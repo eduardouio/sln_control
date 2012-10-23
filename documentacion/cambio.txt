@@ -1,0 +1,49 @@
+///*
+elaborar est e codigp este es el grupo de la aplicacion que se deben poder elegir **///
+
+Control De Sólidos		
+Centrifuga H&H 5500, 		
+Bomba Centr, Stand	
+
+	
+Manejo De Cortes Y Ripios De Perforación		
+Tanque De Cortes De 40 Pies		
+Tanque De Cortes De 20 Pies		
+		
+Sistema De Deshidratacion Del Lodo		
+Centrifuga Hv 518, Bomba Centr.		
+Unidad De Sedimentación Deshidratación		
+Tanques Verticales		
+Bomba De Transferencia  6x5		
+Bomba De Aire T 15		
+Volqueta 		
+Excavadora		
+
+Sistema De Tratamiento De Aguas		
+Fast Tank		
+Tanque Mezclador		
+Bomba 4 X 3		
+Bomba De Aire Px 8		
+Camper 20 Pies		
+Personal En Pozo		
+Ingeniero Supervisor		
+30		
+Técnicos Control De Solds.		
+Ayudantes De Operaciones		
+
+Tratamiento Aguas Negras Y Grises		
+Plantas De Tratamiento		
+Equipo Adicional		
+Volqueta 12 M3		
+Excavadora		
+Trabajo En Locación		
+No.Días Sin Diesel:		
+No. Días Con Diesel
+
+
+Control De Sólidos	
+Manejo De Cortes Y Ripios De Perforación		
+Sistema De Deshidratación Del Lodo	
+Sistema De Tratamiento De Aguas	
+Tratamiento Aguas Negras Y Grises
+	
