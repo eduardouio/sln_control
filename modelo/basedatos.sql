@@ -1,3 +1,11 @@
+-----------------------------------------------------
+-----------------------------------------------------
+-- Modelo de Datos Vacío
+-- Sln 
+-- Autor <@eduardouio>
+-----------------------------------------------------
+-----------------------------------------------------
+
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
@@ -159,24 +167,72 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `slnecc_control`.`cargo_sln`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `slnecc_control`.`cargo_sln` (
+  `id_cargo_sln` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `id_pozo` MEDIUMINT UNSIGNED NOT NULL COMMENT 'tener un id de cargos por reporte' ,
+  `cargo` VARCHAR(45) NOT NULL ,
+  `descripcion` VARCHAR(45) NOT NULL ,
+  `creacion` TIMESTAMP NOT NULL DEFAULT current_timestamp ,
+  PRIMARY KEY (`id_cargo_sln`) ,
+  INDEX `fk_cargos_sql__idx` (`id_pozo` ASC) ,
+  CONSTRAINT `fk_cargos_sln_pozo`
+    FOREIGN KEY (`id_pozo` )
+    REFERENCES `slnecc_control`.`pozo` (`id_pozo` )
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+COMMENT = 'Este es un listado de los cargos que estan disponibles para ' /* comment truncated */;
+
+
+-- -----------------------------------------------------
+-- Table `slnecc_control`.`personal`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `slnecc_control`.`personal` (
+  `id_personal` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `cedula` VARCHAR(10) NOT NULL ,
+  `nombres` VARCHAR(100) NOT NULL ,
+  `apellidos` VARCHAR(100) NOT NULL ,
+  `profesion` VARCHAR(50) NOT NULL ,
+  `creacion` TIMESTAMP NOT NULL DEFAULT current_timestamp ,
+  PRIMARY KEY (`id_personal`) ,
+  UNIQUE INDEX `cedula_UNIQUE` (`cedula` ASC) )
+ENGINE = InnoDB
+COMMENT = 'Listado de personal que trabaja para sln sea directo o indir' /* comment truncated */;
+
+
+-- -----------------------------------------------------
 -- Table `slnecc_control`.`personal_locacion`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `slnecc_control`.`personal_locacion` (
   `id_personal_locacion` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
-  `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
-  `profesion` VARCHAR(50) NULL ,
-  `nombres` VARCHAR(50) NULL ,
-  `cargo` VARCHAR(100) NULL ,
+  `id_reporte` MEDIUMINT NOT NULL ,
+  `id_cargo_sln` MEDIUMINT UNSIGNED NOT NULL ,
+  `id_personal` MEDIUMINT UNSIGNED NOT NULL ,
   `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  `personal_locacioncol` VARCHAR(45) NULL ,
   PRIMARY KEY (`id_personal_locacion`) ,
   INDEX `fk_personal_locacion_reporte_idx` (`id_reporte` ASC) ,
+  INDEX `fk__idx` (`id_cargo_sln` ASC) ,
+  INDEX `fk_personal_locacion_personal_idx` (`id_personal` ASC) ,
   CONSTRAINT `fk_personal_locacion_reporte`
     FOREIGN KEY (`id_reporte` )
     REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
     ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_personal_locacion_cargo_sln`
+    FOREIGN KEY (`id_cargo_sln` )
+    REFERENCES `slnecc_control`.`cargo_sln` (`id_cargo_sln` )
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_personal_locacion_personal`
+    FOREIGN KEY (`id_personal` )
+    REFERENCES `slnecc_control`.`personal` (`id_personal` )
+    ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB
-COMMENT = 'la cantidad de personal en la locacion depende del cargo que' /* comment truncated */;
+COMMENT = 'entidad que maneja la relacion de los empleados y sus cargos' /* comment truncated */;
 
 
 -- -----------------------------------------------------
