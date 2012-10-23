@@ -23,7 +23,7 @@ CREATE  TABLE IF NOT EXISTS `slnecc_control`.`proyecto` (
   `creacio` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
   PRIMARY KEY (`id_proyecto`, `cliente`) )
 ENGINE = InnoDB
-COMMENT = 'Esta es la entidad que representa a un proyecto, la manera e' /* comment truncated */;
+COMMENT = 'Esta es la entidad que representa a un proyecto, la manera e' /* comment truncated */  AUTO_INCREMENT=1 ;
 
 
 -- -----------------------------------------------------
@@ -46,7 +46,7 @@ CREATE  TABLE IF NOT EXISTS `slnecc_control`.`pozo` (
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB
-COMMENT = 'Esta es la entidad que controla los informes de esta entidad' /* comment truncated */;
+COMMENT = 'Esta es la entidad que controla los informes de esta entidad' /* comment truncated */ ;
 
 
 -- -----------------------------------------------------
