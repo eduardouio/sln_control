@@ -1,9 +1,3 @@
-# Modelo de bases de dato SLN
-# @autor <eduardouio@hotmail.com>
-# @version 1.0
-# @licence (R) sln derechos reservados
-
-
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
@@ -23,7 +17,7 @@ CREATE  TABLE IF NOT EXISTS `slnecc_control`.`proyecto` (
   `creacio` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
   PRIMARY KEY (`id_proyecto`, `cliente`) )
 ENGINE = InnoDB
-COMMENT = 'Esta es la entidad que representa a un proyecto, la manera e' /* comment truncated */  AUTO_INCREMENT=1 ;
+COMMENT = 'Esta es la entidad que representa a un proyecto, la manera e' /* comment truncated */;
 
 
 -- -----------------------------------------------------
@@ -46,7 +40,7 @@ CREATE  TABLE IF NOT EXISTS `slnecc_control`.`pozo` (
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB
-COMMENT = 'Esta es la entidad que controla los informes de esta entidad' /* comment truncated */ ;
+COMMENT = 'Esta es la entidad que controla los informes de esta entidad' /* comment truncated */;
 
 
 -- -----------------------------------------------------
@@ -175,7 +169,6 @@ CREATE  TABLE IF NOT EXISTS `slnecc_control`.`personal_locacion` (
   `cargo` VARCHAR(100) NULL ,
   `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
   PRIMARY KEY (`id_personal_locacion`) ,
-  UNIQUE INDEX `id_reporte_UNIQUE` (`id_reporte` ASC) ,
   INDEX `fk_personal_locacion_reporte_idx` (`id_reporte` ASC) ,
   CONSTRAINT `fk_personal_locacion_reporte`
     FOREIGN KEY (`id_reporte` )
@@ -652,6 +645,19 @@ CREATE  TABLE IF NOT EXISTS `slnecc_control`.`logs` (
     REFERENCES `slnecc_control`.`usuarios` (`id_usuario` )
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `slnecc_control`.`log_users`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `slnecc_control`.`log_users` (
+  `id_log_users` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `id_usuario` SMALLINT NOT NULL ,
+  `entrada` DATETIME NULL ,
+  `salida` DATETIME NULL ,
+  `hora_registro` TIMESTAMP NOT NULL DEFAULT current_timestamp ,
+  PRIMARY KEY (`id_log_users`) )
 ENGINE = InnoDB;
 
 
