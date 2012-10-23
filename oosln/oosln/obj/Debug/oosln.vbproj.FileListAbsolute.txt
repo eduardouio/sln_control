@@ -1,0 +1,20 @@
+C:\Documents and Settings\Administrador\Mis documentos\Visual Studio 2008\Projects\oosln\oosln\bin\Debug\oosln.exe
+C:\Documents and Settings\Administrador\Mis documentos\Visual Studio 2008\Projects\oosln\oosln\bin\Debug\oosln.pdb
+C:\Documents and Settings\Administrador\Mis documentos\Visual Studio 2008\Projects\oosln\oosln\bin\Debug\oosln.xml
+C:\Documents and Settings\Administrador\Mis documentos\Visual Studio 2008\Projects\oosln\oosln\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrador\Mis documentos\Visual Studio 2008\Projects\oosln\oosln\obj\Debug\oosln.Form1.resources
+C:\Documents and Settings\Administrador\Mis documentos\Visual Studio 2008\Projects\oosln\oosln\obj\Debug\oosln.Resources.resources
+C:\Documents and Settings\Administrador\Mis documentos\Visual Studio 2008\Projects\oosln\oosln\obj\Debug\oosln.vbproj.GenerateResource.Cache
+C:\Documents and Settings\Administrador\Mis documentos\Visual Studio 2008\Projects\oosln\oosln\obj\Debug\oosln.exe
+C:\Documents and Settings\Administrador\Mis documentos\Visual Studio 2008\Projects\oosln\oosln\obj\Debug\oosln.xml
+C:\Documents and Settings\Administrador\Mis documentos\Visual Studio 2008\Projects\oosln\oosln\obj\Debug\oosln.pdb
+C:\Users\eduardo\Documents\Visual Studio 2008\Projects\oosln\oosln\obj\Debug\oosln.exe
+C:\Users\eduardo\Documents\Visual Studio 2008\Projects\oosln\oosln\obj\Debug\oosln.xml
+C:\Users\eduardo\Documents\Visual Studio 2008\Projects\oosln\oosln\obj\Debug\oosln.pdb
+C:\Users\eduardo\Documents\Visual Studio 2008\Projects\oosln\oosln\bin\Debug\oosln.exe
+C:\Users\eduardo\Documents\Visual Studio 2008\Projects\oosln\oosln\bin\Debug\oosln.pdb
+C:\Users\eduardo\Documents\Visual Studio 2008\Projects\oosln\oosln\bin\Debug\oosln.xml
+C:\Users\eduardo\Documents\Visual Studio 2008\Projects\oosln\oosln\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\eduardo\Documents\Visual Studio 2008\Projects\oosln\oosln\obj\Debug\oosln.Form1.resources
+C:\Users\eduardo\Documents\Visual Studio 2008\Projects\oosln\oosln\obj\Debug\oosln.Resources.resources
+C:\Users\eduardo\Documents\Visual Studio 2008\Projects\oosln\oosln\obj\Debug\oosln.vbproj.GenerateResource.Cache
