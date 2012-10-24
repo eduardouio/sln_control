@@ -356,6 +356,7 @@
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`tratamiento`
   -- -----------------------------------------------------
+  
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`tratamiento` (
     `id_tratamiento` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,    
     `codigo` VARCHAR(50) NOT NULL,    

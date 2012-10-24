@@ -165,6 +165,17 @@ INSERT INTO `slnecc_control`.`zaranda_acondicionador_mallas` (`id_reporte`, `con
 -- Table `slnecc_control`.`equipo`
 -- -----------------------------------------------------
 
+INSERT INTO `slnecc_control`.`equipo` (`codigo`, `nombre`, `modelo`, `tipo`) VALUES ('EQ1', 'HH 5500', 'HH 5500', 'Decanter');
+INSERT INTO `slnecc_control`.`equipo` (`codigo`, `nombre`, `modelo`, `tipo`) VALUES ('EQ2', 'HV 518', 'HV 518', 'Decanter');
+
+-- -----------------------------------------------------
+-- Table `slnecc_control`.`tratamiento`
+-- -----------------------------------------------------
+
+INSERT INTO `slnecc_control`.`tratamiento` (`codigo`, `nombre`, `tipo`) VALUES ('TR1', 'LGS/Sistema Activo', 'm');
+INSERT INTO `slnecc_control`.`tratamiento` (`codigo`, `nombre`, `tipo`) VALUES ('TR2', 'MQC/Sistema Activo', 'm');
+INSERT INTO `slnecc_control`.`tratamiento` (`codigo`, `nombre`, `tipo`) VALUES ('TR3', 'DW/ Recolectados', 'm');
+
 -- -----------------------------------------------------
 -- Table `slnecc_control`.`trabajo_equipo`
 -- -----------------------------------------------------
