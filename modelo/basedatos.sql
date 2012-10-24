@@ -61,8 +61,7 @@
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`revision_reporte` (
     `id_revision` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `fecha_emision` DATE NOT NULL ,
-    `fecha_revision` DATE NOT NULL ,
-    `codigo` VARCHAR(45) NOT NULL ,
+    `fecha_revision` DATE NOT NULL ,    
     `notas` MEDIUMTEXT NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_revision`) )
