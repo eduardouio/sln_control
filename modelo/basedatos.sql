@@ -323,7 +323,8 @@
   -- -----------------------------------------------------
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`zaranda_acondicionador` (
     `id_zaranda_acondicionador_mallas` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
-    `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,    
+    `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
+    `consumo_malla_dia` MEDIUMINT UNSIGNED NOT NULL DEFAULT 0 ,    
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_zaranda_acondicionador_mallas`) ,
     INDEX `fk_zaranda_acondicionador_mallas_reporte_idx` (`id_reporte` ASC) ,
