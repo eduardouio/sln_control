@@ -337,12 +337,29 @@
 
 
   -- -----------------------------------------------------
-  -- Table `slnecc_control`.`centrifugas`
+  -- Table `slnecc_control`.`equipo`
   -- -----------------------------------------------------
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`centrifugas` (
-    `id_centrifugas` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
-    `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
-    `centrifuga` VARCHAR(50) NOT NULL ,
+  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`equipo` (
+    `id_equipo` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,    
+    `codigo` VARCHAR(50) NOT NULL,    
+    `nombre` VARCHAR(50) NOT NULL ,
+    `modelo` VARCHAR(50) NOT NULL ,    
+    `caracteristicas` MEDIUMTEXT ,
+    `usos` MEDIUMTEXT,    
+    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+    PRIMARY KEY (`id_equipo`) ,
+    UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC) ,
+  ENGINE = InnoDB AUTO_INCREMENT=1
+  COMMENT = 'Entidad encargada de recibor los valores de las decanter se ' /* comment truncated */;
+
+
+  -- -----------------------------------------------------
+  -- Table `slnecc_control`.`trabajos_centrifuga`
+  -- -----------------------------------------------------
+  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`trabajo_equipo` (
+    `id_trabajo_equipo` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
+    `id_equipo` MEDIUMINT UNSIGNED NOT NULL ,
+    `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,    
     `fluido_tratamiento` VARCHAR(100) NOT NULL ,
     `horas` DECIMAL(3,1) NULL ,
     `rpm` DECIMAL(4,1) NULL ,
@@ -351,14 +368,19 @@
     `ppg_salida` DECIMAL(4,1) NULL ,
     `ppg_descarga` DECIMAL(4,1) NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    PRIMARY KEY (`id_centrifugas`) ,
-    UNIQUE INDEX `id_reporte_UNIQUE` (`id_reporte` ASC) ,
-    INDEX `fk_centrifugas_reporte_idx` (`id_reporte` ASC) ,
+    PRIMARY KEY (`id_trabajo_equipo`) ,    
+    INDEX `fk_centrifugas_reporte_idx` (`id_equipo` ASC) ,
     CONSTRAINT `fk_centrifugas_reporte`
+      FOREIGN KEY (`id_equipo` )
+      REFERENCES `slnecc_control`.`equipo` (`id_equipo` )
+      ON DELETE RESTRICT
+      ON UPDATE CASCADE,
+      INDEX `fk_trabajos_equipo_reporte_idx` (`id_reporte` ASC) ,
+    CONSTRAINT `fk_trabajos_equipo_reporte`
       FOREIGN KEY (`id_reporte` )
       REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
       ON DELETE RESTRICT
-      ON UPDATE CASCADE)
+      ON UPDATE CASCADE))
   ENGINE = InnoDB AUTO_INCREMENT=1
   COMMENT = 'Entidad encargada de recibor los valores de las decanter se ' /* comment truncated */;
 
