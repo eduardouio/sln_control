@@ -174,18 +174,11 @@
   -- Table `slnecc_control`.`cargo_sln`
   -- -----------------------------------------------------
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`cargo_sln` (
-    `id_cargo_sln` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
-    `id_pozo` MEDIUMINT UNSIGNED NOT NULL COMMENT 'tener un id de cargos por reporte' ,
+    `id_cargo_sln` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,    
     `cargo` VARCHAR(45) NOT NULL ,
     `descripcion` VARCHAR(45) NOT NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (`id_cargo_sln`) ,
-    INDEX `fk_cargos_sql__idx` (`id_pozo` ASC) ,
-    CONSTRAINT `fk_cargos_sln_pozo`
-      FOREIGN KEY (`id_pozo` )
-      REFERENCES `slnecc_control`.`pozo` (`id_pozo` )
-      ON DELETE RESTRICT
-      ON UPDATE CASCADE)
+    PRIMARY KEY (`id_cargo_sln`) ,        
   ENGINE = InnoDB AUTO_INCREMENT=1
   COMMENT = 'Este es un listado de los cargos que estan disponibles para ' /* comment truncated */;
 
