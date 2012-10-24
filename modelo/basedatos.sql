@@ -233,7 +233,7 @@
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`zarandas`
   -- -----------------------------------------------------
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`zarandas` (
+    CREATE  TABLE IF NOT EXISTS `slnecc_control`.`zarandas` (
     `id_zarandas` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `zaranda_no` SMALLINT UNSIGNED NOT NULL ,
@@ -261,9 +261,8 @@
     `id_zaranda_mallas` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_zarandas` MEDIUMINT UNSIGNED NOT NULL ,
     `malla_deck_no` SMALLINT NULL ,
-    `mesh` DECIMAL(3,1) NULL ,
-    `horas` DECIMAL(2,1) NULL COMMENT 'en el informe de peuebas veo que las horas se aumentan en 36\\n' ,
-    `zaranda_mallascol` VARCHAR(45) NULL ,
+    `mesh` DECIMAL(4,1) NULL ,
+    `horas` DECIMAL(3,1) NULL COMMENT 'en el informe de peuebas veo que las horas se aumentan en 36\\n' ,    
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_zaranda_mallas`) ,
     INDEX `mallas_zarandas_idx` (`id_zarandas` ASC) ,
