@@ -61,7 +61,7 @@ INSERT INTO `slnecc_control`.`contenido_solidos` (`id_reporte`, `solidos`, `aren
 -- Table `slnecc_control`.`perforacion`
 -- -----------------------------------------------------
 
-INSERT INTO `slnecc_control`.`perforacion`(`id_perforacion`,`id_reporte`,`profundidad_inicial`,`porosidad`,`wash_out`,`factor_expancion`)VALUES('1','0.0','0.0','20.0','1.0');
+INSERT INTO `slnecc_control`.`perforacion`(`id_perforacion`,`id_reporte`,`profundidad_inicial`,`porosidad`,`wash_out`,`factor_expancion`)VALUES('1', '1' ,'0.0','0.0','20.0','1.0');
 
 -- -----------------------------------------------------
 -- Table `slnecc_control`.`cargo_sln`
@@ -148,6 +148,12 @@ INSERT INTO `slnecc_control`.`acondicionador_lodo` (`id_reporte`, `proceso`, `pr
 -- -----------------------------------------------------
 -- Table `slnecc_control`.`zaranda_acondicionador`
 -- -----------------------------------------------------
+
+INSERT INTO `slnecc_control`.`zaranda_acondicionador` (`id_reporte`, `malla_deck_no`, `mesh`, `horas`) VALUES ('1', '1', '325', '0');
+INSERT INTO `slnecc_control`.`zaranda_acondicionador` (`id_reporte`, `malla_deck_no`, `mesh`, `horas`) VALUES ('1', '2', '325', '0');
+INSERT INTO `slnecc_control`.`zaranda_acondicionador` (`id_reporte`, `malla_deck_no`, `mesh`, `horas`) VALUES ('1', '3', '325', '0');
+INSERT INTO `slnecc_control`.`zaranda_acondicionador` (`id_reporte`, `malla_deck_no`, `mesh`, `horas`) VALUES ('1', '4', '325', '0');
+
 
 -- -----------------------------------------------------
   -- Table `slnecc_control`.`zaranda_acondicionador_mallas`
