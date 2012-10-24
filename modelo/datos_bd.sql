@@ -159,10 +159,15 @@ INSERT INTO `slnecc_control`.`zaranda_acondicionador` (`id_reporte`, `malla_deck
   -- Table `slnecc_control`.`zaranda_acondicionador_mallas`
   -- -----------------------------------------------------
 
+INSERT INTO `slnecc_control`.`zaranda_acondicionador_mallas` (`id_reporte`, `consumo_malla_dia`) VALUES ('1', '0');
+
 -- -----------------------------------------------------
--- Table `slnecc_control`.`centrifugas`
+-- Table `slnecc_control`.`equipo`
 -- -----------------------------------------------------
 
+-- -----------------------------------------------------
+-- Table `slnecc_control`.`trabajo_equipo`
+-- -----------------------------------------------------
 
 
 -- -----------------------------------------------------
