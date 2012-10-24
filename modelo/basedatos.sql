@@ -321,7 +321,7 @@
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`zaranda_acondicionador_mallas`
   -- -----------------------------------------------------
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`zaranda_acondicionador` (
+  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`zaranda_acondicionador_mallas` (
     `id_zaranda_acondicionador_mallas` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `consumo_malla_dia` MEDIUMINT UNSIGNED NOT NULL DEFAULT 0 ,    
