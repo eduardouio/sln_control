@@ -178,7 +178,7 @@
     `cargo` VARCHAR(45) NOT NULL ,
     `descripcion` VARCHAR(45) NOT NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (`id_cargo_sln`) ,        
+    PRIMARY KEY (`id_cargo_sln`))        
   ENGINE = InnoDB AUTO_INCREMENT=1
   COMMENT = 'Este es un listado de los cargos que estan disponibles para ' /* comment truncated */;
 
