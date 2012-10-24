@@ -155,7 +155,7 @@
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `profundidad_inicial` DECIMAL(5,1) NULL ,
     `porosidad` DECIMAL(2,1) NULL COMMENT 'se registra en porcentaje\\n' ,
-    `wash_out` DECIMAL(2,1) NULL COMMENT 'se registra en porcentaje\\n' ,
+    `wash_out` DECIMAL(3,1) NULL COMMENT 'se registra en porcentaje\\n' ,
     `factor_expancion` DECIMAL(2,1) NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id_perforacion`) ,
