@@ -285,8 +285,7 @@
     `presion` DECIMAL(3,1) NULL ,
     `peso_entrada` DECIMAL(3,1) NULL COMMENT 'los valores tienen un + al final preguntar que es ejem 5.6+\\n' ,
     `peso_salida` DECIMAL(3,1) NULL COMMENT 'los valores tienen un + al final preguntar que es ejem 5.6+\\n' ,
-    `peso_descargados` DECIMAL(3,1) NULL ,
-    `consumo_malla_dia` SMALLINT UNSIGNED NOT NULL DEFAULT 0 ,
+    `peso_descargados` DECIMAL(3,1) NULL ,    
     `horas_dia` DECIMAL(2,1) NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_acondicionador_lodo`) ,
@@ -305,18 +304,18 @@
   -- -----------------------------------------------------
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`zaranda_acondicionador` (
     `id_zaranda_acondicionador` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
-    `id_acondicionador_lodo` MEDIUMINT UNSIGNED NOT NULL ,
+    `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `malla_deck_no` SMALLINT NULL ,
     `mesh` DECIMAL(3,1) NULL ,
     `horas` DECIMAL(2,1) NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_zaranda_acondicionador`) ,
-    INDEX `fk_mallas_acondicionador_idx` (`id_acondicionador_lodo` ASC) ,
-    CONSTRAINT `fk_mallas_acondicionador`
-      FOREIGN KEY (`id_acondicionador_lodo` )
-      REFERENCES `slnecc_control`.`acondicionador_lodo` (`id_acondicionador_lodo` )
-      ON DELETE CASCADE
-      ON UPDATE CASCADE)
+    INDEX `fk_zaranda_acondicionador_reporte_idx` (`id_reporte` ASC) ,
+    CONSTRAINT `fk_zaranda_acondicionador_reporte`
+      FOREIGN KEY (`id_reporte` )
+      REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
+      ON DELETE RESTRICT
+      ON UPDATE CASCADE      )
   ENGINE = InnoDB AUTO_INCREMENT=1 ;
 
 
