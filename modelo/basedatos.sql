@@ -348,7 +348,7 @@
     `usos` MEDIUMTEXT,    
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_equipo`) ,
-    UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC) ,
+    UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC))
   ENGINE = InnoDB AUTO_INCREMENT=1
   COMMENT = 'Entidad encargada de recibor los valores de las decanter se ' /* comment truncated */;
 
@@ -380,7 +380,7 @@
       FOREIGN KEY (`id_reporte` )
       REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
       ON DELETE RESTRICT
-      ON UPDATE CASCADE))
+      ON UPDATE CASCADE)
   ENGINE = InnoDB AUTO_INCREMENT=1
   COMMENT = 'Entidad encargada de recibor los valores de las decanter se ' /* comment truncated */;
 
