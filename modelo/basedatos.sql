@@ -353,6 +353,21 @@
   ENGINE = InnoDB AUTO_INCREMENT=1
   COMMENT = 'Entidad encargada de recibor los valores de las decanter se ' /* comment truncated */;
 
+  -- -----------------------------------------------------
+  -- Table `slnecc_control`.`tratamiento`
+  -- -----------------------------------------------------
+  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`tratamiento` (
+    `id_tratamiento` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,    
+    `codigo` VARCHAR(50) NOT NULL,    
+    `nombre` VARCHAR(50) NOT NULL ,    
+    `tipo` VARCHAR(50) NOT NULL ,    
+    `caracteristicas` MEDIUMTEXT ,
+    `notas` MEDIUMTEXT,    
+    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+    PRIMARY KEY (`id_tratamiento`) ,
+    UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC))
+  ENGINE = InnoDB AUTO_INCREMENT=1
+  COMMENT = 'Entidad encargada de recibor los valores de las decanter se ' /* comment truncated */;
 
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`trabajos_centrifuga`
@@ -360,8 +375,8 @@
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`trabajo_equipo` (
     `id_trabajo_equipo` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_equipo` MEDIUMINT UNSIGNED NOT NULL ,
-    `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,    
-    `fluido_tratamiento` VARCHAR(100) NOT NULL ,
+    `id_tratamiento` MEDIUMINT UNSIGNED NOT NULL ,
+    `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,        
     `horas` DECIMAL(3,1) NULL ,
     `rpm` DECIMAL(4,1) NULL ,
     `gpm` DECIMAL(4,1) NULL ,
@@ -370,13 +385,19 @@
     `ppg_descarga` DECIMAL(4,1) NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_trabajo_equipo`) ,    
-    INDEX `fk_centrifugas_reporte_idx` (`id_equipo` ASC) ,
-    CONSTRAINT `fk_centrifugas_reporte`
+    INDEX `fk_trabajo_equipo_equipo_idx` (`id_equipo` ASC) ,
+    CONSTRAINT `fk_trabajos_equipo_equipo`
       FOREIGN KEY (`id_equipo` )
       REFERENCES `slnecc_control`.`equipo` (`id_equipo` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
-      INDEX `fk_trabajos_equipo_reporte_idx` (`id_reporte` ASC) ,
+    INDEX `fk_trabajo_equipo_tratamientos_idx` (`id_tratamiento` ASC) ,
+    CONSTRAINT `fk_trabajo_equipo_tratamientos`
+      FOREIGN KEY (`id_tratamiento` )
+      REFERENCES `slnecc_control`.`tratamiento` (`id_tratamiento` )
+      ON DELETE RESTRICT
+      ON UPDATE CASCADE,
+    INDEX `fk_trabajos_equipo_reporte_idx` (`id_reporte` ASC) ,
     CONSTRAINT `fk_trabajos_equipo_reporte`
       FOREIGN KEY (`id_reporte` )
       REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
