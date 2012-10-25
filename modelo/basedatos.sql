@@ -532,7 +532,7 @@
     `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL ,    
     `bbls_dia` DECIMAL(5,1) NULL ,
     `celda_no` SMALLINT UNSIGNED NULL ,
-    `cap_bls` DECIMAL(5,1) NULL ,
+    `cap_bls` DECIMAL(6,1) NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_manejo_cortes`) ,
     INDEX `fk_manejo_cortes_servicio_otro_idx` (`id_servicio_otro` ASC) ,
