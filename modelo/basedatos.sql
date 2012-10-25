@@ -354,21 +354,29 @@
   COMMENT = 'Entidad encargada de recibor los valores de las decanter se ' /* comment truncated */;
 
   -- -----------------------------------------------------
-  -- Table `slnecc_control`.`tratamiento`
+  -- Table `slnecc_control`.`servicio_otro`
   -- -----------------------------------------------------
   
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`tratamiento_efluente` (
-    `id_tratamiento_efluente` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,    
+  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`servicio_otro` (
+    `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,    
     `codigo` VARCHAR(50) NOT NULL,    
     `nombre` VARCHAR(50) NOT NULL ,    
+    `descripcion` VARCHAR(200) ,
     `tipo` VARCHAR(50) NOT NULL ,    
-    `caracteristicas` MEDIUMTEXT ,
     `notas` MEDIUMTEXT,    
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    PRIMARY KEY (`id_tratamiento_efluente`) ,
+    PRIMARY KEY (`id_servicio_otro`) ,
     UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC))
   ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'Entidad encargada de recibor los valores de las decanter se ' /* comment truncated */;
+  COMMENT = 'despues de intentar ingresar la informacion a la base de datos noté que mucho nombres se repetian
+            en los registros ed las diferentes tablas, lo que hizo e cambiar el nombre de la tabla
+            tratamiento_efluente por servicios_otros como su nombre lo indica esta entidad almacenara
+            la informacion que se esta repitiendo en las tablas, y luego se referenciara a esos datos a travez
+            de un fk esto ayuda a que el detalle de los servicios y otros sea mas completa, las entidades que heredan de esta 
+            entidad padre son trabajo_equipo, vol_recolectados_procesados, vol_agua_operaciones, vol_cortes_fluidos,
+            manejo_efluentes, manejo_cortes cada registro e la tabla padre sera controlado por un campo llamado tipo que es 
+            el que asigna lo que se ingresa en el registro valores de este campo Efluentes, Tratamiento/Fluido, Agua,
+            Tanques, Cortes, Manejo Efluentes -> cada nombre es descriptivo y es una clasificacion de los registros';
 
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`trabajos_centrifuga`
@@ -376,7 +384,7 @@
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`trabajo_equipo` (
     `id_trabajo_equipo` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_equipo` MEDIUMINT UNSIGNED NOT NULL ,
-    `id_tratamiento_efluente` MEDIUMINT UNSIGNED NOT NULL ,
+    `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,        
     `horas` DECIMAL(3,1) NULL ,
     `rpm` DECIMAL(4,1) NULL ,
@@ -392,10 +400,10 @@
       REFERENCES `slnecc_control`.`equipo` (`id_equipo` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
-    INDEX `fk_trabajo_equipo_tratamiento_efluente_idx` (`id_tratamiento_efluente` ASC) ,
-    CONSTRAINT `fk_trabajo_equipo_tratamiento_efluente`
-      FOREIGN KEY (`id_tratamiento_efluente` )
-      REFERENCES `slnecc_control`.`tratamiento_efluente` (`id_tratamiento_efluente` )
+    INDEX `fk_id_servicio_otro_idx` (`id_servicio_otro` ASC) ,
+    CONSTRAINT `fk_id_servicio_otro`
+      FOREIGN KEY (`id_servicio_otro` )
+      REFERENCES `slnecc_control`.`servicio_otro` (`id_servicio_otro` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
     INDEX `fk_trabajos_equipo_reporte_idx` (`id_reporte` ASC) ,
@@ -414,14 +422,14 @@
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`vol_recolectados_procesados` (
     `id_vol_recolectados_procesados` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NULL ,
-    `id_tratamiento_efluente` MEDIUMINT UNSIGNED NOT NULL ,
+    `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL ,
     `diario` DECIMAL(5,1) NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_vol_recolectados_procesados`) ,
-    INDEX `fk_vlo_recolectados_procesados_tratamiento_efluente_idx` (`id_tratamiento_efluente` ASC) ,
-    CONSTRAINT `fk_vlo_recolectados_procesados_tratamiento_efluente`
-      FOREIGN KEY (`id_tratamiento_efluente` )
-      REFERENCES `slnecc_control`.`tratamiento_efluente` (`id_tratamiento_efluente` )
+    INDEX `fk_vlo_recolectados_procesados_servicio_otro_idx` (`id_servicio_otro` ASC) ,
+    CONSTRAINT `fk_vlo_recolectados_procesados_servicio_otro`
+      FOREIGN KEY (`id_servicio_otro` )
+      REFERENCES `slnecc_control`.`servicio_otro` (`id_servicio_otro` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE, 
     INDEX `fk_vol_recolectados_procesados_reporte_idx` (`id_reporte` ASC) ,
@@ -440,16 +448,23 @@
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`vol_agua_operaciones` (
     `id_vol_agua_operaciones` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
-    `agua` VARCHAR(50) NULL ,
+    `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL ,    
     `diario` DECIMAL(4,1) NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_vol_agua_operaciones`) ,
+    INDEX `fk_vol_agua_operaciones_servicio_otro_idx` (`id_servicio_otro` ASC) ,
+    CONSTRAINT `fk_vol_agua_operaciones_servicio_otro`
+      FOREIGN KEY (`id_servicio_otro` )
+      REFERENCES `slnecc_control`.`servicio_otro` (`id_servicio_otro` )
+      ON DELETE RESTRICT
+      ON UPDATE CASCADE, 
     INDEX `fk_vol_agua_operaciones_reportes_idx` (`id_reporte` ASC) ,
     CONSTRAINT `fk_vol_agua_operaciones_reportes`
       FOREIGN KEY (`id_reporte` )
       REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
       ON DELETE RESTRICT
-      ON UPDATE CASCADE)
+      ON UPDATE CASCADE
+      )
   ENGINE = InnoDB AUTO_INCREMENT=1
   COMMENT = 'entidad con opciones\n\nagua:\nfresca para polimero\nde dw para ' /* comment truncated */;
 
@@ -460,20 +475,26 @@
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`vol_cortes_fluidos` (
     `id_vol_cortes_fluidos` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
-    `tanques` VARCHAR(50) NULL ,
-    `cortes` VARCHAR(50) NULL ,
+    `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL ,        
+    `cortes_flidos` VARCHAR(50) NULL ,
     `bbls` DECIMAL(4,1) NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_vol_cortes_fluidos`) ,
+    INDEX `fk_vol_cortes_fluidos_servicio_otro_idx` (`id_servicio_otro` ASC) ,
+    CONSTRAINT `fk_vol_cortes_fluidos_servicio_otro`
+      FOREIGN KEY (`id_servicio_otro` )
+      REFERENCES `slnecc_control`.`servicio_otro` (`id_servicio_otro` )
+      ON DELETE RESTRICT
+      ON UPDATE CASCADE, 
     INDEX `fk_cortes_fluidos_reportes_idx` (`id_reporte` ASC) ,
     CONSTRAINT `fk_cortes_fluidos_reportes`
       FOREIGN KEY (`id_reporte` )
       REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
       ON DELETE RESTRICT
-      ON UPDATE CASCADE)
+      ON UPDATE CASCADE
+      )
   ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'entidad con opciones\n\ntanques:\n\ncatch tank 1\ncatch tank 2\nve' /* comment truncated */;
-
+  COMMENT = 'los cortes fluidos son manejados por eusuario, solamente se almacenara la informacion de los tanques ' /* comment truncated */;
 
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`manejo_efluentes`
@@ -481,11 +502,17 @@
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`manejo_efluentes` (
     `id_manejo_efluentes` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
-    `tipo` VARCHAR(50) NULL ,
+    `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL ,    
     `tanque1` DECIMAL(5,1) NULL ,
     `tanque2` DECIMAL(5,1) NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_manejo_efluentes`) ,
+    INDEX `fk_manejo_efluentes_servicio_otro_idx` (`id_servicio_otro` ASC) ,
+    CONSTRAINT `fk_manejo_efluentes_servicio_otro`
+      FOREIGN KEY (`id_servicio_otro` )
+      REFERENCES `slnecc_control`.`servicio_otro` (`id_servicio_otro` )
+      ON DELETE RESTRICT
+      ON UPDATE CASCADE,
     INDEX `fk_manejo_efluentes_reporte_idx` (`id_reporte` ASC) ,
     CONSTRAINT `fk_manejo_efluentes_reporte`
       FOREIGN KEY (`id_reporte` )
@@ -502,12 +529,18 @@
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`manejo_cortes` (
     `id_manejo_cortes` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
-    `tipo` VARCHAR(50) NULL ,
+    `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL ,    
     `bbls_dia` DECIMAL(5,1) NULL ,
     `celda_no` SMALLINT UNSIGNED NULL ,
     `cap_bls` DECIMAL(5,1) NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_manejo_cortes`) ,
+    INDEX `fk_manejo_cortes_servicio_otro_idx` (`id_servicio_otro` ASC) ,
+    CONSTRAINT `fk_manejo_cortes_servicio_otro`
+      FOREIGN KEY (`id_servicio_otro` )
+      REFERENCES `slnecc_control`.`servicio_otro` (`id_servicio_otro` )
+      ON DELETE RESTRICT
+      ON UPDATE CASCADE,
     INDEX `fk_manejo_cortes_reporte_idx` (`id_reporte` ASC) ,
     CONSTRAINT `fk_manejo_cortes_reporte`
       FOREIGN KEY (`id_reporte` )
