@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="controlSln" company="Sólidos Y lodos Nacionales" webLink="http://control.sln-ec.com" view-date="2012-10-05" view-index="0" gantt-divider-location="400" resource-divider-location="300" version="2.0">
+<?xml version="1.0" encoding="UTF-8"?><project name="controlSln" company="Sólidos Y lodos Nacionales" webLink="http://control.sln-ec.com" view-date="2012-10-03" view-index="0" gantt-divider-location="400" resource-divider-location="300" version="2.0" locale="es">
     <description><![CDATA[Esta esuna aplicación para e control de reporte diario de control de Sólidos y tratamientos de efluentes de perforacion, la aplicacion ayudará a llevar un registro de los trabajos realiazdos en el campo. Esta aplicación debe cumplir con los siguientes requisistos:
 
 1.- Manejo de Costos
@@ -6,7 +6,11 @@
 3.- Control de sólidos tratados
 4.- Manejo y movimiento de cortes
 ]]></description>
-    <view zooming-state="default:3" id="gantt-chart"/>
+    <view zooming-state="default:3" id="gantt-chart">
+        <field id="tpd3" name="Nombre" width="50" order="0"/>
+        <field id="tpd4" name="Fecha de inicio" width="26" order="1"/>
+        <field id="tpd5" name="Fecha de fin" width="22" order="2"/>
+    </view>
     <view id="resource-table">
         <field id="0" name="Nombre" width="50" order="0"/>
         <field id="1" name="Función" width="49" order="1"/>
@@ -37,11 +41,53 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="0" name="Inicio de Analisis de Documentos" color="#8cb6ce" meeting="false" start="2012-10-08" duration="3" complete="0" expand="true"/>
-        <task id="1" name="Reconocimiento estructura del proyecto" color="#8cb6ce" meeting="false" start="2012-10-11" duration="1" complete="0" expand="true"/>
-        <task id="3" name="Analisis de Base de datos pimer borrador" color="#8cb6ce" meeting="false" start="2012-10-12" duration="2" complete="0" expand="true"/>
-        <task id="4" name="Creando el primer modelo de Base da datos funcional" color="#8cb6ce" meeting="false" start="2012-10-15" duration="1" complete="0" expand="true"/>
-        <task id="5" name="Comprobacion modelo contra datos" color="#8cb6ce" meeting="false" start="2012-10-16" duration="2" complete="0" expand="true"/>
+        <task id="0" name="Inicio de Analisis de Documentos" color="#8cb6ce" meeting="false" start="2012-10-08" duration="3" complete="100" expand="true">
+            <notes><![CDATA[Inicio del Proyecto de SLN Sólidos y Lodos Nacionale
+
+Se procede a identificar el problema a resolver, una vez identificado y hablado con el interesado se procede a estuadiar la documentacion disponible en la cual consta informacion de los procesos y los controles que se le hacen a los mismos
+
+Se establece una lista de metas en base a los objetivos del sistema
+
+se entable un serie de requerimientos del sistema 
+
+se establece un listado de objetivos directos del sistema
+
+Esta informacion esta completa dentro de la documentacion bitacora de la aplicacion lleva en un cuaderno borrador el mismo que luego sera enviado a formato digital]]></notes>
+        </task>
+        <task id="1" name="Reconocimiento estructura del proyecto" color="#8cb6ce" meeting="false" start="2012-10-11" duration="1" complete="100" expand="true">
+            <depend id="3" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="3" name="Analisis de Base de datos pimer borrador" color="#8cb6ce" meeting="false" start="2012-10-12" duration="2" complete="100" expand="true">
+            <notes><![CDATA[Se termina con el analisis de los documentos y se procede a definir los tipos de entidades y los atributos de las mismas obteniendo un largo listado usado para crear las entidades, este es un analisis superficial de los requerimientos de la app, finalmente se termina con un diccionario de datos borrador que luego será corregido cuando el modelo sea sometido a pruebas con datos reales, aunque se espera que estos cambios sean minimos no se descarta que habrá que hacerlos :)	]]></notes>
+            <depend id="4" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="4" name="Creando el primer modelo de Base da datos funcional" color="#8cb6ce" meeting="false" start="2012-10-15" duration="1" complete="100" expand="true">
+            <notes><![CDATA[Luego de realizar el analisis a los documentos, se procede a crear un borrador de bases de datos, luego de esto el modelo es analisado nuevamente realizando correcciones en el mismo, a partir de los resultados obtenidos se procede a la prueba del modelo con datos reales de los informes	
+]]></notes>
+            <depend id="5" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="5" name="Comprobacion modelo contra datos" color="#8cb6ce" meeting="false" start="2012-10-16" duration="9" complete="70" expand="true">
+            <notes><![CDATA[Durante esta fase de desarrollo el modelo ha ido cambiando en su estructura cambiando la organizacion de las entidades, optimizando la estructura creando nuevas esructuras, los cambios a detalle se los puede encontrar en los commit enviados a github en la url https://github.com/eduardouio/sln_control aqui se encontrará a detalle los cambos que se han hecho en el modelo.
+
+Listado general de los cambios hechos al modelo.
+
+Se crea un nueva entidad para cenrtalizar informacion que se repetia varias veces en las tablas
+
+Se esta trabajando en el manejo de inventarios
+
+Se trabaja tambien en el manejo de los costos y de ser posible buscar una relacion entre los dos grupos (inventarios y costos)
+
+El modelo esta trabajando con datos para el primer reporte se lleva completa un  70% del total del modelo]]></notes>
+        </task>
+        <task id="11" name="Cambio en Estructura de Elementos Repetitibos" color="#8cb6ce" meeting="false" start="2012-10-17" duration="4" complete="100" expand="true">
+            <notes><![CDATA[Se identifica que existen elementos en las entidades que se repiten demaciadas veces, se procede a crear un grupo de entidades que resuelven el problema]]></notes>
+        </task>
+        <task id="12" name="Analisis de Estructura de costos" color="#8cb6ce" meeting="false" start="2012-10-22" duration="4" complete="0" expand="true">
+            <notes><![CDATA[Se analiza la forma en la que los costos están manejados por la base de datos y se verifica que cumpla con las metas asignadas	]]></notes>
+        </task>
+        <task id="13" name="Analisis de Estructura Inventario" color="#8cb6ce" meeting="false" start="2012-10-22" duration="4" complete="0" expand="true">
+            <notes><![CDATA[Se analiza el manejo de inventario, estructurandole de manera optima y funcional, eperemos que todo salga bien	]]></notes>
+        </task>
     </tasks>
     <resources>
         <resource id="0" name="Analisis de Documentacion" function="SoftwareDevelopment:8" contacts="" phone=""/>
@@ -54,6 +100,7 @@
         <displaycolumn property-id="tpd8" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd6" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd10" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd11" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd1" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd7" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd0" order="-1" width="75" visible="false"/>
