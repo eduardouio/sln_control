@@ -365,7 +365,7 @@
     `caracteristicas` MEDIUMTEXT ,
     `notas` MEDIUMTEXT,    
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    PRIMARY KEY (`id_tratamiento`) ,
+    PRIMARY KEY (`id_tratamiento_efluente`) ,
     UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC))
   ENGINE = InnoDB AUTO_INCREMENT=1
   COMMENT = 'Entidad encargada de recibor los valores de las decanter se ' /* comment truncated */;
@@ -394,7 +394,7 @@
       ON UPDATE CASCADE,
     INDEX `fk_trabajo_equipo_tratamiento_efluente_idx` (`id_tratamiento_efluente` ASC) ,
     CONSTRAINT `fk_trabajo_equipo_tratamiento_efluente`
-      FOREIGN KEY (`id_tratamiento` )
+      FOREIGN KEY (`id_tratamiento_efluente` )
       REFERENCES `slnecc_control`.`tratamiento_efluente` (`id_tratamiento_efluente` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
@@ -418,9 +418,9 @@
     `diario` DECIMAL(5,1) NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_vol_recolectados_procesados`) ,
-    INDEX `fk_trabajo_equipo_tratamiento_efluente_idx` (`id_tratamiento_efluente` ASC) ,
-    CONSTRAINT `fk_trabajo_equipo_tratamiento_efluente`
-      FOREIGN KEY (`id_tratamiento` )
+    INDEX `fk_vlo_recolectados_procesados_tratamiento_efluente_idx` (`id_tratamiento_efluente` ASC) ,
+    CONSTRAINT `fk_vlo_recolectados_procesados_tratamiento_efluente`
+      FOREIGN KEY (`id_tratamiento_efluente` )
       REFERENCES `slnecc_control`.`tratamiento_efluente` (`id_tratamiento_efluente` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE, 
