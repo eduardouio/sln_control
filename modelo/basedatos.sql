@@ -357,8 +357,8 @@
   -- Table `slnecc_control`.`tratamiento`
   -- -----------------------------------------------------
   
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`tratamiento` (
-    `id_tratamiento` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,    
+  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`tratamiento_efluente` (
+    `id_tratamiento_efluente` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,    
     `codigo` VARCHAR(50) NOT NULL,    
     `nombre` VARCHAR(50) NOT NULL ,    
     `tipo` VARCHAR(50) NOT NULL ,    
@@ -376,7 +376,7 @@
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`trabajo_equipo` (
     `id_trabajo_equipo` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_equipo` MEDIUMINT UNSIGNED NOT NULL ,
-    `id_tratamiento` MEDIUMINT UNSIGNED NOT NULL ,
+    `id_tratamiento_efluente` MEDIUMINT UNSIGNED NOT NULL ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,        
     `horas` DECIMAL(3,1) NULL ,
     `rpm` DECIMAL(4,1) NULL ,
@@ -392,10 +392,10 @@
       REFERENCES `slnecc_control`.`equipo` (`id_equipo` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
-    INDEX `fk_trabajo_equipo_tratamientos_idx` (`id_tratamiento` ASC) ,
-    CONSTRAINT `fk_trabajo_equipo_tratamientos`
+    INDEX `fk_trabajo_equipo_tratamiento_efluente_idx` (`id_tratamiento_efluente` ASC) ,
+    CONSTRAINT `fk_trabajo_equipo_tratamiento_efluente`
       FOREIGN KEY (`id_tratamiento` )
-      REFERENCES `slnecc_control`.`tratamiento` (`id_tratamiento` )
+      REFERENCES `slnecc_control`.`tratamiento_efluente` (`id_tratamiento_efluente` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
     INDEX `fk_trabajos_equipo_reporte_idx` (`id_reporte` ASC) ,
@@ -414,11 +414,16 @@
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`vol_recolectados_procesados` (
     `id_vol_recolectados_procesados` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NULL ,
-    `efluente` VARCHAR(50) NULL ,
+    `id_tratamiento_efluente` MEDIUMINT UNSIGNED NOT NULL ,
     `diario` DECIMAL(5,1) NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_vol_recolectados_procesados`) ,
-    UNIQUE INDEX `id_reporte_UNIQUE` (`id_reporte` ASC) ,
+    INDEX `fk_trabajo_equipo_tratamiento_efluente_idx` (`id_tratamiento_efluente` ASC) ,
+    CONSTRAINT `fk_trabajo_equipo_tratamiento_efluente`
+      FOREIGN KEY (`id_tratamiento` )
+      REFERENCES `slnecc_control`.`tratamiento_efluente` (`id_tratamiento_efluente` )
+      ON DELETE RESTRICT
+      ON UPDATE CASCADE, 
     INDEX `fk_vol_recolectados_procesados_reporte_idx` (`id_reporte` ASC) ,
     CONSTRAINT `fk_vol_recolectados_procesados_reporte`
       FOREIGN KEY (`id_reporte` )
