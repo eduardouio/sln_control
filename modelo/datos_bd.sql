@@ -172,20 +172,42 @@ INSERT INTO `slnecc_control`.`equipo` (`codigo`, `nombre`, `modelo`, `tipo`) VAL
 -- Table `slnecc_control`.`tratamiento`
 -- -----------------------------------------------------
 
-INSERT INTO `slnecc_control`.`tratamiento` (`codigo`, `nombre`, `tipo`) VALUES ('TR1', 'LGS/Sistema Activo', 'm');
-INSERT INTO `slnecc_control`.`tratamiento` (`codigo`, `nombre`, `tipo`) VALUES ('TR2', 'MQC/Sistema Activo', 'm');
-INSERT INTO `slnecc_control`.`tratamiento` (`codigo`, `nombre`, `tipo`) VALUES ('TR3', 'DW/ Recolectados', 'm');
+INSERT INTO `slnecc_control`.`tratamiento_efluente` (`codigo`, `nombre`, `tipo`) VALUES ('TR1', 'LGS/Sistema Activo', 'Tratamiento');
+INSERT INTO `slnecc_control`.`tratamiento_efluente` (`codigo`, `nombre`, `tipo`) VALUES ('TR2', 'MQC/Sistema Activo', 'Tratamiento');
+INSERT INTO `slnecc_control`.`tratamiento_efluente` (`codigo`, `nombre`, `tipo`) VALUES ('TR3', 'DW/ Recolectados', 'Tratamiento');
+INSERT INTO `slnecc_control`.`tratamiento_efluente` (`codigo`, `nombre`, `tipo`) VALUES ('EF1', 'Lodo Desplazado', 'Efluente');
+INSERT INTO `slnecc_control`.`tratamiento_efluente` (`codigo`, `nombre`, `tipo`) VALUES ('EF2', 'Contrapozo', 'Efluente');
+INSERT INTO `slnecc_control`.`tratamiento_efluente` (`codigo`, `nombre`, `tipo`) VALUES ('EF3', 'Tanques de Cortes', 'Efluente');
+INSERT INTO `slnecc_control`.`tratamiento_efluente` (`codigo`, `nombre`, `tipo`) VALUES ('EF4', 'Floculos', 'Efluente');
+INSERT INTO `slnecc_control`.`tratamiento_efluente` (`codigo`, `nombre`, `tipo`) VALUES ('EF5', 'Aguas Lodosas Lavados', 'Efluente');
+INSERT INTO `slnecc_control`.`tratamiento_efluente` (`codigo`, `nombre`, `tipo`) VALUES ('EF6', 'Cubetos', 'Efluente');
+INSERT INTO `slnecc_control`.`tratamiento_efluente` (`codigo`, `nombre`, `tipo`) VALUES ('EF7', 'Celdas Zona Cortes', 'Efluente');
+INSERT INTO `slnecc_control`.`tratamiento_efluente` (`codigo`, `nombre`, `tipo`) VALUES ('EF8', 'Otroa', 'Efluente');
 
 -- -----------------------------------------------------
 -- Table `slnecc_control`.`trabajo_equipo`
 -- -----------------------------------------------------
+
+INSERT INTO `slnecc_control`.`trabajo_equipo` (`id_equipo`, `id_tratamiento_efluente`, `id_reporte`, `horas`, `rpm`, `gpm`, `ppg_entrada`, `ppg_salida`, `ppg_descarga`) VALUES ('1', '1', '1', '0', '0', '0', '0', '0', '0');
+INSERT INTO `slnecc_control`.`trabajo_equipo` (`id_equipo`, `id_tratamiento_efluente`, `id_reporte`, `horas`, `rpm`, `gpm`, `ppg_entrada`, `ppg_salida`, `ppg_descarga`) VALUES ('1', '2', '1', '0', '0', '0', '0', '0', '0');
+INSERT INTO `slnecc_control`.`trabajo_equipo` (`id_equipo`, `id_tratamiento_efluente`, `id_reporte`, `horas`, `rpm`, `gpm`, `ppg_entrada`, `ppg_salida`, `ppg_descarga`) VALUES ('1', '3', '1', '0', '0', '0', '0', '0', '0');
+INSERT INTO `slnecc_control`.`trabajo_equipo` (`id_equipo`, `id_tratamiento_efluente`, `id_reporte`, `horas`, `rpm`, `gpm`, `ppg_entrada`, `ppg_salida`, `ppg_descarga`) VALUES ('2', '1', '1', '0', '0', '0', '0', '0', '0');
+INSERT INTO `slnecc_control`.`trabajo_equipo` (`id_equipo`, `id_tratamiento_efluente`, `id_reporte`, `horas`, `rpm`, `gpm`, `ppg_entrada`, `ppg_salida`, `ppg_descarga`) VALUES ('2', '2', '1', '0', '0', '0', '0', '0', '0');
+INSERT INTO `slnecc_control`.`trabajo_equipo` (`id_equipo`, `id_tratamiento_efluente`, `id_reporte`, `horas`, `rpm`, `gpm`, `ppg_entrada`, `ppg_salida`, `ppg_descarga`) VALUES ('2', '3', '1', '0', '0', '0', '0', '0', '0');
 
 
 -- -----------------------------------------------------
 -- Table `slnecc_control`.`vol_recolectados_procesados`
 -- -----------------------------------------------------
 
-
+INSERT INTO `slnecc_control`.`vol_recolectados_procesados` (`id_reporte`, `id_tratamiento_efluente`, `diario`) VALUES ('1', '4', '0');
+INSERT INTO `slnecc_control`.`vol_recolectados_procesados` (`id_reporte`, `id_tratamiento_efluente`, `diario`) VALUES ('1', '5', '0');
+INSERT INTO `slnecc_control`.`vol_recolectados_procesados` (`id_reporte`, `id_tratamiento_efluente`, `diario`) VALUES ('1', '6', '0');
+INSERT INTO `slnecc_control`.`vol_recolectados_procesados` (`id_reporte`, `id_tratamiento_efluente`, `diario`) VALUES ('1', '7', '0');
+INSERT INTO `slnecc_control`.`vol_recolectados_procesados` (`id_reporte`, `id_tratamiento_efluente`, `diario`) VALUES ('1', '8', '0');
+INSERT INTO `slnecc_control`.`vol_recolectados_procesados` (`id_reporte`, `id_tratamiento_efluente`, `diario`) VALUES ('1', '9', '0');
+INSERT INTO `slnecc_control`.`vol_recolectados_procesados` (`id_reporte`, `id_tratamiento_efluente`, `diario`) VALUES ('1', '10', '0');
+INSERT INTO `slnecc_control`.`vol_recolectados_procesados` (`id_reporte`, `id_tratamiento_efluente`, `diario`) VALUES ('1', '11', '0');
 
 -- -----------------------------------------------------
 -- Table `slnecc_control`.`vol_agua_operaciones`
