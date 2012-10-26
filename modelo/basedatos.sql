@@ -2,7 +2,7 @@
 -- ---------------------------------------------------
 -- Modelo de Datos Vacío
 -- Sln 
--- Autor <@eduardouio>
+-- Autor <@eduardouio> Eduardo Villota
 --
 -- Este es el modelo de referencia del proyecto, ya no se va a trabajar con el modelo grafica
 -- Este script es la base para generar los modelos graficos, adjunto se encuentra un script
