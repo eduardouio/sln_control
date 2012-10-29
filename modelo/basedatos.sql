@@ -592,11 +592,12 @@
   COMMENT = 'entidad con opciones:\n\nvolqueta:\n1\n2\n3\n4\n\nlos acumulados van' /* comment truncated */;
 
 
+
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`materia_prima`
   -- -----------------------------------------------------
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`materia_prima` (
-    `id_materia_prima` MEDIUMINT NOT NULL AUTO_INCREMENT ,
+    `id_materia_prima` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `codigo` VARCHAR(20) NOT NULL ,
     `nombre` VARCHAR(50) NOT NULL ,
     `unidad_medida` VARCHAR(45) NULL ,
@@ -612,67 +613,101 @@
   ENGINE = InnoDB AUTO_INCREMENT=1
   COMMENT = 'Entidad encargada de manejar las materias primas usados en e' /* comment truncated */;
 
-
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`parametros_mp`
   -- -----------------------------------------------------
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`parametros_mp` (
-    `id_parametros_mp` MEDIUMINT NOT NULL AUTO_INCREMENT,
-    `codigo` VARCHAR(20) NOT NULL ,
+    `id_parametros_mp` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `id_materia_prima` MEDIUMINT UNSIGNED NOT NULL ,
+    `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL ,
     `procedimiento` VARCHAR(50) NOT NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     UNIQUE INDEX `id_parametros_mp_UNIQUE` (`id_parametros_mp` ASC) ,
-    PRIMARY KEY (`codigo`, `procedimiento`) ,
-    INDEX `fk_param_mp_idx` (`codigo` ASC) ,
-    CONSTRAINT `fk_param_mp`
-      FOREIGN KEY (`codigo` )
-      REFERENCES `slnecc_control`.`materia_prima` (`codigo` )
-      ON DELETE CASCADE
-      ON UPDATE CASCADE)
+    PRIMARY KEY (`id_materia_prima`,`id_servicio_otro`) ,
+    INDEX `fk_parametros_materia_mp_idx` (`id_materia_prima` ASC) ,    
+    CONSTRAINT `fk_parametros_materia_mp`
+      FOREIGN KEY (`id_materia_prima` )
+      REFERENCES `slnecc_control`.`materia_prima` (`id_materia_prima` )
+      ON DELETE RESTRICT
+      ON UPDATE CASCADE,
+      INDEX `fk_parametros_mp_servicio_otro_idx` (`id_servicio_otro` ASC) ,    
+    CONSTRAINT `fk_parametros_mp_servicio_otro`
+      FOREIGN KEY (`id_servicio_otro` )
+      REFERENCES `slnecc_control`.`servicio_otro` (`id_servicio_otro` )
+      ON DELETE RESTRICT
+      ON UPDATE CASCADE
+      )
   ENGINE = InnoDB AUTO_INCREMENT=1
   COMMENT = 'En esta entidad se controla el uso de los quimicos con los p' /* comment truncated */;
 
-
   -- -----------------------------------------------------
-  -- Table `slnecc_control`.`movimientos_mp`
+  -- Table `slnecc_control`.`iventario_entrada`
   -- -----------------------------------------------------
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`movimientos_mp` (
-    `id_movimientos_mp` MEDIUMINT NOT NULL AUTO_INCREMENT ,
-    `id_parametros_mp` MEDIUMINT NOT NULL ,
-    `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
+  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`inv_entrada` (
+    `id_inv_entrada` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
+    `id_parametros_mp` MEDIUMINT UNSIGNED NOT NULL,
+    `id_reporte` MEDIUMINT UNSIGNED NOT NULL,
     `fecha` DATE NULL ,
-    `movimiento` VARCHAR(45) NULL ,
-    `cantidad` DECIMAL(5,1) NULL ,
-    `procedimiento` VARCHAR(45) NULL ,
+    `lote` MEDIUMINT UNSIGNED COMMENT'en caso de no especificar un numero de guia se controla por lote es un valor autoincremental para cada lote de entrada',
+    `guia_remision` VARCHAR(20) NOT NULL DEFAULT 0,
+    `cantidad` DECIMAL(5,1) NULL ,    
     `notas` MEDIUMTEXT NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    PRIMARY KEY (`id_movimientos_mp`) ,
-    INDEX `fk_movimientos_mp_parametros_idx` (`id_parametros_mp` ASC) ,
-    INDEX `fk_movimientos_mp-reporte_idx` (`id_reporte` ASC) ,
-    CONSTRAINT `fk_movimientos_mp_parametros`
+    PRIMARY KEY (`id_inv_entrada`) ,
+    INDEX `fk_inv_entrada_parametros_mp_idx` (`id_parametros_mp` ASC) ,
+    INDEX `fk_inv_entrada_reporte_idx` (`id_reporte` ASC) ,
+    CONSTRAINT `fk_inv_entrada_parametros_mp`
       FOREIGN KEY (`id_parametros_mp` )
       REFERENCES `slnecc_control`.`parametros_mp` (`id_parametros_mp` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
-    CONSTRAINT `fk_movimientos_mp_reporte`
+    CONSTRAINT `fk_inv_entrada_reporte`
       FOREIGN KEY (`id_reporte` )
       REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE)
   ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'Esta es la entidad que controla el uso de los quimicos en la' /* comment truncated */;
+  COMMENT = 'Entidad que controla el ingreso de los quimicos al pozo';
 
+-- -----------------------------------------------------
+  -- Table `slnecc_control`.`inventario_salida`
+  -- -----------------------------------------------------
+  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`inv_salida` (
+    `id_inv_salida` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `id_parametros_mp` MEDIUMINT UNSIGNED NOT NULL,
+    `id_reporte` MEDIUMINT UNSIGNED NOT NULL,
+    `fecha` DATE NULL ,
+    `lote` MEDIUMINT UNSIGNED  COMMENT'se consulta al inv_entrada y se copia en esta columna',
+    `guia_remision` VARCHAR(20) NOT NULL DEFAULT 0 COMMENT'se usa solo si la salida se controla',
+    `cantidad` DECIMAL(5,1) NULL ,    
+    `notas` MEDIUMTEXT NULL ,
+    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+    PRIMARY KEY (`id_inv_salida`) ,
+    INDEX `fk_inv_salida_parametros_mp_idx` (`id_parametros_mp` ASC) ,
+    INDEX `fk_inv_salida_reporte_idx` (`id_reporte` ASC) ,
+    CONSTRAINT `fk_inv_salida_parametros_mp`
+      FOREIGN KEY (`id_parametros_mp` )
+      REFERENCES `slnecc_control`.`parametros_mp` (`id_parametros_mp` )
+      ON DELETE RESTRICT
+      ON UPDATE CASCADE,
+    CONSTRAINT `fk_inv_salida_reporte`
+      FOREIGN KEY (`id_reporte` )
+      REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
+      ON DELETE RESTRICT
+      ON UPDATE CASCADE)
+  ENGINE = InnoDB AUTO_INCREMENT=1
+  COMMENT = 'Entidad que controla el uso y salida de los quimicos del pozo';
 
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`clasificacion_costos`
   -- -----------------------------------------------------
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`clasificacion_costos` (
-    `id_clasificacion_costos` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`clasificacion_costo` (
+    `id_clasificacion_costo` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `id_proyecto` MEDIUMINT UNSIGNED NOT NULL ,
-    `nombre` VARCHAR(90) NOT NULL ,
+    `nombre` VARCHAR(90) NOT NULL ,    
     `notas` MEDIUMTEXT NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    PRIMARY KEY (`id_clasificacion_costos`) ,
+    PRIMARY KEY (`id_clasificacion_costo`) ,
     UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) ,
     INDEX `fk_clasificacion_costo_proyecto_idx` (`id_proyecto` ASC) ,
     CONSTRAINT `fk_clasificacion_costo_proyecto`
@@ -681,28 +716,55 @@
       ON DELETE RESTRICT
       ON UPDATE CASCADE)
   ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'entidad que maneja los costos para una operacion o un proyec' /* comment truncated */;
+  COMMENT = 'entidad que maneja los costos para una operacion o un proyecto';
 
 
   -- -----------------------------------------------------
-  -- Table `slnecc_control`.`costos`
+  -- Table `slnecc_control`.`costo`
   -- -----------------------------------------------------
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`costos` (
-    `id_costos` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
-    `id_clasificacion_costos` MEDIUMINT UNSIGNED NOT NULL ,
+  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`costo` (
+    `id_costo` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
+    `id_clasificacion_costo` MEDIUMINT UNSIGNED NOT NULL ,
     `descripcion_costo` VARCHAR(50) NOT NULL ,
-    `costo` DECIMAL(6,2) NOT NULL ,
+    `costo` DECIMAL(6,2) NOT NULL ,    
     `notas` MEDIUMTEXT NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    PRIMARY KEY (`id_costos`) ,
-    INDEX `fk_costo_clasificacion_idx` (`id_clasificacion_costos` ASC) ,
+    PRIMARY KEY (`id_costo`) ,
+    INDEX `fk_costo_clasificacion_idx` (`id_clasificacion_costo` ASC) ,
     CONSTRAINT `fk_costo_clasificacion`
-      FOREIGN KEY (`id_clasificacion_costos` )
-      REFERENCES `slnecc_control`.`clasificacion_costos` (`id_clasificacion_costos` )
+      FOREIGN KEY (`id_clasificacion_costo` )
+      REFERENCES `slnecc_control`.`clasificacion_costo` (`id_clasificacion_costo` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE)
   ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'Entidad encargada de almacenar los detalles de los costos pa' /* comment truncated */;
+  COMMENT = 'Entidad encargada de almacenar los detalles de los costos para un proyecto';
+
+  -- -----------------------------------------------------
+  -- Table `slnecc_control`.`salida_costo`
+  -- -----------------------------------------------------
+  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`salida_costo` (
+    `id_salida_costo` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
+    `id_costo` MEDIUMINT UNSIGNED NOT NULL ,
+    `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
+    `costo` DECIMAL(6,2) NOT NULL COMMENT'Se copia el costo de la entidad costo',            
+    `notas` MEDIUMTEXT NULL ,
+    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+    PRIMARY KEY (`id_salida_costo`) ,
+    INDEX `fk_salida_costo_costo_idx` (`id_costo` ASC) ,
+    INDEX `fk_salida_costo_reporte_idx` (`id_reporte` ASC) ,
+    CONSTRAINT `fk_salida_costo_costo`
+      FOREIGN KEY (`id_costo` )
+      REFERENCES `slnecc_control`.`costo` (`id_costo` )
+      ON DELETE RESTRICT
+      ON UPDATE CASCADE,
+    CONSTRAINT `fk_salida_costo_reporte`
+      FOREIGN KEY (`id_reporte` )
+      REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
+      ON DELETE RESTRICT
+      ON UPDATE CASCADE
+      )
+  ENGINE = InnoDB AUTO_INCREMENT=1
+  COMMENT = 'Entidad encargada de almacenar los detalles de los costos para un proyecto';  
 
 
   -- -----------------------------------------------------
@@ -809,7 +871,6 @@
     `hora_registro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_log_users`) )
   ENGINE = InnoDB AUTO_INCREMENT=1;
-
 
 
   SET SQL_MODE=@OLD_SQL_MODE;
