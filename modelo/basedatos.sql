@@ -600,16 +600,17 @@
     `id_materia_prima` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `codigo` VARCHAR(20) NOT NULL ,
     `nombre` VARCHAR(50) NOT NULL ,
+    `marca` VARCHAR(50) NOT NULL ,
+    `cantidad_presentacion` DECIMAL(4,2) NULL ,
     `unidad_medida` VARCHAR(45) NULL ,
-    `cantidad` DECIMAL(4,1) NULL ,
-    `costo` DECIMAL(4,1) NULL ,
-    `stock_min` DECIMAL(4,1) NULL ,
+    `costo` DECIMAL(4,3) NULL ,
+    `stock_min` DECIMAL(4,1) NOT NULL ,
     `stock_max` DECIMAL(5,1) NULL ,
     `ubicacion` VARCHAR(50) NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    UNIQUE INDEX `id_materia_prima_UNIQUE` (`id_materia_prima` ASC) ,
-    UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) ,
-    PRIMARY KEY (`codigo`) )
+    UNIQUE INDEX `id_materia_prima` (`id_materia_prima` ASC) ,    
+    UNIQUE INDEX `codigo` (`codigo` ASC) ,    
+    PRIMARY KEY (`nombre`,`marca`,`cantidad_presentacion`) )
   ENGINE = InnoDB AUTO_INCREMENT=1
   COMMENT = 'Entidad encargada de manejar las materias primas usados en e' /* comment truncated */;
 
