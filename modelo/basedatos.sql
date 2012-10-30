@@ -600,10 +600,10 @@
     `id_materia_prima` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `codigo` VARCHAR(20) NOT NULL ,
     `nombre` VARCHAR(50) NOT NULL ,
-    `marca` VARCHAR(50) NOT NULL ,
+    `marca` VARCHAR(50) NOT NULL DEFAULT 'S/M' ,
     `cantidad_presentacion` DECIMAL(4,2) NULL ,
     `unidad_medida` VARCHAR(45) NULL ,
-    `costo` DECIMAL(4,3) NULL ,
+    `costo` DECIMAL(4,2) NULL ,
     `stock_min` DECIMAL(4,1) NOT NULL ,
     `stock_max` DECIMAL(5,1) NULL ,
     `ubicacion` VARCHAR(50) NULL ,
@@ -620,8 +620,7 @@
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`parametros_mp` (
     `id_parametros_mp` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `id_materia_prima` MEDIUMINT UNSIGNED NOT NULL ,
-    `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL ,
-    `procedimiento` VARCHAR(50) NOT NULL ,
+    `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL ,    
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     UNIQUE INDEX `id_parametros_mp_UNIQUE` (`id_parametros_mp` ASC) ,
     PRIMARY KEY (`id_materia_prima`,`id_servicio_otro`) ,
@@ -646,7 +645,7 @@
   -- -----------------------------------------------------
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`inv_entrada` (
     `id_inv_entrada` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
-    `id_parametros_mp` MEDIUMINT UNSIGNED NOT NULL,
+    `id_materia_prima` MEDIUMINT UNSIGNED NOT NULL,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL,
     `fecha` DATE NULL ,
     `lote` MEDIUMINT UNSIGNED COMMENT'en caso de no especificar un numero de guia se controla por lote es un valor autoincremental para cada lote de entrada',
@@ -655,11 +654,11 @@
     `notas` MEDIUMTEXT NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_inv_entrada`) ,
-    INDEX `fk_inv_entrada_parametros_mp_idx` (`id_parametros_mp` ASC) ,
+    INDEX `fk_inv_entrada_matria_mp_idx` (`id_materia_prima` ASC) ,
     INDEX `fk_inv_entrada_reporte_idx` (`id_reporte` ASC) ,
-    CONSTRAINT `fk_inv_entrada_parametros_mp`
-      FOREIGN KEY (`id_parametros_mp` )
-      REFERENCES `slnecc_control`.`parametros_mp` (`id_parametros_mp` )
+    CONSTRAINT `fk_inv_entrada_materia_mp`
+      FOREIGN KEY (`id_materia_prima` )
+      REFERENCES `slnecc_control`.`materia_prima` (`id_materia_prima` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
     CONSTRAINT `fk_inv_entrada_reporte`
