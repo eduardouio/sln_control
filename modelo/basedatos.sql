@@ -747,6 +747,7 @@
     `id_costo` MEDIUMINT UNSIGNED NOT NULL ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `costo` DECIMAL(6,2) NOT NULL COMMENT'Se copia el costo de la entidad costo',            
+    `cantidad` SMALLINT UNSIGNED NOT NULL , 
     `notas` MEDIUMTEXT NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_salida_costo`) ,
