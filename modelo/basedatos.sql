@@ -233,8 +233,8 @@
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`zarandas`
   -- -----------------------------------------------------
-    CREATE  TABLE IF NOT EXISTS `slnecc_control`.`zarandas` (
-    `id_zarandas` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
+    CREATE  TABLE IF NOT EXISTS `slnecc_control`.`zaranda` (
+    `id_zaranda` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `zaranda_no` SMALLINT UNSIGNED NOT NULL ,
     `peso_entrada` DECIMAL(4,1) NULL ,
@@ -243,9 +243,9 @@
     `consumo_malla_dia` SMALLINT UNSIGNED NULL ,
     `horas_dia` DECIMAL(3,1) NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    PRIMARY KEY (`id_zarandas`) ,
-    INDEX `fk_zarandas_reporte_idx` (`id_reporte` ASC) ,
-    CONSTRAINT `fk_zarandas_reporte`
+    PRIMARY KEY (`id_zaranda`) ,
+    INDEX `fk_zaranda_reporte_idx` (`id_reporte` ASC) ,
+    CONSTRAINT `fk_zaranda_reporte`
       FOREIGN KEY (`id_reporte` )
       REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
       ON DELETE RESTRICT
@@ -259,16 +259,16 @@
   -- -----------------------------------------------------
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`zaranda_mallas` (
     `id_zaranda_mallas` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
-    `id_zarandas` MEDIUMINT UNSIGNED NOT NULL ,
+    `id_zaranda` MEDIUMINT UNSIGNED NOT NULL ,
     `malla_deck_no` SMALLINT NULL ,
     `mesh` DECIMAL(4,1) NULL ,
     `horas` DECIMAL(3,1) NULL COMMENT 'en el informe de peuebas veo que las horas se aumentan en 36\\n' ,    
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_zaranda_mallas`) ,
-    INDEX `mallas_zarandas_idx` (`id_zarandas` ASC) ,
-    CONSTRAINT `fk_mallas_zarandas`
-      FOREIGN KEY (`id_zarandas` )
-      REFERENCES `slnecc_control`.`zarandas` (`id_zarandas` )
+    INDEX `mallas_zaranda_idx` (`id_zaranda` ASC) ,
+    CONSTRAINT `fk_mallas_zaranda`
+      FOREIGN KEY (`id_zaranda` )
+      REFERENCES `slnecc_control`.`zaranda` (`id_zaranda` )
       ON DELETE CASCADE
       ON UPDATE CASCADE)
   ENGINE = InnoDB AUTO_INCREMENT=1
@@ -361,7 +361,7 @@
     `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,    
     `codigo` VARCHAR(50) NOT NULL,    
     `nombre` VARCHAR(50) NOT NULL ,    
-    `descripcion` VARCHAR(200) ,
+    `descripcion` VARCHAR(300) ,
     `tipo` VARCHAR(50) NOT NULL ,    
     `notas` MEDIUMTEXT,    
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
