@@ -769,18 +769,18 @@
 
 
   -- -----------------------------------------------------
-  -- Table `slnecc_control`.`comentarios`
+  -- Table `slnecc_control`.`comentario`
   -- -----------------------------------------------------
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`comentarios` (
-    `id_comentarios` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`comentario` (
+    `id_comentario` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `titulo` VARCHAR(150) NULL ,
     `comentarios` MEDIUMTEXT NULL ,
     `responsable` VARCHAR(50) NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    PRIMARY KEY (`id_comentarios`) ,
-    INDEX `fk_comentarios_reporte_idx` (`id_reporte` ASC) ,
-    CONSTRAINT `fk_comentarios_reporte`
+    PRIMARY KEY (`id_comentario`) ,
+    INDEX `fk_comentario_reporte_idx` (`id_reporte` ASC) ,
+    CONSTRAINT `fk_comentario_reporte`
       FOREIGN KEY (`id_reporte` )
       REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
       ON DELETE RESTRICT
