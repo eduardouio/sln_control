@@ -10,6 +10,9 @@
 -- ---------------------------------------------------
 -- ---------------------------------------------------
 
+revisar el uso deinventario, creo que seria mejos hacerlo asi inv_entrada contra inventario_salida, ademas se añadio
+el tpo default 0.0 not null, se quito la columna costo de materia_prima y se la incluyo en la de inv_entrada
+
   SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
   SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
   SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
@@ -26,10 +29,12 @@
     `fecha_inicio` DATE NOT NULL ,
     `fecha_fin` DATE NULL ,
     `notas` MEDIUMTEXT NULL ,
-    `creacio` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    PRIMARY KEY (`id_proyecto`, `cliente`) )
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'Esta es la entidad que representa a un proyecto, la manera e' /* comment truncated */;
+    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+    PRIMARY KEY (`id_proyecto`, `cliente`) 
+    )
+  ENGINE = InnoDB 
+  AUTO_INCREMENT = 1
+  COMMENT = 'Entidad que representa un proyecto, es un ente de control de los costos y manejo de presupuesto para su ejecución';
 
 
   -- -----------------------------------------------------
@@ -50,9 +55,12 @@
       FOREIGN KEY (`id_proyecto` )
       REFERENCES `slnecc_control`.`proyecto` (`id_proyecto` )
       ON DELETE RESTRICT
-      ON UPDATE CASCADE)
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'Esta es la entidad que controla los informes de esta entidad' /* comment truncated */;
+      ON UPDATE CASCADE
+      )
+  ENGINE = InnoDB 
+  AUTO_INCREMENT = 1
+  COMMENT = 'Entidad dependiente de proyecto, aqui se registrn los pozos en los que se trabajó durante el desarrollo del proyecto
+             y ademas es un ente de control para el reporte';
 
 
   -- -----------------------------------------------------
@@ -64,9 +72,12 @@
     `fecha_revision` DATE NOT NULL ,    
     `notas` MEDIUMTEXT NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    PRIMARY KEY (`id_revision`) )
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'Esta es la entidad donde se registran todos los cambios real' /* comment truncated */;
+    PRIMARY KEY (`id_revision`) 
+    )
+  ENGINE = InnoDB 
+  AUTO_INCREMENT = 1
+  COMMENT = 'Entidad que regitra los cambios realizados a la estructura del reporte, no guarda ninguna dependencia del reporte, pero es 
+            necesario que se registren aquí cualquier cambio (los cambios serán en su mayoria en el diseño de la app)';
 
 
   -- -----------------------------------------------------
@@ -78,13 +89,13 @@
     `no_reprote` MEDIUMINT NOT NULL ,
     `codigo` VARCHAR(45) NOT NULL ,
     `fecha` DATE NOT NULL ,
-    `profundidad_final` DECIMAL(5,1) NOT NULL ,
-    `seccion` DECIMAL(5,1) NULL ,
+    `profundidad_final` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
+    `seccion` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
     `company_man` VARCHAR(50) NOT NULL ,
-    `tool_pusher` VARCHAR(50) NULL ,
-    `superintendente` VARCHAR(50) NULL ,
-    `rig_manager` VARCHAR(50) NULL ,
-    `supervisor_sln` VARCHAR(50) NULL COMMENT 'El supervisor esta en la lista de personal en pozo' ,
+    `tool_pusher` VARCHAR(50) NOT NULL ,
+    `superintendente` VARCHAR(50) NOT NULL ,
+    `rig_manager` VARCHAR(50) NOT NULL ,
+    `supervisor_sln` VARCHAR(50) NOT NULL COMMENT 'El supervisor esta en la lista de personal en pozo' ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_pozo`, `no_reprote`) ,
     UNIQUE INDEX `id_reporte_UNIQUE` (`id_reporte` ASC) ,
@@ -93,9 +104,13 @@
       FOREIGN KEY (`id_pozo` )
       REFERENCES `slnecc_control`.`pozo` (`id_pozo` )
       ON DELETE RESTRICT
-      ON UPDATE CASCADE)
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'inicio del informe verificaer la informacion del taladro ant' /* comment truncated */;
+      ON UPDATE CASCADE
+      )
+  ENGINE = InnoDB 
+  AUTO_INCREMENT = 1
+  COMMENT = 'Esta entidad representa el informe diario y es un ente control para el igreso de la informacion del reporte
+            es una tabla de la que dependen mas de una entidad para existir, a pesar de ser una entidad de control tambien almacena 
+            informacion';
 
 
   -- -----------------------------------------------------
@@ -106,10 +121,10 @@
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `compania` VARCHAR(50) NULL ,
     `sistema` VARCHAR(50) NULL ,
-    `peso_lodo` DECIMAL(4,1) NULL ,
+    `peso_lodo` VARCHAR(6) NOT NULL DEFAULT '0.0' ,
     `viscosidad_plastica` VARCHAR(7) NULL ,
-    `yield_point` DECIMAL(4,1) NULL ,
-    `volumen_sa` DECIMAL(5,1) NULL ,
+    `yield_point` DECIMAL(4,1) NOT NULL DEFAULT '0.0' ,
+    `volumen_sa` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_datos_lodos`) ,
     UNIQUE INDEX `id_reporte_UNIQUE` (`id_reporte` ASC) ,
@@ -118,9 +133,11 @@
       FOREIGN KEY (`id_reporte` )
       REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
       ON DELETE RESTRICT
-      ON UPDATE CASCADE)
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'entidad que recibe los datos del lodo, los datos necesitan u' /* comment truncated */;
+      ON UPDATE CASCADE
+      )
+  ENGINE = InnoDB 
+  AUTO_INCREMENT = 1
+  COMMENT = 'Entidad que registra los datos del lodo, la cual es dependiente de la entidad reporte';
 
 
   -- -----------------------------------------------------
@@ -129,11 +146,11 @@
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`contenido_solidos` (
     `id_contenido_solidos` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
-    `solidos` DECIMAL(3,1) NULL ,
-    `arena` DECIMAL(3,1) NULL ,
-    `lgs` DECIMAL(3,1) NULL ,
-    `hgs` DECIMAL(3,1) NULL ,
-    `mtb` SMALLINT UNSIGNED NULL ,
+    `solidos` DECIMAL(3,1) NOT NULL DEFAULT '0.0' ,
+    `arena` DECIMAL(3,1) NOT NULL DEFAULT '0.0' ,
+    `lgs` DECIMAL(3,1) NOT NULL DEFAULT '0.0' ,
+    `hgs` DECIMAL(3,1) NOT NULL DEFAULT '0.0' ,
+    `mtb` SMALLINT UNSIGNED NULL DEFAULT '0',
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_contenido_solidos`) ,
     UNIQUE INDEX `id_reporte_UNIQUE` (`id_reporte` ASC) ,
@@ -142,9 +159,11 @@
       FOREIGN KEY (`id_reporte` )
       REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
       ON DELETE RESTRICT
-      ON UPDATE CASCADE)
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'la mayoria de los parametros son en porcentajes con exepcion' /* comment truncated */;
+      ON UPDATE CASCADE
+      )
+  ENGINE = InnoDB 
+  AUTO_INCREMENT = 1
+  COMMENT = 'Entidad que registra el contenido de los solidos presentes en el Lodo de perforacion';
 
 
   -- -----------------------------------------------------
@@ -153,10 +172,10 @@
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`perforacion` (
     `id_perforacion` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
-    `profundidad_inicial` DECIMAL(5,1) NULL ,
-    `porosidad` DECIMAL(3,1) NULL COMMENT 'se registra en porcentaje\\n' ,
-    `wash_out` DECIMAL(3,1) NULL COMMENT 'se registra en porcentaje\\n' ,
-    `factor_expancion` DECIMAL(3,1) NULL ,
+    `profundidad_inicial` DECIMAL(5,1) NOT NULL DEFAULT '0.0',
+    `porosidad` DECIMAL(3,1) NOT NULL DEFAULT '0.0' COMMENT 'se registra en porcentaje\\n' ,
+    `wash_out` DECIMAL(3,1) NOT NULL DEFAULT '0.0' COMMENT 'se registra en porcentaje\\n' ,
+    `factor_expancion` DECIMAL(3,1) NOT NULL DEFAULT '0.0' ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id_perforacion`) ,
     UNIQUE INDEX `id_reporte_UNIQUE` (`id_reporte` ASC) ,
@@ -165,8 +184,11 @@
       FOREIGN KEY (`id_reporte` )
       REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
       ON DELETE RESTRICT
-      ON UPDATE CASCADE)
-  ENGINE = InnoDB AUTO_INCREMENT=1;
+      ON UPDATE CASCADE
+      )
+  ENGINE = InnoDB 
+  AUTO_INCREMENT = 1
+  COMMENT = 'Entidad encargada de registrar los datos de la perforacion del pozo';
 
 
   -- -----------------------------------------------------
@@ -177,9 +199,13 @@
     `cargo` VARCHAR(45) NOT NULL ,
     `descripcion` VARCHAR(45) NOT NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (`id_cargo_sln`))        
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'Este es un listado de los cargos que estan disponibles para ' /* comment truncated */;
+    PRIMARY KEY (`id_cargo_sln`)
+    )        
+  ENGINE = InnoDB 
+  AUTO_INCREMENT = 1
+  COMMENT = 'En esta entidad se regisrtan todos lo cargos que puedan existir dentro de la empresa, no es un Listado
+            de las personas con su cargo es un listado de los cargos que existen en la empresa. es una tabla padre
+            independiente del reporte';
 
 
   -- -----------------------------------------------------
@@ -193,9 +219,12 @@
     `profesion` VARCHAR(50) NOT NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_personal`) ,
-    UNIQUE INDEX `cedula_UNIQUE` (`cedula` ASC) )
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'Listado de personal que trabaja para sln sea directo o indir' /* comment truncated */;
+    UNIQUE INDEX `cedula_UNIQUE` (`cedula` ASC) 
+    )
+  ENGINE = InnoDB 
+  AUTO_INCREMENT = 1
+  COMMENT = 'Entidad que registra un listado de todo el personal de la empresa, solo la informacion de las personas no sus
+            funciones dentro de la misma, esta es un entidad padre no dependiente del reporte';
 
 
   -- -----------------------------------------------------
@@ -225,9 +254,14 @@
       FOREIGN KEY (`id_personal` )
       REFERENCES `slnecc_control`.`personal` (`id_personal` )
       ON DELETE RESTRICT
-      ON UPDATE CASCADE)
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'entidad que maneja la relacion de los empleados y sus cargos' /* comment truncated */;
+      ON UPDATE CASCADE
+      )
+  ENGINE = InnoDB 
+  AUTO_INCREMENT = 1
+  COMMENT = 'Entidad encargada de relacionar y registrar el personal que trabaja en el pozo y los cargos que ocupaba cada uno
+            , esta es una entidad hija dependiente de personal, cargos_sln y del reporte, como podemos ver es esta la entidad
+            que controla los cargos del personal, esto es asi porque una persona puede cambiar de cargo asender de puesto, esto se puede hacer
+            ademas de tener un historial completo de todos los cargos de cada persona, entidad que da cara al reporte';
 
 
   -- -----------------------------------------------------
@@ -237,10 +271,10 @@
     `id_zaranda` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `zaranda_no` SMALLINT UNSIGNED NOT NULL ,
-    `peso_entrada` DECIMAL(4,1) NULL ,
-    `peso_salida` DECIMAL(4,1) NULL ,
-    `peso_descargados` DECIMAL(4,1) NULL ,
-    `consumo_malla_dia` SMALLINT UNSIGNED NULL ,
+    `peso_entrada` VARCHAR(6) NOT NULL DEFAULT '0.0' ,
+    `peso_salida` VARCHAR(6) NOT NULL DEFAULT '0.0' ,
+    `peso_descargados` VARCHAR(6) NOT NULL DEFAULT '0.0' ,
+    `consumo_malla_dia` SMALLINT UNSIGNED NOT NULL DEFAULT '0' ,
     `horas_dia` DECIMAL(3,1) NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_zaranda`) ,
@@ -249,9 +283,12 @@
       FOREIGN KEY (`id_reporte` )
       REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
       ON DELETE RESTRICT
-      ON UPDATE CASCADE)
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'Esta entidad es una entidad compuesta ya que hay parametros ' /* comment truncated */;
+      ON UPDATE CASCADE
+      )
+  ENGINE = InnoDB 
+  AUTO_INCREMENT = 1
+  COMMENT = 'Entidad que registra el uso y consumo de las mallas en el pozo, entidad padre y a la vez entidad dependiente
+            del informe';
 
 
   -- -----------------------------------------------------
@@ -260,9 +297,9 @@
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`zaranda_mallas` (
     `id_zaranda_mallas` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_zaranda` MEDIUMINT UNSIGNED NOT NULL ,
-    `malla_deck_no` SMALLINT NULL ,
-    `mesh` DECIMAL(4,1) NULL ,
-    `horas` DECIMAL(3,1) NULL COMMENT 'en el informe de peuebas veo que las horas se aumentan en 36\\n' ,    
+    `malla_deck_no` SMALLINT NOT NULL ,
+    `mesh` DECIMAL(4,1) NOT NULL DEFAULT '0.0' ,
+    `horas` DECIMAL(3,1) NOT NULL DEFAULT '0.0' COMMENT 'en el informe de peuebas veo que las horas se aumentan en 36\\n' ,    
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_zaranda_mallas`) ,
     INDEX `mallas_zaranda_idx` (`id_zaranda` ASC) ,
@@ -270,9 +307,12 @@
       FOREIGN KEY (`id_zaranda` )
       REFERENCES `slnecc_control`.`zaranda` (`id_zaranda` )
       ON DELETE CASCADE
-      ON UPDATE CASCADE)
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'Almacena los valores para las mallas en mesh y horas, depend' /* comment truncated */;
+      ON UPDATE CASCADE
+      )
+  ENGINE = InnoDB 
+  AUTO_INCREMENT = 1
+  COMMENT = 'Entidad que registra el uso de las zarandas en horas y mesh valores numericos, entidad dependiente de zaranda
+            no es parte del informe directamente, sino a travez de su entidad padre (zaranda)';
 
 
   -- -----------------------------------------------------
@@ -282,11 +322,11 @@
     `id_acondicionador_lodo` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `proceso` VARCHAR(60) NOT NULL COMMENT 'desarenador\\ndesarcillador' ,
-    `presion` DECIMAL(4,1) NULL ,
-    `peso_entrada` DECIMAL(4,1) NULL COMMENT 'los valores tienen un + al final preguntar que es ejem 5.6+\\n' ,
-    `peso_salida` DECIMAL(4,1) NULL COMMENT 'los valores tienen un + al final preguntar que es ejem 5.6+\\n' ,
-    `peso_descargados` DECIMAL(4,1) NULL ,    
-    `horas_dia` DECIMAL(3,1) NULL ,
+    `presion` DECIMAL(4,1) NOT NULL DEFAULT '0.0' ,
+    `peso_entrada` VARCHAR(6) NOT NULL DEFAULT '0.0' COMMENT 'los valores tienen un + al final preguntar que es ejem 5.6+\\n' ,
+    `peso_salida` VARCHAR(6) NOT NULL DEFAULT '0.0' COMMENT 'los valores tienen un + al final preguntar que es ejem 5.6+\\n' ,
+    `peso_descargados` VARCHAR(6) NOT NULL DEFAULT '0.0' ,    
+    `horas_dia` DECIMAL(3,1) NOT NULL DEFAULT '0' ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_acondicionador_lodo`) ,
     INDEX `fk_acondicionador_lodo_reporte_idx` (`id_reporte` ASC) ,
@@ -294,9 +334,12 @@
       FOREIGN KEY (`id_reporte` )
       REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
       ON DELETE RESTRICT
-      ON UPDATE CASCADE)
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'se guardan los atributos unicos y el consumo de mallas esta ' /* comment truncated */;
+      ON UPDATE CASCADE
+      )
+  ENGINE = InnoDB 
+  AUTO_INCREMENT = 1
+  COMMENT = 'Entidad que registra los parametros de uso del acondicionador de lodo para los procesos
+              de desarenador y desarcillador, emntidad dependiente de reporte y padre de zaranda_acondicionador';
 
 
   -- -----------------------------------------------------
@@ -306,8 +349,8 @@
     `id_zaranda_acondicionador` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `malla_deck_no` SMALLINT NULL ,
-    `mesh` DECIMAL(4,1) NULL ,
-    `horas` DECIMAL(3,1) NULL ,
+    `mesh` DECIMAL(4,1) NOT NULL DEFAULT '0.0' ,
+    `horas` DECIMAL(3,1) NOT NULL DEFAULT '0.0' ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_zaranda_acondicionador`) ,
     INDEX `fk_zaranda_acondicionador_reporte_idx` (`id_reporte` ASC) ,
@@ -315,8 +358,12 @@
       FOREIGN KEY (`id_reporte` )
       REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
       ON DELETE RESTRICT
-      ON UPDATE CASCADE      )
-  ENGINE = InnoDB AUTO_INCREMENT=1 ;
+      ON UPDATE CASCADE      
+      )
+  ENGINE = InnoDB 
+  AUTO_INCREMENT = 1 
+  COMMENT = 'Entidad que registra los datos correspondientes al uso de la zaranda acondicionador, entidad dependiente dependiente
+            de acondicionador_lodo, por ende forma parte del reporte de forma indirecta';
 
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`zaranda_acondicionador_mallas`
@@ -324,7 +371,7 @@
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`zaranda_acondicionador_mallas` (
     `id_zaranda_acondicionador_mallas` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
-    `consumo_malla_dia` MEDIUMINT UNSIGNED NOT NULL DEFAULT 0 ,    
+    `consumo_malla_dia` MEDIUMINT UNSIGNED NOT NULL DEFAULT '0' ,    
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_zaranda_acondicionador_mallas`) ,
     INDEX `fk_zaranda_acondicionador_mallas_reporte_idx` (`id_reporte` ASC) ,
@@ -333,7 +380,12 @@
       REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE      )
-  ENGINE = InnoDB AUTO_INCREMENT=1 ;
+  ENGINE = InnoDB 
+  AUTO_INCREMENT = 1 
+  COMMENT = 'entidad que registra el uso de mallas en el proceso de zaranda_acondicionador, no se registra en la entidad anterior
+            porque es una vez por reporte y no por registro (en la entidad anterior la tabla tiene varios ingresos para el mismo reporte)
+            es por eso que fue necesaria la creacion de una nueva entidad dependiente de informe, pero se entiende que lo unico que guarda es
+            un valor de mallas usadas en este día, en caso de usar nada se deberá crear un regisrto con valor cero';
 
 
   -- -----------------------------------------------------
@@ -343,15 +395,20 @@
     `id_equipo` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,    
     `codigo` VARCHAR(50) NOT NULL,    
     `nombre` VARCHAR(50) NOT NULL ,
-    `modelo` VARCHAR(50) NOT NULL ,
-    `tipo` VARCHAR(50) NOT NULL ,    
-    `caracteristicas` MEDIUMTEXT ,
-    `usos` MEDIUMTEXT,    
+    `modelo` VARCHAR(50) NOT NULL DEFAULT 'Sin/Modelo',
+    `tipo` VARCHAR(50) NOT NULL DEFAULT 'Otros',    
+    `caracteristicas` MEDIUMTEXT DEFAULT NULL,
+    `usos` MEDIUMTEXT DEFAULT NULL,    
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_equipo`) ,
-    UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC))
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'Entidad encargada de recibor los valores de las decanter se ' /* comment truncated */;
+    UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC)
+    )
+    ENGINE = InnoDB 
+    AUTO_INCREMENT = 1
+    COMMENT = 'Entidad que se encarga de registrar todos los equipos del uso de la empresa dentro de un proyecto,
+              no necesariamente se refiere al los equipos propios sino a los equipos usados en la ejecucion de los 
+              trabajos en los proyectos, las mallas no son equipos son consumibles, entidad no dependiente del reporte
+                y padre de trabajo_equipo';
 
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`servicio_otro`
@@ -361,22 +418,19 @@
     `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,    
     `codigo` VARCHAR(50) NOT NULL,    
     `nombre` VARCHAR(50) NOT NULL ,    
-    `descripcion` VARCHAR(300) ,
+    `descripcion` VARCHAR(300) NOT NULL DEFAULT 'Sin/Descripción'  ,
     `tipo` VARCHAR(50) NOT NULL ,    
-    `notas` MEDIUMTEXT,    
+    `notas` MEDIUMTEXT NULL,    
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_servicio_otro`) ,
-    UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC))
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'despues de intentar ingresar la informacion a la base de datos noté que mucho nombres se repetian
-            en los registros ed las diferentes tablas, lo que hizo e cambiar el nombre de la tabla
-            tratamiento_efluente por servicios_otros como su nombre lo indica esta entidad almacenara
-            la informacion que se esta repitiendo en las tablas, y luego se referenciara a esos datos a travez
-            de un fk esto ayuda a que el detalle de los servicios y otros sea mas completa, las entidades que heredan de esta 
-            entidad padre son trabajo_equipo, vol_recolectados_procesados, vol_agua_operaciones, vol_cortes_fluidos,
-            manejo_efluentes, manejo_cortes cada registro e la tabla padre sera controlado por un campo llamado tipo que es 
-            el que asigna lo que se ingresa en el registro valores de este campo Efluentes, Tratamiento/Fluido, Agua,
-            Tanques, Cortes, Manejo Efluentes -> cada nombre es descriptivo y es una clasificacion de los registros';
+    UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC)
+    )
+    ENGINE = InnoDB 
+    AUTO_INCREMENT = 1
+    COMMENT = 'Entidad que registran todos los servicion que la compañia ofrece para la ejecucion del proyecto
+              ademas de los servicios se registra fluidos cortes y demas actividades que se realicen en los trabajos
+            Entidad no dependiente de reporte y padre de trabajo_equipo, vol_recolectados_procesados, vol_agua_operaciones
+            vol_cortes_fluidos(maneja doble herencia), manejo_efluentes, manejo_cortes, manejo_efluentes';
 
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`trabajos_centrifuga`
@@ -386,12 +440,12 @@
     `id_equipo` MEDIUMINT UNSIGNED NOT NULL ,
     `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,        
-    `horas` DECIMAL(3,1) NULL ,
-    `rpm` DECIMAL(4,1) NULL ,
-    `gpm` DECIMAL(4,1) NULL ,
-    `ppg_entrada` DECIMAL(4,1) NULL ,
-    `ppg_salida` DECIMAL(4,1) NULL ,
-    `ppg_descarga` DECIMAL(4,1) NULL ,
+    `horas` DECIMAL(3,1) NOT NULL DEFAULT '0.0' ,
+    `rpm` DECIMAL(4,1) NOT NULL DEFAULT '0.0' ,
+    `gpm` DECIMAL(4,1) NOT NULL DEFAULT '0.0' ,
+    `ppg_entrada` VARCHAR(6) NOT NULL DEFAULT '0.0' ,
+    `ppg_salida` VARCHAR(6) NOT NULL DEFAULT '0.0' ,
+    `ppg_descarga` VARCHAR(6) NOT NULL DEFAULT '0.0' ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_trabajo_equipo`) ,    
     INDEX `fk_trabajo_equipo_equipo_idx` (`id_equipo` ASC) ,
@@ -411,9 +465,12 @@
       FOREIGN KEY (`id_reporte` )
       REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
       ON DELETE RESTRICT
-      ON UPDATE CASCADE)
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'Entidad encargada de recibor los valores de las decanter se ' /* comment truncated */;
+      ON UPDATE CASCADE
+      )
+  ENGINE = InnoDB 
+  AUTO_INCREMENT = 1
+  COMMENT = 'entidad que se encarga de registra el uso de los equipos del tipo centrifugas, los registros almacenan
+            valores para tipos de tratamientos heredados ed la entidad servicio_otro, entidad dependiente ademas de reporte';
 
 
   -- -----------------------------------------------------
@@ -423,7 +480,7 @@
     `id_vol_recolectados_procesados` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NULL ,
     `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL ,
-    `diario` DECIMAL(5,1) NULL ,
+    `diario` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_vol_recolectados_procesados`) ,
     INDEX `fk_vlo_recolectados_procesados_servicio_otro_idx` (`id_servicio_otro` ASC) ,
@@ -437,9 +494,11 @@
       FOREIGN KEY (`id_reporte` )
       REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
       ON DELETE RESTRICT
-      ON UPDATE CASCADE)
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'Entidad de opcion\n\nefluente:\n\nsistema activo\ncontrapozo\ntanq' /* comment truncated */;
+      ON UPDATE CASCADE
+      )
+    ENGINE = InnoDB AUTO_INCREMENT = 1
+    COMMENT = 'Entidad encargada de registrar los volumenes de efluentes recolectados y procesados para cada dia(reporte)
+              esta entidad es edpendiente de servicio_otro y de el reporte';
 
 
   -- -----------------------------------------------------
@@ -449,7 +508,7 @@
     `id_vol_agua_operaciones` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL ,    
-    `diario` DECIMAL(4,1) NULL ,
+    `diario` DECIMAL(4,1) NOT NULL DEFAULT '0.0' ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_vol_agua_operaciones`) ,
     INDEX `fk_vol_agua_operaciones_servicio_otro_idx` (`id_servicio_otro` ASC) ,
@@ -465,8 +524,10 @@
       ON DELETE RESTRICT
       ON UPDATE CASCADE
       )
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'entidad con opciones\n\nagua:\nfresca para polimero\nde dw para ' /* comment truncated */;
+  ENGINE = InnoDB 
+  AUTO_INCREMENT = 1
+  COMMENT = 'Entidad que guarda los valores para los volumenes de agua usados en el trabajo diario, se registra un
+            valor diario para cada tipo de agua por defecto es cero, entidad edpendiente de reporte';
 
 
   -- -----------------------------------------------------
@@ -476,8 +537,8 @@
     `id_vol_cortes_fluidos` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL ,        
-    `cortes_flidos` VARCHAR(50) NULL ,
-    `bbls` DECIMAL(4,1) NULL ,
+    `id_servicio_otro2` MEDIUMINT UNSIGNED NOT NULL ,            
+    `bbls` DECIMAL(4,1) NOT NULL DEFAULT '0.0' ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_vol_cortes_fluidos`) ,
     INDEX `fk_vol_cortes_fluidos_servicio_otro_idx` (`id_servicio_otro` ASC) ,
@@ -486,15 +547,24 @@
       REFERENCES `slnecc_control`.`servicio_otro` (`id_servicio_otro` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE, 
-    INDEX `fk_cortes_fluidos_reportes_idx` (`id_reporte` ASC) ,
+      INDEX `fk_vol_cortes_fluidos_servicio_otro2_idx` (`id_servicio_otro2` ASC) ,
+    CONSTRAINT `fk_vol_cortes_fluidos_servicio_otro2`
+      FOREIGN KEY (`id_servicio_otro2` )
+      REFERENCES `slnecc_control`.`servicio_otro` (`id_servicio_otro` )
+      ON DELETE RESTRICT
+      ON UPDATE CASCADE,     
+    INDEX `fk_cortes_fluidos_reportes_idx` (`id_reporte` ASC) ,    
     CONSTRAINT `fk_cortes_fluidos_reportes`
       FOREIGN KEY (`id_reporte` )
       REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE
       )
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'los cortes fluidos son manejados por eusuario, solamente se almacenara la informacion de los tanques ' /* comment truncated */;
+  ENGINE = InnoDB 
+  AUTO_INCREMENT = 1
+  COMMENT = 'Entidad encargada de registrar los volumenes de cortes y fluidos usados en la perforacion, para el reporte
+            vigente, ademas esta entidad es doblemente dependiente de servicio_otro ya quu se regustra los tanques y los
+            fluidos de estos datos que estan en la tabla padre(servicio_otro), entidad dependiente de reporte';
 
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`manejo_efluentes`
@@ -503,8 +573,8 @@
     `id_manejo_efluentes` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL ,    
-    `tanque1` DECIMAL(5,1) NULL ,
-    `tanque2` DECIMAL(5,1) NULL ,
+    `tanque1` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
+    `tanque2` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_manejo_efluentes`) ,
     INDEX `fk_manejo_efluentes_servicio_otro_idx` (`id_servicio_otro` ASC) ,
@@ -518,9 +588,12 @@
       FOREIGN KEY (`id_reporte` )
       REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
       ON DELETE RESTRICT
-      ON UPDATE CASCADE)
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'entidad de opciones:\n\ntipo:\n\ntratados\nevacuados\nfloculos';
+      ON UPDATE CASCADE
+      )
+    ENGINE = InnoDB 
+    AUTO_INCREMENT = 1
+    COMMENT = 'Entidad que se encargada ed amacenar los valores para el manejo de efluentes, del tipo tratados, evacuados,
+            entidad dependiente de servicio_otro (tipos de efluente) y de reporte';
 
 
   -- -----------------------------------------------------
@@ -530,9 +603,9 @@
     `id_manejo_cortes` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL ,    
-    `bbls_dia` DECIMAL(5,1) NULL ,
-    `celda_no` SMALLINT UNSIGNED NULL ,
-    `cap_bls` DECIMAL(6,1) NULL ,
+    `bbls_dia` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
+    `celda_no` SMALLINT UNSIGNED NOT NULL ,
+    `cap_bls` DECIMAL(6,1) NOT NULL DEFAULT '0.0' ,    
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_manejo_cortes`) ,
     INDEX `fk_manejo_cortes_servicio_otro_idx` (`id_servicio_otro` ASC) ,
@@ -546,8 +619,11 @@
       FOREIGN KEY (`id_reporte` )
       REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
       ON DELETE RESTRICT
-      ON UPDATE CASCADE)
-  ENGINE = InnoDB AUTO_INCREMENT=1;
+      ON UPDATE CASCADE
+      )
+    ENGINE = InnoDB 
+    AUTO_INCREMENT = 1
+    COMMENT = 'Entida que registra los valores para el manejo de cortes del sia de trabajo, entidad dependiente de reporte y de servicio_otro';
 
 
   -- -----------------------------------------------------
@@ -557,8 +633,8 @@
     `id_movimiento_efluentes` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `vaccum` VARCHAR(12) NOT NULL ,
-    `capacidad_bls` DECIMAL(5,1) NULL ,
-    `no_viajes_diario` SMALLINT UNSIGNED NULL ,
+    `capacidad_bls` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
+    `no_viajes_diario` SMALLINT UNSIGNED NOT NULL DEFAULT '0' ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_movimiento_efluentes`) ,
     INDEX `fk_movimiento_efluentes_reporte_idx` (`id_reporte` ASC) ,
@@ -566,9 +642,11 @@
       FOREIGN KEY (`id_reporte` )
       REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
       ON DELETE RESTRICT
-      ON UPDATE CASCADE)
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'El valor acumulado es parqa cada uno para cada vaccum';
+      ON UPDATE CASCADE
+      )
+    ENGINE = InnoDB 
+    AUTO_INCREMENT = 1
+    COMMENT = 'Entidad que registra los valores en bls del movimiento de efluentes para cada reporte, entidad dependiente de reporte';
 
 
   -- -----------------------------------------------------
@@ -577,9 +655,9 @@
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`movimiento_cortes` (
     `id_movimiento_cortes` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
-    `volqueta` VARCHAR(12) NULL ,
-    `m3` DECIMAL(4,1) NULL ,
-    `diario` DECIMAL(3,1) NULL ,
+    `volqueta` VARCHAR(12) NOT NULL ,
+    `m3` DECIMAL(4,1) NOT NULL ,
+    `diario` DECIMAL(3,1) NOT NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_movimiento_cortes`) ,
     INDEX `fk_movimiento_cortes_reporte_idx` (`id_reporte` ASC) ,
@@ -587,10 +665,11 @@
       FOREIGN KEY (`id_reporte` )
       REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
       ON DELETE RESTRICT
-      ON UPDATE CASCADE)
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'entidad con opciones:\n\nvolqueta:\n1\n2\n3\n4\n\nlos acumulados van' /* comment truncated */;
-
+      ON UPDATE CASCADE
+      )
+    ENGINE = InnoDB 
+    AUTO_INCREMENT = 1
+    COMMENT = 'Entidad que registra el movimiento de cortes en m3, entidad dependiente de reporte';
 
 
   -- -----------------------------------------------------
@@ -602,17 +681,18 @@
     `nombre` VARCHAR(50) NOT NULL ,
     `marca` VARCHAR(50) NOT NULL DEFAULT 'S/M' ,
     `cantidad_presentacion` DECIMAL(4,2) NULL ,
-    `unidad_medida` VARCHAR(45) NULL ,
-    `costo` DECIMAL(4,2) NULL ,
-    `stock_min` DECIMAL(4,1) NOT NULL ,
-    `stock_max` DECIMAL(5,1) NULL ,
+    `unidad_medida` VARCHAR(45) NOT NULL 'Unidades',    
+    `stock_min` SMALLINT NOT NULL DEFAULT '0,0' ,
+    `stock_max` SMALLINT NOT NULL DEFAULT '0,0' ,
     `ubicacion` VARCHAR(50) NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     UNIQUE INDEX `id_materia_prima` (`id_materia_prima` ASC) ,    
     UNIQUE INDEX `codigo` (`codigo` ASC) ,    
     PRIMARY KEY (`nombre`,`marca`,`cantidad_presentacion`) )
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'Entidad encargada de manejar las materias primas usados en e' /* comment truncated */;
+  ENGINE = InnoDB AUTO_INCREMENT = 1
+  COMMENT = 'Entidad que registra un listado de materia prima usada en opracion, se considera materia prima a los
+            productos consumibles para la ejecucion correcta de los trabajos en locacion, entidad no dependiente de
+            reporte y padre de inv_entrada y de inventario_salida';
 
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`parametros_mp`
@@ -637,8 +717,11 @@
       ON DELETE RESTRICT
       ON UPDATE CASCADE
       )
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'En esta entidad se controla el uso de los quimicos con los p' /* comment truncated */;
+  ENGINE = InnoDB 
+  AUTO_INCREMENT = 1
+  COMMENT = 'En esta entidad se controla el uso de los quimicos, de esta forma se optimiza su uso,
+            ademas es hija de materia_prima y de servicio_otro y padre de inventario_salida, como se dijo arriba
+            esta es solo una entidad de control';
 
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`iventario_entrada`
@@ -647,10 +730,11 @@
     `id_inv_entrada` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_materia_prima` MEDIUMINT UNSIGNED NOT NULL,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL,
-    `fecha` DATE NULL ,
+    `fecha` DATE NOT NULL DEFAULT now() ,
     `lote` MEDIUMINT UNSIGNED COMMENT'en caso de no especificar un numero de guia se controla por lote es un valor autoincremental para cada lote de entrada',
     `guia_remision` VARCHAR(20) NOT NULL DEFAULT 0,
-    `cantidad` DECIMAL(5,1) NULL ,    
+    `cantidad` DECIMAL(5,1) NOT NULL ,  
+    `costo` DECIMAL(4,2) NOT NULL ,  
     `notas` MEDIUMTEXT NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_inv_entrada`) ,
@@ -665,9 +749,12 @@
       FOREIGN KEY (`id_reporte` )
       REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
       ON DELETE RESTRICT
-      ON UPDATE CASCADE)
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'Entidad que controla el ingreso de los quimicos al pozo';
+      ON UPDATE CASCADE
+      )
+    ENGINE = InnoDB 
+    AUTO_INCREMENT = 1
+    COMMENT = 'Entidad que controla el ingreso de los quimicos al pozo, es dependiende de reporte y de materia_prima, el costo se ingresa
+              para cada registro';
 
 -- -----------------------------------------------------
   -- Table `slnecc_control`.`inventario_salida`
@@ -675,8 +762,9 @@
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`inv_salida` (
     `id_inv_salida` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `id_parametros_mp` MEDIUMINT UNSIGNED NOT NULL,
+    `id_inv_entrada` MEDIUMINT UNSIGNED NOT NULL,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL,
-    `fecha` DATE NULL ,
+    `fecha` DATE NOT NULL ,
     `lote` MEDIUMINT UNSIGNED  COMMENT'se consulta al inv_entrada y se copia en esta columna',
     `guia_remision` VARCHAR(20) NOT NULL DEFAULT 0 COMMENT'se usa solo si la salida se controla',
     `cantidad` DECIMAL(5,1) NULL ,    
@@ -685,18 +773,27 @@
     PRIMARY KEY (`id_inv_salida`) ,
     INDEX `fk_inv_salida_parametros_mp_idx` (`id_parametros_mp` ASC) ,
     INDEX `fk_inv_salida_reporte_idx` (`id_reporte` ASC) ,
+    INDEX `fk_inv_salida_inv_entrada_idx` (`id_parametros_mp` ASC) ,
     CONSTRAINT `fk_inv_salida_parametros_mp`
       FOREIGN KEY (`id_parametros_mp` )
       REFERENCES `slnecc_control`.`parametros_mp` (`id_parametros_mp` )
+      ON DELETE RESTRICT
+      ON UPDATE CASCADE,
+      CONSTRAINT `fk_inv_salida_inv_entrada`
+      FOREIGN KEY (`id_inv_entrada` )
+      REFERENCES `slnecc_control`.`inv_entrada` (`id_inv_entrada` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
     CONSTRAINT `fk_inv_salida_reporte`
       FOREIGN KEY (`id_reporte` )
       REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
       ON DELETE RESTRICT
-      ON UPDATE CASCADE)
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'Entidad que controla el uso y salida de los quimicos del pozo';
+      ON UPDATE CASCADE
+      )
+  ENGINE = InnoDB 
+  AUTO_INCREMENT = 1
+  COMMENT = 'Entidad que controla el uso y salida de los quimicos del pozo, entidad dependiende del inv_entrada para que las
+              salidas sean controladas de acuerdo a las existencias y del reporte';
 
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`clasificacion_costos`
@@ -714,9 +811,12 @@
       FOREIGN KEY (`id_proyecto` )
       REFERENCES `slnecc_control`.`proyecto` (`id_proyecto` )
       ON DELETE RESTRICT
-      ON UPDATE CASCADE)
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'entidad que maneja los costos para una operacion o un proyecto';
+      ON UPDATE CASCADE
+      )
+  ENGINE = InnoDB 
+  AUTO_INCREMENT = 1
+  COMMENT = 'Entidad que maneja la clasificacion de los costos para un proyecto, lo que significa que para cada proyecto se deberá generar
+            una nueva clasificacion Entidad dependiente de proyecto y padre de costo';
 
 
   -- -----------------------------------------------------
@@ -726,7 +826,8 @@
     `id_costo` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_clasificacion_costo` MEDIUMINT UNSIGNED NOT NULL ,
     `descripcion_costo` VARCHAR(50) NOT NULL ,
-    `costo` DECIMAL(6,2) NOT NULL ,    
+    `costo_diario` DECIMAL(6,2) NOT NULL DEFAULT '0.0' ,    
+    `costo_total` DECIMAL(6,2) NOT NULL DEFAULT '0.0',     
     `notas` MEDIUMTEXT NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_costo`) ,
@@ -735,9 +836,16 @@
       FOREIGN KEY (`id_clasificacion_costo` )
       REFERENCES `slnecc_control`.`clasificacion_costo` (`id_clasificacion_costo` )
       ON DELETE RESTRICT
-      ON UPDATE CASCADE)
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'Entidad encargada de almacenar los detalles de los costos para un proyecto';
+      ON UPDATE CASCADE
+      )
+  ENGINE = InnoDB 
+  AUTO_INCREMENT = 1
+  COMMENT = 'Entidad encargada de almacenar los detalles de los costos para un proyecto, ademas es un ente de control en las salidas de los 
+            costos se tiene dos campos el uno es para registrar el costo diario (Esto en vista de que algunos procedimientos y materia prima tienen un 
+              valor definido para cada dia, pero tambien se controlará el uso real de los gatos de materia prima a travez de las entidades encargadas
+              ) en caso de no haber costo diario este puede quedar en cero, y el otro es para registrar el maximo del costo, elm mismo
+            que deberá ser menor a la suma del costo diario para que un rpoyecto sea rentable, esta tabla no es dependiente del informe pero si 
+            de la clasificacion de costo y es padre de salida_costo ';
 
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`salida_costo`
@@ -747,7 +855,7 @@
     `id_costo` MEDIUMINT UNSIGNED NOT NULL ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `costo` DECIMAL(6,2) NOT NULL COMMENT'Se copia el costo de la entidad costo',            
-    `cantidad` SMALLINT UNSIGNED NOT NULL , 
+    `cantidad` SMALLINT UNSIGNED NOT NULL DEFAULT '0.0' , 
     `notas` MEDIUMTEXT NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_salida_costo`) ,
@@ -764,8 +872,12 @@
       ON DELETE RESTRICT
       ON UPDATE CASCADE
       )
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'Entidad encargada de almacenar los detalles de los costos para un proyecto';  
+  ENGINE = InnoDB 
+  AUTO_INCREMENT = 1
+  COMMENT = 'Entidad que se encarga de registrar la salida de los costos al informe, los costos se manejan de la misma forma que los
+            inventarios con la diferencia que son costos en lugar de materia, se ha creado un campo costo esto es para registrar el costo
+            con el que baja de la tabla padre, para que cuando haya un cambio en algun costo la integridad de los informes pasados se mantenga
+            esta entidad es hija de costo y de reporte ayuda a registrar los costos en el reporte diario';  
 
 
   -- -----------------------------------------------------
@@ -774,105 +886,50 @@
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`comentario` (
     `id_comentario` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
-    `titulo` VARCHAR(150) NULL ,
-    `comentarios` MEDIUMTEXT NULL ,
-    `responsable` VARCHAR(50) NULL ,
+    `id_usuario` MEDIUMINT UNSIGNED NOT NULL ,
+    `titulo` VARCHAR(150) NOT NULL ,
+    `comentarios` MEDIUMTEXT NOT NULL ,    
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_comentario`) ,
     INDEX `fk_comentario_reporte_idx` (`id_reporte` ASC) ,
-    CONSTRAINT `fk_comentario_reporte`
+    INDEX `fk_comentario_id_usuario_idx` (`id_reporte` ASC) ,
+    CONSTRAINT `fk_comentario_id_usuario`
+      FOREIGN KEY (`id_usuario` )
+      REFERENCES `slnecc_control`.`usuario` (`id_usuario` )
+      ON DELETE RESTRICT
+      ON UPDATE CASCADE,
+      CONSTRAINT `fk_comentario_reporte`
       FOREIGN KEY (`id_reporte` )
       REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
       ON DELETE RESTRICT
-      ON UPDATE CASCADE)
-  ENGINE = InnoDB AUTO_INCREMENT=1;
+      ON UPDATE CASCADE
+      )
+  ENGINE = InnoDB 
+  AUTO_INCREMENT = 1
+  COMMENT = 'En esta entidad se registran los comentarios que el reporte posee estos comentarios estan estructurados como los muestra el informe
+            ademas como todos los usuarios que usan el sistema deben ser autoridades de la empresa los commentarios guardados responden a un id
+            de usuario, para definir responsables entidad hija de reporte y de usuario' ;
 
 
   -- -----------------------------------------------------
-  -- Table `slnecc_control`.`usuarios`
+  -- Table `slnecc_control`.`usuario`
   -- -----------------------------------------------------
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`usuarios` (
+  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`usuario` (
     `id_usuario` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `usuario` VARCHAR(40) NOT NULL ,
     `pass` VARCHAR(200) NOT NULL ,
+    `tipo` VARCHAR(60) NOT NULL DEFAULT 'User' COMMENT = 'Administrador, Medio, User' ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`usuario`) ,
-    UNIQUE INDEX `id_usuario_UNIQUE` (`id_usuario` ASC) )
-  ENGINE = InnoDB AUTO_INCREMENT=1;
-
-
-  -- -----------------------------------------------------
-  -- Table `slnecc_control`.`cambios_db`
-  -- -----------------------------------------------------
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`cambios_db` (
-    `id_cambio_db` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
-    `id_usuario` SMALLINT UNSIGNED NOT NULL ,
-    `fecha` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    `tabla` VARCHAR(60) NOT NULL ,
-    PRIMARY KEY (`id_cambio_db`) ,
-    INDEX `fk_cambios_db_usuarios_idx` (`id_usuario` ASC) ,
-    CONSTRAINT `fk_cambios_db_usuarios`
-      FOREIGN KEY (`id_usuario` )
-      REFERENCES `slnecc_control`.`usuarios` (`id_usuario` )
-      ON DELETE RESTRICT
-      ON UPDATE CASCADE)
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'gestiona los cambios que se realizan en las tablas de la bas' /* comment truncated */;
-
-
-  -- -----------------------------------------------------
-  -- Table `slnecc_control`.`log_cambios_bd`
-  -- -----------------------------------------------------
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`log_cambios_bd` (
-    `id_log_cambios_bd` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `id_cambio_db` MEDIUMINT UNSIGNED NOT NULL ,
-    `id_registro` MEDIUMINT UNSIGNED NOT NULL ,
-    `nombre_columna` VARCHAR(60) NULL ,
-    `valor_original` VARCHAR(100) NULL ,
-    `valor_nuevo` VARCHAR(100) NULL ,
-    `fecha` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    PRIMARY KEY (`id_log_cambios_bd`) ,
-    INDEX `fk_log_cambios_cambios_db_idx` (`id_cambio_db` ASC) ,
-    CONSTRAINT `fk_log_cambios_cambios_db`
-      FOREIGN KEY (`id_cambio_db` )
-      REFERENCES `slnecc_control`.`cambios_db` (`id_cambio_db` )
-      ON DELETE RESTRICT
-      ON UPDATE CASCADE)
-  ENGINE = InnoDB AUTO_INCREMENT=1
-  COMMENT = 'no se van a registrar los cambios realizados a los campos de' /* comment truncated */;
-
-
-  -- -----------------------------------------------------
-  -- Table `slnecc_control`.`logs`
-  -- -----------------------------------------------------
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`logs` (
-    `id_logs` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
-    `fecha` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    `id_usuario` SMALLINT UNSIGNED NOT NULL ,
-    `actividad` VARCHAR(500) NOT NULL ,
-    `nombre_equipo` VARCHAR(50) NOT NULL ,
-    PRIMARY KEY (`id_logs`) ,
-    INDEX `fk_logs_usuarios_idx` (`id_usuario` ASC) ,
-    CONSTRAINT `fk_logs_usuarios`
-      FOREIGN KEY (`id_usuario` )
-      REFERENCES `slnecc_control`.`usuarios` (`id_usuario` )
-      ON DELETE RESTRICT
-      ON UPDATE CASCADE)
-  ENGINE = InnoDB AUTO_INCREMENT=1;
-
-
-  -- -----------------------------------------------------
-  -- Table `slnecc_control`.`log_users`
-  -- -----------------------------------------------------
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`log_users` (
-    `id_log_users` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
-    `id_usuario` SMALLINT NOT NULL ,
-    `entrada` DATETIME NULL ,
-    `salida` DATETIME NULL ,
-    `hora_registro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    PRIMARY KEY (`id_log_users`) )
-  ENGINE = InnoDB AUTO_INCREMENT=1;
-
+    UNIQUE INDEX `id_usuario_UNIQUE` (`id_usuario` ASC) 
+    )
+    ENGINE = InnoDB
+    AUTO_INCREMENT = 1
+    COMMENT = 'Entidad encargada de registrar a los usuarios del sistema, es padre de comentario, y luego de terminar con el modelo de datos
+              se usará esta entidad para el registro de actividades del sistema pudiendo identificar a los resposables de la creacion edicion 
+              de los informes, para ello se definen tres tipos de usuarios el user normal, el usuarui medio con capacidad de borrar algunas fk_costo_clasificacion
+              este actuará como supervisor, y el Administrador que será quien pueda mandar todo al carajo, sin embargo se deben registrar todos 
+              los cambios a la base de datos para que sea posible recuperar informacion en caso de que alguien meta mal el dedo';
 
   SET SQL_MODE=@OLD_SQL_MODE;
   SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
