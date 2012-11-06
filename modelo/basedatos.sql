@@ -10,9 +10,6 @@
 -- ---------------------------------------------------
 -- ---------------------------------------------------
 
-revisar el uso deinventario, creo que seria mejos hacerlo asi inv_entrada contra inventario_salida, ademas se añadio
-el tpo default 0.0 not null, se quito la columna costo de materia_prima y se la incluyo en la de inv_entrada
-
   SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
   SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
   SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
