@@ -10,6 +10,12 @@
 -- ---------------------------------------------------
 
 USE `slnecc_control`;
+ 
+ -- -----------------------------------------------------
+ -- Table `slnecc_control`.`usuarios`
+ -- -----------------------------------------------------
+
+ INSERT INTO `slnecc_control`.`usuario` (`usuario`, `pass`, `tipo`) VALUES ('admin', 'admin', 'administrador');
 
 -- -----------------------------------------------------
 -- Table `slnecc_control`.`proyecto`
@@ -248,6 +254,10 @@ INSERT INTO `slnecc_control`.`servicio_otro` (`codigo`, `nombre`, `tipo`) VALUES
 INSERT INTO `slnecc_control`.`servicio_otro` (`codigo`, `nombre`, `descripcion`, `tipo`, `notas`) VALUES ('MQC', 'Mud Quality Control', 'se refieren al dewatering del lodo del sistema activo con retornos de agua ó agua lodosa al mismo sistema activo. La operación DW se refiere al dewatering de lodos recolectado y/o desplazados pero con envíos de agua a tratamiento', 'Mud Quality Control', '');
 INSERT INTO `slnecc_control`.`servicio_otro` (`codigo`, `nombre`, `tipo`) VALUES ('DW', 'Dewatering', 'Dewatering');
 INSERT INTO `slnecc_control`.`servicio_otro` (`codigo`, `nombre`, `tipo`) VALUES ('T/A', 'Tratamiento de Aguas', '');
+INSERT INTO `slnecc_control`.`servicio_otro` (`codigo`, `nombre`, `tipo`) VALUES ('EF9', 'Sistema Activo', 'Volumen recolectado procesado');
+INSERT INTO `slnecc_control`.`servicio_otro` (`codigo`, `nombre`, `descripcion`, `tipo`) VALUES ('AG5', 'Agua Frezca', 'Volumenes de COrtes y fluidos', 'Agua');
+
+
 
 -- -----------------------------------------------------
 -- Table `slnecc_control`.`trabajo_equipo`
@@ -259,6 +269,13 @@ INSERT INTO `slnecc_control`.`trabajo_equipo` (`id_equipo`, `id_servicio_otro`, 
 INSERT INTO `slnecc_control`.`trabajo_equipo` (`id_equipo`, `id_servicio_otro`, `id_reporte`, `horas`, `rpm`, `gpm`, `ppg_entrada`, `ppg_salida`, `ppg_descarga`) VALUES ('2', '1', '1', '0', '0', '0', '0', '0', '0');
 INSERT INTO `slnecc_control`.`trabajo_equipo` (`id_equipo`, `id_servicio_otro`, `id_reporte`, `horas`, `rpm`, `gpm`, `ppg_entrada`, `ppg_salida`, `ppg_descarga`) VALUES ('2', '2', '1', '0', '0', '0', '0', '0', '0');
 INSERT INTO `slnecc_control`.`trabajo_equipo` (`id_equipo`, `id_servicio_otro`, `id_reporte`, `horas`, `rpm`, `gpm`, `ppg_entrada`, `ppg_salida`, `ppg_descarga`) VALUES ('2', '3', '1', '0', '0', '0', '0', '0', '0');
+INSERT INTO `slnecc_control`.`trabajo_equipo` (`id_equipo`, `id_servicio_otro`, `id_reporte`, `horas`, `rpm`, `gpm`, `ppg_entrada`, `ppg_salida`, `ppg_descarga`) VALUES ('1', '1', '2', '0', '0', '0', '0', '0', '0');
+INSERT INTO `slnecc_control`.`trabajo_equipo` (`id_equipo`, `id_servicio_otro`, `id_reporte`, `horas`, `rpm`, `gpm`, `ppg_entrada`, `ppg_salida`, `ppg_descarga`) VALUES ('1', '2', '2', '0', '0', '0', '0', '0', '0');
+INSERT INTO `slnecc_control`.`trabajo_equipo` (`id_equipo`, `id_servicio_otro`, `id_reporte`, `horas`, `rpm`, `gpm`, `ppg_entrada`, `ppg_salida`, `ppg_descarga`) VALUES ('1', '3', '2', '0', '0', '0', '0', '0', '0');
+INSERT INTO `slnecc_control`.`trabajo_equipo` (`id_equipo`, `id_servicio_otro`, `id_reporte`, `horas`, `rpm`, `gpm`, `ppg_entrada`, `ppg_salida`, `ppg_descarga`) VALUES ('2', '1', '2', '0', '0', '0', '0', '0', '0');
+INSERT INTO `slnecc_control`.`trabajo_equipo` (`id_equipo`, `id_servicio_otro`, `id_reporte`, `horas`, `rpm`, `gpm`, `ppg_entrada`, `ppg_salida`, `ppg_descarga`) VALUES ('2', '2', '2', '0', '0', '0', '0', '0', '0');
+INSERT INTO `slnecc_control`.`trabajo_equipo` (`id_equipo`, `id_servicio_otro`, `id_reporte`, `horas`, `rpm`, `gpm`, `ppg_entrada`, `ppg_salida`, `ppg_descarga`) VALUES ('2', '3', '2', '0', '0', '0', '0', '0', '0');
+
 
 
 -- -----------------------------------------------------
@@ -273,6 +290,16 @@ INSERT INTO `slnecc_control`.`vol_recolectados_procesados` (`id_reporte`, `id_se
 INSERT INTO `slnecc_control`.`vol_recolectados_procesados` (`id_reporte`, `id_servicio_otro`, `diario`) VALUES ('1', '9', '0');
 INSERT INTO `slnecc_control`.`vol_recolectados_procesados` (`id_reporte`, `id_servicio_otro`, `diario`) VALUES ('1', '10', '0');
 INSERT INTO `slnecc_control`.`vol_recolectados_procesados` (`id_reporte`, `id_servicio_otro`, `diario`) VALUES ('1', '11', '0');
+INSERT INTO `slnecc_control`.`vol_recolectados_procesados` (`id_reporte`, `id_servicio_otro`, `diario`) VALUES ('2', '35', '0');
+INSERT INTO `slnecc_control`.`vol_recolectados_procesados` (`id_reporte`, `id_servicio_otro`, `diario`) VALUES ('2', '5', '0');
+INSERT INTO `slnecc_control`.`vol_recolectados_procesados` (`id_reporte`, `id_servicio_otro`, `diario`) VALUES ('2', '6', '0');
+INSERT INTO `slnecc_control`.`vol_recolectados_procesados` (`id_reporte`, `id_servicio_otro`, `diario`) VALUES ('2', '7', '0');
+INSERT INTO `slnecc_control`.`vol_recolectados_procesados` (`id_reporte`, `id_servicio_otro`, `diario`) VALUES ('2', '8', '0');
+INSERT INTO `slnecc_control`.`vol_recolectados_procesados` (`id_reporte`, `id_servicio_otro`, `diario`) VALUES ('2', '9', '0');
+INSERT INTO `slnecc_control`.`vol_recolectados_procesados` (`id_reporte`, `id_servicio_otro`, `diario`) VALUES ('2', '10', '0');
+INSERT INTO `slnecc_control`.`vol_recolectados_procesados` (`id_reporte`, `id_servicio_otro`, `diario`) VALUES ('2', '11', '0');
+
+
 
 -- -----------------------------------------------------
 -- Table `slnecc_control`.`vol_agua_operaciones`
@@ -282,20 +309,23 @@ INSERT INTO `slnecc_control`.`vol_agua_operaciones` (`id_reporte`, `id_servicio_
 INSERT INTO `slnecc_control`.`vol_agua_operaciones` (`id_reporte`, `id_servicio_otro`, `diario`) VALUES ('1', '13', '0');
 INSERT INTO `slnecc_control`.`vol_agua_operaciones` (`id_reporte`, `id_servicio_otro`, `diario`) VALUES ('1', '14', '0');
 INSERT INTO `slnecc_control`.`vol_agua_operaciones` (`id_reporte`, `id_servicio_otro`, `diario`) VALUES ('1', '15', '0');
-
+INSERT INTO `slnecc_control`.`vol_agua_operaciones` (`id_reporte`, `id_servicio_otro`, `diario`) VALUES ('2', '12', '0');
+INSERT INTO `slnecc_control`.`vol_agua_operaciones` (`id_reporte`, `id_servicio_otro`, `diario`) VALUES ('2', '13', '0');
+INSERT INTO `slnecc_control`.`vol_agua_operaciones` (`id_reporte`, `id_servicio_otro`, `diario`) VALUES ('2', '14', '0');
+INSERT INTO `slnecc_control`.`vol_agua_operaciones` (`id_reporte`, `id_servicio_otro`, `diario`) VALUES ('2', '15', '0');
 
 -- -----------------------------------------------------
 -- Table `slnecc_control`.`vol_cortes_fluidos`
 -- -----------------------------------------------------
 
-INSERT INTO `slnecc_control`.`vol_cortes_fluidos` (`id_reporte`, `id_servicio_otro`) VALUES ('1', '16');
-INSERT INTO `slnecc_control`.`vol_cortes_fluidos` (`id_reporte`, `id_servicio_otro`) VALUES ('1', '17');
-INSERT INTO `slnecc_control`.`vol_cortes_fluidos` (`id_reporte`, `id_servicio_otro`) VALUES ('1', '18');
-INSERT INTO `slnecc_control`.`vol_cortes_fluidos` (`id_reporte`, `id_servicio_otro`, `cortes_flidos`, `bbls`) VALUES ('1', '19', 'Agua Fresca', '450');
-INSERT INTO `slnecc_control`.`vol_cortes_fluidos` (`id_reporte`, `id_servicio_otro`) VALUES ('1', '20');
-INSERT INTO `slnecc_control`.`vol_cortes_fluidos` (`id_reporte`, `id_servicio_otro`) VALUES ('1', '21');
-INSERT INTO `slnecc_control`.`vol_cortes_fluidos` (`id_reporte`, `id_servicio_otro`) VALUES ('1', '22');
-INSERT INTO `slnecc_control`.`vol_cortes_fluidos` (`id_reporte`, `id_servicio_otro`) VALUES ('1', '23');
+INSERT INTO `slnecc_control`.`vol_cortes_fluidos` (`id_reporte`, `id_servicio_otro`,`id_servicio_otro2`) VALUES ('1', '16', DEFAULT);
+INSERT INTO `slnecc_control`.`vol_cortes_fluidos` (`id_reporte`, `id_servicio_otro`,`id_servicio_otro2`) VALUES ('1', '17', DEFAULT);
+INSERT INTO `slnecc_control`.`vol_cortes_fluidos` (`id_reporte`, `id_servicio_otro`,`id_servicio_otro2`) VALUES ('1', '18', DEFAULT);
+INSERT INTO `slnecc_control`.`vol_cortes_fluidos` (`id_reporte`, `id_servicio_otro`,`id_servicio_otro2`, `bbls`) VALUES ('1', '19', '36', '450');
+INSERT INTO `slnecc_control`.`vol_cortes_fluidos` (`id_reporte`, `id_servicio_otro`,`id_servicio_otro2`) VALUES ('1', '20', DEFAULT);
+INSERT INTO `slnecc_control`.`vol_cortes_fluidos` (`id_reporte`, `id_servicio_otro`,`id_servicio_otro2`) VALUES ('1', '21', DEFAULT);
+INSERT INTO `slnecc_control`.`vol_cortes_fluidos` (`id_reporte`, `id_servicio_otro`,`id_servicio_otro2`) VALUES ('1', '22', DEFAULT);
+INSERT INTO `slnecc_control`.`vol_cortes_fluidos` (`id_reporte`, `id_servicio_otro`,`id_servicio_otro2`) VALUES ('1', '23', DEFAULT);
 
 -- -----------------------------------------------------
 -- Table `slnecc_control`.`manejo_efluentes`
@@ -332,19 +362,17 @@ INSERT INTO `slnecc_control`.`movimiento_cortes` (`id_reporte`, `volqueta`, `m3`
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`materia_prima`
   -- -----------------------------------------------------
-  
-
-INSERT INTO `slnecc_control`.`materia_prima` (`codigo`, `nombre`, `marca`, `cantidad_presentacion`, `unidad_medida`, `costo`, `stock_min`) VALUES ('MP1', 'Polimero 1569A', 'S/M', '25', 'Kg', '25.65', '100');
-INSERT INTO `slnecc_control`.`materia_prima` (`codigo`, `nombre`, `cantidad_presentacion`, `unidad_medida`, `costo`, `stock_min`) VALUES ('MP2', 'Polimero 1550 A', '25', 'Kg', '35.65', '100');
-INSERT INTO `slnecc_control`.`materia_prima` (`codigo`, `nombre`, `cantidad_presentacion`, `unidad_medida`, `costo`, `stock_min`) VALUES ('MP3', 'Sulfato de Aluminio', '25', 'Kg', '45.65', '100');
-INSERT INTO `slnecc_control`.`materia_prima` (`codigo`, `nombre`, `cantidad_presentacion`, `unidad_medida`, `costo`, `stock_min`) VALUES ('MP4', 'Hipo Clorito de Ca', '25', 'Kg', '55.65', '100');
-INSERT INTO `slnecc_control`.`materia_prima` (`codigo`, `nombre`, `cantidad_presentacion`, `unidad_medida`, `costo`, `stock_min`) VALUES ('MP5', 'Cal Hidratada', '25', 'Kg', '66.65', '100');
-INSERT INTO `slnecc_control`.`materia_prima` (`codigo`, `nombre`, `cantidad_presentacion`, `unidad_medida`, `costo`, `stock_min`) VALUES ('MP6', 'Silicato', '40', 'Kg', '75.65', '100');
-INSERT INTO `slnecc_control`.`materia_prima` (`codigo`, `nombre`, `cantidad_presentacion`, `unidad_medida`, `costo`, `stock_min`) VALUES ('MP7', 'Acido Fosforico', '7', 'Gl', '85.65', '100');
-INSERT INTO `slnecc_control`.`materia_prima` (`codigo`, `nombre`, `cantidad_presentacion`, `unidad_medida`, `costo`, `stock_min`) VALUES ('MP8', 'Acido Fosforico', '5', 'Gl', '95.65', '100');
-INSERT INTO `slnecc_control`.`materia_prima` (`codigo`, `nombre`, `cantidad_presentacion`, `unidad_medida`, `costo`, `stock_min`) VALUES ('MP9', 'Alli Alpa', '43', 'Kg', '25.65', '100');
-INSERT INTO `slnecc_control`.`materia_prima` (`codigo`, `nombre`, `cantidad_presentacion`, `unidad_medida`, `costo`, `stock_min`) VALUES ('MP10', 'Polucloruro de Al', '25', 'Kg', '35.65', '100');
-INSERT INTO `slnecc_control`.`materia_prima` (`codigo`, `nombre`, `cantidad_presentacion`, `unidad_medida`, `costo`, `stock_min`) VALUES ('MP11', 'Bisulfoto de Sodio', '25', 'Kg', '45.65', '100');
+INSERT INTO `slnecc_control`.`materia_prima` (`codigo`, `nombre`, `marca`, `cantidad_presentacion`, `unidad_medida`, `stock_min`) VALUES ('MP1', 'Polimero 1569A', 'S/M', '25', 'Kg', '100');
+INSERT INTO `slnecc_control`.`materia_prima` (`codigo`, `nombre`, `cantidad_presentacion`, `unidad_medida`,  `stock_min`) VALUES ('MP2', 'Polimero 1550 A', '25', 'Kg', '100');
+INSERT INTO `slnecc_control`.`materia_prima` (`codigo`, `nombre`, `cantidad_presentacion`, `unidad_medida`,  `stock_min`) VALUES ('MP3', 'Sulfato de Aluminio', '25', 'Kg', '100');
+INSERT INTO `slnecc_control`.`materia_prima` (`codigo`, `nombre`, `cantidad_presentacion`, `unidad_medida`,  `stock_min`) VALUES ('MP4', 'Hipo Clorito de Ca', '25', 'Kg', '100');
+INSERT INTO `slnecc_control`.`materia_prima` (`codigo`, `nombre`, `cantidad_presentacion`, `unidad_medida`,  `stock_min`) VALUES ('MP5', 'Cal Hidratada', '25', 'Kg', '100');
+INSERT INTO `slnecc_control`.`materia_prima` (`codigo`, `nombre`, `cantidad_presentacion`, `unidad_medida`,  `stock_min`) VALUES ('MP6', 'Silicato', '40', 'Kg', '100');
+INSERT INTO `slnecc_control`.`materia_prima` (`codigo`, `nombre`, `cantidad_presentacion`, `unidad_medida`,  `stock_min`) VALUES ('MP7', 'Acido Fosforico', '7', 'Gl', '100');
+INSERT INTO `slnecc_control`.`materia_prima` (`codigo`, `nombre`, `cantidad_presentacion`, `unidad_medida`,  `stock_min`) VALUES ('MP8', 'Acido Fosforico', '5', 'Gl', '100');
+INSERT INTO `slnecc_control`.`materia_prima` (`codigo`, `nombre`, `cantidad_presentacion`, `unidad_medida`,  `stock_min`) VALUES ('MP9', 'Alli Alpa', '43', 'Kg',  '100');
+INSERT INTO `slnecc_control`.`materia_prima` (`codigo`, `nombre`, `cantidad_presentacion`, `unidad_medida`,  `stock_min`) VALUES ('MP10', 'Polucloruro de Al', '25', 'Kg', '100');
+INSERT INTO `slnecc_control`.`materia_prima` (`codigo`, `nombre`, `cantidad_presentacion`, `unidad_medida`,  `stock_min`) VALUES ('MP11', 'Bisulfoto de Sodio', '25', 'Kg', '100');
 
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`parametros_mp`
@@ -371,18 +399,18 @@ INSERT INTO `slnecc_control`.`parametros_mp` (`id_materia_prima`, `id_servicio_o
   -- Table `slnecc_control`.`iventario_entrada`
   -- -----------------------------------------------------
   
-INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `cantidad`) VALUES ('1', '1', '2010-10-30', '1', '1600');
-INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `cantidad`) VALUES ('2', '1', '2010-10-30', '1', '500');
-INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `cantidad`) VALUES ('3', '1', '2010-10-30', '1', '2750');
-INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `cantidad`) VALUES ('4', '1', '2010-10-30', '1', '10');
-INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `cantidad`) VALUES ('5', '1', '2010-10-30', '1', '25');
-INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `cantidad`) VALUES ('7', '1', '2010-10-30', '1', '4');
-INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `cantidad`) VALUES ('8', '1', '2010-10-30', '1', '3');
-INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `cantidad`) VALUES ('9', '1', '2010-10-30', '1', '2025');
-INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `cantidad`) VALUES ('10', '1', '2010-10-30', '1', '75');
-INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `cantidad`) VALUES ('11', '1', '2010-10-30', '1', '50');
-INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `cantidad`) VALUES ('3', '1', '2010-10-30', '2', '6000');
-INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `cantidad`) VALUES ('5', '1', '2010-10-30', '2', '2000');
+INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `cantidad`, `costo`) VALUES ('1', '1', '2010-10-30', '1', '1600','36.65');
+INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `cantidad`, `costo`) VALUES ('2', '1', '2010-10-30', '1', '500','36.65');
+INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `cantidad`, `costo`) VALUES ('3', '1', '2010-10-30', '1', '2750','36.65');
+INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `cantidad`, `costo`) VALUES ('4', '1', '2010-10-30', '1', '10','36.65');
+INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `cantidad`, `costo`) VALUES ('5', '1', '2010-10-30', '1', '25','36.65');
+INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `cantidad`, `costo`) VALUES ('7', '1', '2010-10-30', '1', '4','36.65');
+INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `cantidad`, `costo`) VALUES ('8', '1', '2010-10-30', '1', '3','36.65');
+INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `cantidad`, `costo`) VALUES ('9', '1', '2010-10-30', '1', '2025','36.65');
+INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `cantidad`, `costo`) VALUES ('10', '1', '2010-10-30', '1', '75','36.65');
+INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `cantidad`, `costo`) VALUES ('11', '1', '2010-10-30', '1', '50','36.65');
+INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `cantidad`, `costo`) VALUES ('3', '1', '2010-10-30', '2', '6000','36.65');
+INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `cantidad`, `costo`) VALUES ('5', '1', '2010-10-30', '2', '2000','36.65');
 
 
 
@@ -408,31 +436,31 @@ INSERT INTO `slnecc_control`.`clasificacion_costo` (`id_proyecto`, `nombre`) VAL
   -- Table `slnecc_control`.`costo`
   -- -----------------------------------------------------
   
-  INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo`) VALUES ('1', 'Centrifuga HH 5500', '100');
-INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo`) VALUES ('1', 'Bomba Centrifuga Standad', '100');
-INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo`) VALUES ('2', 'Tanque de Cortes de 40', '100');
-INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo`) VALUES ('2', 'Tanque de Cortes de 20', '100');
-INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo`) VALUES ('3', 'Centrifuga HV518 bomba Centrifuga', '100');
-INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo`) VALUES ('3', 'Unidad de Deshidratacion', '100');
-INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo`) VALUES ('3', 'Tanques Verticales', '100');
-INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo`) VALUES ('3', 'Bomba 6x5', '100');
-INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo`) VALUES ('3', 'Bomba de Aire T 15', '100');
-INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo`) VALUES ('3', 'Volqueta', '100');
-INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo`) VALUES ('3', 'Excabadora', '100');
-INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo`) VALUES ('4', 'Fast Tank', '100');
-INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo`) VALUES ('4', 'Tanque Mezclador', '100');
-INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo`) VALUES ('4', 'Bomba 4x3', '100');
-INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo`) VALUES ('4', 'Bomba de Aire PX 8', '100');
-INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo`) VALUES ('4', 'Camper 20 Pies', '100');
-INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo`) VALUES ('5', 'Ingeniero Supervisor', '100');
-INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo`) VALUES ('5', 'Ing. Tratamiento de Efluentes', '100');
-INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo`) VALUES ('5', 'Tecnicos de Control de Sólidos', '100');
-INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo`) VALUES ('5', 'Ayudantes de Operacion', '100');
-INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo`) VALUES ('6', 'Plantas de Tratamiento', '100');
-INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo`) VALUES ('7', 'Volqueta 8 M3', '100');
-INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo`) VALUES ('7', 'Volqueta 12 M3', '100');
-INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo`) VALUES ('7', 'Excavadora', '100');
-INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo`) VALUES ('8', 'Diesel', '100');
+  INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo_diario`) VALUES ('1', 'Centrifuga HH 5500', '100');
+INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo_diario`) VALUES ('1', 'Bomba Centrifuga Standad', '100');
+INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo_diario`) VALUES ('2', 'Tanque de Cortes de 40', '100');
+INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo_diario`) VALUES ('2', 'Tanque de Cortes de 20', '100');
+INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo_diario`) VALUES ('3', 'Centrifuga HV518 bomba Centrifuga', '100');
+INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo_diario`) VALUES ('3', 'Unidad de Deshidratacion', '100');
+INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo_diario`) VALUES ('3', 'Tanques Verticales', '100');
+INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo_diario`) VALUES ('3', 'Bomba 6x5', '100');
+INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo_diario`) VALUES ('3', 'Bomba de Aire T 15', '100');
+INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo_diario`) VALUES ('3', 'Volqueta', '100');
+INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo_diario`) VALUES ('3', 'Excabadora', '100');
+INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo_diario`) VALUES ('4', 'Fast Tank', '100');
+INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo_diario`) VALUES ('4', 'Tanque Mezclador', '100');
+INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo_diario`) VALUES ('4', 'Bomba 4x3', '100');
+INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo_diario`) VALUES ('4', 'Bomba de Aire PX 8', '100');
+INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo_diario`) VALUES ('4', 'Camper 20 Pies', '100');
+INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo_diario`) VALUES ('5', 'Ingeniero Supervisor', '100');
+INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo_diario`) VALUES ('5', 'Ing. Tratamiento de Efluentes', '100');
+INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo_diario`) VALUES ('5', 'Tecnicos de Control de Sólidos', '100');
+INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo_diario`) VALUES ('5', 'Ayudantes de Operacion', '100');
+INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo_diario`) VALUES ('6', 'Plantas de Tratamiento', '100');
+INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo_diario`) VALUES ('7', 'Volqueta 8 M3', '100');
+INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo_diario`) VALUES ('7', 'Volqueta 12 M3', '100');
+INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo_diario`) VALUES ('7', 'Excavadora', '100');
+INSERT INTO `slnecc_control`.`costo` (`id_clasificacion_costo`, `descripcion_costo`, `costo_diario`) VALUES ('8', 'Diesel', '100');
 
 
   -- -----------------------------------------------------
@@ -468,16 +496,13 @@ INSERT INTO `slnecc_control`.`salida_costo` (`id_costo`, `id_reporte`, `costo`, 
   -- Table `slnecc_control`.`comentarios`
   -- -----------------------------------------------------
   
-INSERT INTO `slnecc_control`.`comentario` (`id_reporte`, `titulo`, `comentarios`, `responsable`) VALUES ('1', 'Control de Solidos', 'Equipos listos para trabajar de acuerdo a indicaciones de ingenieros de Lodos, se colocan 3 mallas NOV BRANDT´6BHX280ATRHD API 140 nuevas en lña zarnada No. 1 en Deck 1,2,3 se coloca una malla GN SOILDS MESH 140 en Zaranda 1 deck 1', 'Roberto Guama');
-INSERT INTO `slnecc_control`.`comentario` (`id_reporte`, `titulo`, `comentarios`, `responsable`) VALUES ('1', 'Tratamiento de Efluentes','Se realiza medicion de parametros de ph y cloro libre en platas de aguas negras y grises','Roberto Guama');
-INSERT INTO `slnecc_control`.`comentario` (`id_reporte`, `titulo`, `comentarios`, `responsable`) VALUES ('1', 'Manejos de Cortes','Excavadora trabajando en zona de cortes, Cononaco 20, se trabaja con una volqueta fija','Roberto Guama');
-INSERT INTO `slnecc_control`.`comentario` (`id_reporte`, `titulo`, `comentarios`, `responsable`) VALUES ('1', 'Seguridad y Salud Ocupacional','Peligros en excavaciones','Roberto Guama');
-INSERT INTO `slnecc_control`.`comentario` (`id_reporte`, `titulo`, `comentarios`, `responsable`) VALUES ('1', 'Actividad del Taladro','Luego de realizada las pruebas con carga de los equipos y componentes del RIG 127 se dan por iniciadas las operaciones en el pozo Rumiyacu 03 D@ 07H:00 del día martes 12 de octubre del 2012 Realizo inspeccion de tanques del sistema, alinea circuito corto para inicio de la perforacion del pozo Rumiyacu 03 D. Reviso he inspecciono funcionamiento de SHAKESR, y quipos de control de solidos primarios ok, inspecciono ECS. Cotinua Armando paradas 5"','Roberto Guama');
+INSERT INTO `slnecc_control`.`comentario` (`id_reporte`, `titulo`, `comentarios`, `id_usuario`) VALUES ('1', 'Control de Solidos', 'Equipos listos para trabajar de acuerdo a indicaciones de ingenieros de Lodos, se colocan 3 mallas NOV BRANDT´6BHX280ATRHD API 140 nuevas en lña zarnada No. 1 en Deck 1,2,3 se coloca una malla GN SOILDS MESH 140 en Zaranda 1 deck 1', '1');
+INSERT INTO `slnecc_control`.`comentario` (`id_reporte`, `titulo`, `comentarios`, `id_usuario`) VALUES ('1', 'Tratamiento de Efluentes','Se realiza medicion de parametros de ph y cloro libre en platas de aguas negras y grises','1');
+INSERT INTO `slnecc_control`.`comentario` (`id_reporte`, `titulo`, `comentarios`, `id_usuario`) VALUES ('1', 'Manejos de Cortes','Excavadora trabajando en zona de cortes, Cononaco 20, se trabaja con una volqueta fija','1');
+INSERT INTO `slnecc_control`.`comentario` (`id_reporte`, `titulo`, `comentarios`, `id_usuario`) VALUES ('1', 'Seguridad y Salud Ocupacional','Peligros en excavaciones','1');
+INSERT INTO `slnecc_control`.`comentario` (`id_reporte`, `titulo`, `comentarios`, `id_usuario`) VALUES ('1', 'Actividad del Taladro','Luego de realizada las pruebas con carga de los equipos y componentes del RIG 127 se dan por iniciadas las operaciones en el pozo Rumiyacu 03 D@ 07H:00 del día martes 12 de octubre del 2012 Realizo inspeccion de tanques del sistema, alinea circuito corto para inicio de la perforacion del pozo Rumiyacu 03 D. Reviso he inspecciono funcionamiento de SHAKESR, y quipos de control de solidos primarios ok, inspecciono ECS. Cotinua Armando paradas 5"','1');
 
 
-  -- -----------------------------------------------------
-  -- Table `slnecc_control`.`usuarios`
-  -- -----------------------------------------------------
   
 
   -- -----------------------------------------------------

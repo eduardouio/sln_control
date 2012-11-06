@@ -17,6 +17,27 @@
   CREATE SCHEMA IF NOT EXISTS `slnecc_control` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
   USE `slnecc_control` ;
 
+-- -----------------------------------------------------
+  -- Table `slnecc_control`.`usuario`
+  -- -----------------------------------------------------
+  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`usuario` (
+    `id_usuario` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT ,
+    `usuario` VARCHAR(40) NOT NULL ,
+    `pass` VARCHAR(200) NOT NULL ,
+    `tipo` VARCHAR(60) NOT NULL DEFAULT 'User' COMMENT  'Administrador, Medio, User' ,
+    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+    PRIMARY KEY (`usuario`) ,
+    UNIQUE INDEX `id_usuario_UNIQUE` (`id_usuario` ASC) 
+    )
+    ENGINE = InnoDB
+    AUTO_INCREMENT = 1
+    COMMENT = 'Entidad encargada de registrar a los usuarios del sistema, es padre de comentario, y luego de terminar con el modelo de datos
+              se usará esta entidad para el registro de actividades del sistema pudiendo identificar a los resposables de la creacion edicion 
+              de los informes, para ello se definen tres tipos de usuarios el user normal, el usuarui medio con capacidad de borrar algunas fk_costo_clasificacion
+              este actuará como supervisor, y el Administrador que será quien pueda mandar todo al carajo, sin embargo se deben registrar todos 
+              los cambios a la base de datos para que sea posible recuperar informacion en caso de que alguien meta mal el dedo';
+
+
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`proyecto`
   -- -----------------------------------------------------
@@ -534,7 +555,7 @@
     `id_vol_cortes_fluidos` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL ,        
-    `id_servicio_otro2` MEDIUMINT UNSIGNED NOT NULL ,            
+    `id_servicio_otro2` MEDIUMINT UNSIGNED NOT NULL DEFAULT '0' ,            
     `bbls` DECIMAL(4,1) NOT NULL DEFAULT '0.0' ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_vol_cortes_fluidos`) ,
@@ -678,9 +699,9 @@
     `nombre` VARCHAR(50) NOT NULL ,
     `marca` VARCHAR(50) NOT NULL DEFAULT 'S/M' ,
     `cantidad_presentacion` DECIMAL(4,2) NULL ,
-    `unidad_medida` VARCHAR(45) NOT NULL 'Unidades',    
-    `stock_min` SMALLINT NOT NULL DEFAULT '0,0' ,
-    `stock_max` SMALLINT NOT NULL DEFAULT '0,0' ,
+    `unidad_medida` VARCHAR(45) NOT NULL DEFAULT 'Unidades',    
+    `stock_min` SMALLINT NOT NULL DEFAULT '0' ,
+    `stock_max` SMALLINT NOT NULL DEFAULT '0' ,
     `ubicacion` VARCHAR(50) NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     UNIQUE INDEX `id_materia_prima` (`id_materia_prima` ASC) ,    
@@ -727,7 +748,7 @@
     `id_inv_entrada` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_materia_prima` MEDIUMINT UNSIGNED NOT NULL,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL,
-    `fecha` DATE NOT NULL DEFAULT now() ,
+    `fecha` DATE NOT NULL,
     `lote` MEDIUMINT UNSIGNED COMMENT'en caso de no especificar un numero de guia se controla por lote es un valor autoincremental para cada lote de entrada',
     `guia_remision` VARCHAR(20) NOT NULL DEFAULT 0,
     `cantidad` DECIMAL(5,1) NOT NULL ,  
@@ -883,7 +904,7 @@
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`comentario` (
     `id_comentario` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
-    `id_usuario` MEDIUMINT UNSIGNED NOT NULL ,
+    `id_usuario` SMALLINT UNSIGNED NOT NULL ,
     `titulo` VARCHAR(150) NOT NULL ,
     `comentarios` MEDIUMTEXT NOT NULL ,    
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
@@ -906,27 +927,6 @@
   COMMENT = 'En esta entidad se registran los comentarios que el reporte posee estos comentarios estan estructurados como los muestra el informe
             ademas como todos los usuarios que usan el sistema deben ser autoridades de la empresa los commentarios guardados responden a un id
             de usuario, para definir responsables entidad hija de reporte y de usuario' ;
-
-
-  -- -----------------------------------------------------
-  -- Table `slnecc_control`.`usuario`
-  -- -----------------------------------------------------
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`usuario` (
-    `id_usuario` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT ,
-    `usuario` VARCHAR(40) NOT NULL ,
-    `pass` VARCHAR(200) NOT NULL ,
-    `tipo` VARCHAR(60) NOT NULL DEFAULT 'User' COMMENT = 'Administrador, Medio, User' ,
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    PRIMARY KEY (`usuario`) ,
-    UNIQUE INDEX `id_usuario_UNIQUE` (`id_usuario` ASC) 
-    )
-    ENGINE = InnoDB
-    AUTO_INCREMENT = 1
-    COMMENT = 'Entidad encargada de registrar a los usuarios del sistema, es padre de comentario, y luego de terminar con el modelo de datos
-              se usará esta entidad para el registro de actividades del sistema pudiendo identificar a los resposables de la creacion edicion 
-              de los informes, para ello se definen tres tipos de usuarios el user normal, el usuarui medio con capacidad de borrar algunas fk_costo_clasificacion
-              este actuará como supervisor, y el Administrador que será quien pueda mandar todo al carajo, sin embargo se deben registrar todos 
-              los cambios a la base de datos para que sea posible recuperar informacion en caso de que alguien meta mal el dedo';
 
   SET SQL_MODE=@OLD_SQL_MODE;
   SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
