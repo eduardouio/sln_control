@@ -429,18 +429,18 @@
                 y padre de trabajo_equipo';
 
   -- -----------------------------------------------------
-  -- Table `slnecc_control`.`servicio_otro`
+  -- Table `slnecc_control`.`servicio_fluido`
   -- -----------------------------------------------------
   
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`servicio_otro` (
-    `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,    
+  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`servicio_fluido` (
+    `id_servicio_fluido` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,    
     `codigo` VARCHAR(50) NOT NULL,    
     `nombre` VARCHAR(50) NOT NULL ,    
     `descripcion` VARCHAR(300) NOT NULL DEFAULT 'Sin/Descripción'  ,
     `tipo` VARCHAR(50) NOT NULL ,    
     `notas` MEDIUMTEXT NULL,    
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    PRIMARY KEY (`id_servicio_otro`) ,
+    PRIMARY KEY (`id_servicio_fluido`) ,
     UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC)
     )
     ENGINE = InnoDB 
@@ -456,7 +456,7 @@
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`trabajo_equipo` (
     `id_trabajo_equipo` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_equipo` MEDIUMINT UNSIGNED NOT NULL ,
-    `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL ,
+    `id_servicio_fluido` MEDIUMINT UNSIGNED NOT NULL ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,        
     `horas` DECIMAL(3,1) NOT NULL DEFAULT '0.0' ,
     `rpm` DECIMAL(4,1) NOT NULL DEFAULT '0.0' ,
@@ -472,10 +472,10 @@
       REFERENCES `slnecc_control`.`equipo` (`id_equipo` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
-    INDEX `fk_id_servicio_otro_idx` (`id_servicio_otro` ASC) ,
-    CONSTRAINT `fk_id_servicio_otro`
-      FOREIGN KEY (`id_servicio_otro` )
-      REFERENCES `slnecc_control`.`servicio_otro` (`id_servicio_otro` )
+    INDEX `fk_id_servicio_fluido_idx` (`id_servicio_fluido` ASC) ,
+    CONSTRAINT `fk_id_servicio_fluido`
+      FOREIGN KEY (`id_servicio_fluido` )
+      REFERENCES `slnecc_control`.`servicio_fluido` (`id_servicio_fluido` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
     INDEX `fk_trabajos_equipo_reporte_idx` (`id_reporte` ASC) ,
@@ -488,7 +488,7 @@
   ENGINE = InnoDB 
   AUTO_INCREMENT = 1
   COMMENT = 'entidad que se encarga de registra el uso de los equipos del tipo centrifugas, los registros almacenan
-            valores para tipos de tratamientos heredados ed la entidad servicio_otro, entidad dependiente ademas de reporte';
+            valores para tipos de tratamientos heredados ed la entidad servicio_fluido, entidad dependiente ademas de reporte';
 
 
   -- -----------------------------------------------------
@@ -497,14 +497,14 @@
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`vol_recolectados_procesados` (
     `id_vol_recolectados_procesados` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NULL ,
-    `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL ,
+    `id_servicio_fluido` MEDIUMINT UNSIGNED NOT NULL ,
     `diario` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_vol_recolectados_procesados`) ,
-    INDEX `fk_vlo_recolectados_procesados_servicio_otro_idx` (`id_servicio_otro` ASC) ,
-    CONSTRAINT `fk_vlo_recolectados_procesados_servicio_otro`
-      FOREIGN KEY (`id_servicio_otro` )
-      REFERENCES `slnecc_control`.`servicio_otro` (`id_servicio_otro` )
+    INDEX `fk_vlo_recolectados_procesados_servicio_fluido_idx` (`id_servicio_fluido` ASC) ,
+    CONSTRAINT `fk_vlo_recolectados_procesados_servicio_fluido`
+      FOREIGN KEY (`id_servicio_fluido` )
+      REFERENCES `slnecc_control`.`servicio_fluido` (`id_servicio_fluido` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE, 
     INDEX `fk_vol_recolectados_procesados_reporte_idx` (`id_reporte` ASC) ,
@@ -516,7 +516,7 @@
       )
     ENGINE = InnoDB AUTO_INCREMENT = 1
     COMMENT = 'Entidad encargada de registrar los volumenes de efluentes recolectados y procesados para cada dia(reporte)
-              esta entidad es edpendiente de servicio_otro y de el reporte';
+              esta entidad es edpendiente de servicio_fluido y de el reporte';
 
 
   -- -----------------------------------------------------
@@ -525,14 +525,14 @@
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`vol_agua_operaciones` (
     `id_vol_agua_operaciones` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
-    `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL ,    
+    `id_servicio_fluido` MEDIUMINT UNSIGNED NOT NULL ,    
     `diario` DECIMAL(4,1) NOT NULL DEFAULT '0.0' ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_vol_agua_operaciones`) ,
-    INDEX `fk_vol_agua_operaciones_servicio_otro_idx` (`id_servicio_otro` ASC) ,
-    CONSTRAINT `fk_vol_agua_operaciones_servicio_otro`
-      FOREIGN KEY (`id_servicio_otro` )
-      REFERENCES `slnecc_control`.`servicio_otro` (`id_servicio_otro` )
+    INDEX `fk_vol_agua_operaciones_servicio_fluido_idx` (`id_servicio_fluido` ASC) ,
+    CONSTRAINT `fk_vol_agua_operaciones_servicio_fluido`
+      FOREIGN KEY (`id_servicio_fluido` )
+      REFERENCES `slnecc_control`.`servicio_fluido` (`id_servicio_fluido` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE, 
     INDEX `fk_vol_agua_operaciones_reportes_idx` (`id_reporte` ASC) ,
@@ -554,21 +554,21 @@
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`vol_cortes_fluidos` (
     `id_vol_cortes_fluidos` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
-    `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL ,        
-    `id_servicio_otro2` MEDIUMINT UNSIGNED NULL DEFAULT NULL ,            
+    `id_servicio_fluido` MEDIUMINT UNSIGNED NOT NULL ,        
+    `id_equipo` MEDIUMINT UNSIGNED NULL DEFAULT NULL ,            
     `bbls` DECIMAL(4,1) NOT NULL DEFAULT '0.0' ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_vol_cortes_fluidos`) ,
-    INDEX `fk_vol_cortes_fluidos_servicio_otro_idx` (`id_servicio_otro` ASC) ,
-    CONSTRAINT `fk_vol_cortes_fluidos_servicio_otro`
-      FOREIGN KEY (`id_servicio_otro` )
-      REFERENCES `slnecc_control`.`servicio_otro` (`id_servicio_otro` )
+    INDEX `fk_vol_cortes_fluidos_servicio_fluido_idx` (`id_servicio_fluido` ASC) ,
+    CONSTRAINT `fk_vol_cortes_fluidos_servicio_fluido`
+      FOREIGN KEY (`id_servicio_fluido` )
+      REFERENCES `slnecc_control`.`servicio_fluido` (`id_servicio_fluido` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE, 
-      INDEX `fk_vol_cortes_fluidos_servicio_otro2_idx` (`id_servicio_otro2` ASC) ,
-    CONSTRAINT `fk_vol_cortes_fluidos_servicio_otro2`
-      FOREIGN KEY (`id_servicio_otro2` )
-      REFERENCES `slnecc_control`.`servicio_otro` (`id_servicio_otro` )
+      INDEX `fk_vol_cortes_fluidos_equipo_idx` (`id_equipo` ASC) ,
+    CONSTRAINT `fk_vol_cortes_fluidos_equipo`
+      FOREIGN KEY (`id_equipo` )
+      REFERENCES `slnecc_control`.`equipo` (`id_equipo` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE,     
     INDEX `fk_cortes_fluidos_reportes_idx` (`id_reporte` ASC) ,    
@@ -581,8 +581,8 @@
   ENGINE = InnoDB 
   AUTO_INCREMENT = 1
   COMMENT = 'Entidad encargada de registrar los volumenes de cortes y fluidos usados en la perforacion, para el reporte
-            vigente, ademas esta entidad es doblemente dependiente de servicio_otro ya quu se regustra los tanques y los
-            fluidos de estos datos que estan en la tabla padre(servicio_otro), entidad dependiente de reporte';
+            vigente, ademas esta entidad es doblemente dependiente de servicio_fluido ya quu se regustra los tanques y los
+            fluidos de estos datos que estan en la tabla padre(servicio_fluido), entidad dependiente de reporte';
 
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`manejo_efluentes`
@@ -590,15 +590,15 @@
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`manejo_efluentes` (
     `id_manejo_efluentes` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
-    `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL ,    
+    `id_servicio_fluido` MEDIUMINT UNSIGNED NOT NULL ,    
     `tanque1` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
     `tanque2` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_manejo_efluentes`) ,
-    INDEX `fk_manejo_efluentes_servicio_otro_idx` (`id_servicio_otro` ASC) ,
-    CONSTRAINT `fk_manejo_efluentes_servicio_otro`
-      FOREIGN KEY (`id_servicio_otro` )
-      REFERENCES `slnecc_control`.`servicio_otro` (`id_servicio_otro` )
+    INDEX `fk_manejo_efluentes_servicio_fluido_idx` (`id_servicio_fluido` ASC) ,
+    CONSTRAINT `fk_manejo_efluentes_servicio_fluido`
+      FOREIGN KEY (`id_servicio_fluido` )
+      REFERENCES `slnecc_control`.`servicio_fluido` (`id_servicio_fluido` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
     INDEX `fk_manejo_efluentes_reporte_idx` (`id_reporte` ASC) ,
@@ -611,7 +611,7 @@
     ENGINE = InnoDB 
     AUTO_INCREMENT = 1
     COMMENT = 'Entidad que se encargada ed amacenar los valores para el manejo de efluentes, del tipo tratados, evacuados,
-            entidad dependiente de servicio_otro (tipos de efluente) y de reporte';
+            entidad dependiente de servicio_fluido (tipos de efluente) y de reporte';
 
 
   -- -----------------------------------------------------
@@ -620,16 +620,16 @@
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`manejo_cortes` (
     `id_manejo_cortes` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
-    `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL ,    
+    `id_servicio_fluido` MEDIUMINT UNSIGNED NOT NULL ,    
     `bbls_dia` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
     `celda_no` SMALLINT UNSIGNED NOT NULL ,
     `cap_bls` DECIMAL(6,1) NOT NULL DEFAULT '0.0' ,    
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_manejo_cortes`) ,
-    INDEX `fk_manejo_cortes_servicio_otro_idx` (`id_servicio_otro` ASC) ,
-    CONSTRAINT `fk_manejo_cortes_servicio_otro`
-      FOREIGN KEY (`id_servicio_otro` )
-      REFERENCES `slnecc_control`.`servicio_otro` (`id_servicio_otro` )
+    INDEX `fk_manejo_cortes_servicio_fluido_idx` (`id_servicio_fluido` ASC) ,
+    CONSTRAINT `fk_manejo_cortes_servicio_fluido`
+      FOREIGN KEY (`id_servicio_fluido` )
+      REFERENCES `slnecc_control`.`servicio_fluido` (`id_servicio_fluido` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
     INDEX `fk_manejo_cortes_reporte_idx` (`id_reporte` ASC) ,
@@ -641,7 +641,7 @@
       )
     ENGINE = InnoDB 
     AUTO_INCREMENT = 1
-    COMMENT = 'Entida que registra los valores para el manejo de cortes del sia de trabajo, entidad dependiente de reporte y de servicio_otro';
+    COMMENT = 'Entida que registra los valores para el manejo de cortes del sia de trabajo, entidad dependiente de reporte y de servicio_fluido';
 
 
   -- -----------------------------------------------------
@@ -718,27 +718,27 @@
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`parametros_mp` (
     `id_parametros_mp` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `id_materia_prima` MEDIUMINT UNSIGNED NOT NULL ,
-    `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL ,    
+    `id_servicio_fluido` MEDIUMINT UNSIGNED NOT NULL ,    
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     UNIQUE INDEX `id_parametros_mp_UNIQUE` (`id_parametros_mp` ASC) ,
-    PRIMARY KEY (`id_materia_prima`,`id_servicio_otro`) ,
+    PRIMARY KEY (`id_materia_prima`,`id_servicio_fluido`) ,
     INDEX `fk_parametros_materia_mp_idx` (`id_materia_prima` ASC) ,    
     CONSTRAINT `fk_parametros_materia_mp`
       FOREIGN KEY (`id_materia_prima` )
       REFERENCES `slnecc_control`.`materia_prima` (`id_materia_prima` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
-      INDEX `fk_parametros_mp_servicio_otro_idx` (`id_servicio_otro` ASC) ,    
-    CONSTRAINT `fk_parametros_mp_servicio_otro`
-      FOREIGN KEY (`id_servicio_otro` )
-      REFERENCES `slnecc_control`.`servicio_otro` (`id_servicio_otro` )
+      INDEX `fk_parametros_mp_servicio_fluido_idx` (`id_servicio_fluido` ASC) ,    
+    CONSTRAINT `fk_parametros_mp_servicio_fluido`
+      FOREIGN KEY (`id_servicio_fluido` )
+      REFERENCES `slnecc_control`.`servicio_fluido` (`id_servicio_fluido` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE
       )
   ENGINE = InnoDB 
   AUTO_INCREMENT = 1
   COMMENT = 'En esta entidad se controla el uso de los quimicos, de esta forma se optimiza su uso,
-            ademas es hija de materia_prima y de servicio_otro y padre de inventario_salida, como se dijo arriba
+            ademas es hija de materia_prima y de servicio_fluido y padre de inventario_salida, como se dijo arriba
             esta es solo una entidad de control';
 
   -- -----------------------------------------------------
