@@ -555,7 +555,7 @@
     `id_vol_cortes_fluidos` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `id_servicio_otro` MEDIUMINT UNSIGNED NOT NULL ,        
-    `id_servicio_otro2` MEDIUMINT UNSIGNED NOT NULL DEFAULT '0' ,            
+    `id_servicio_otro2` MEDIUMINT UNSIGNED NULL DEFAULT NULL ,            
     `bbls` DECIMAL(4,1) NOT NULL DEFAULT '0.0' ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_vol_cortes_fluidos`) ,
