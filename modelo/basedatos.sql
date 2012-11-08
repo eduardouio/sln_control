@@ -392,7 +392,8 @@
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `consumo_malla_dia` MEDIUMINT UNSIGNED NOT NULL DEFAULT '0' ,    
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    PRIMARY KEY (`id_zaranda_acondicionador_mallas`,`id_reporte`) ,
+    PRIMARY KEY (`id_reporte`) ,
+UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionador_mallas` ASC),	
     INDEX `fk_zaranda_acondicionador_mallas_reporte_idx` (`id_reporte` ASC) ,
     CONSTRAINT `fk_zaranda_acondicionador_mallas_reporte`
       FOREIGN KEY (`id_reporte` )
