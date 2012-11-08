@@ -445,7 +445,7 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`nombre`),
     UNIQUE INDEX `id_servicio_fluido_UNIQUE` (`id_servicio_fluido` ASC),
-	UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC)
+	UNIQUE INDEX `codigo_UNIQUE` (`codigo`)
     )
     ENGINE = InnoDB 
     AUTO_INCREMENT = 1
