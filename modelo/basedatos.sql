@@ -558,7 +558,7 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`vol_cortes_fluidos` (
     `id_vol_cortes_fluidos` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
-    `id_servicio_fluido` MEDIUMINT UNSIGNED NOT NULL ,        
+    `id_servicio_fluido` MEDIUMINT UNSIGNED DEFAULT NULL ,        
     `id_equipo` MEDIUMINT UNSIGNED NULL DEFAULT NULL ,            
     `bbls` DECIMAL(4,1) NOT NULL DEFAULT '0.0' ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
