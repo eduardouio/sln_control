@@ -751,7 +751,7 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`inv_entrada` (
     `id_inv_entrada` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_materia_prima` MEDIUMINT UNSIGNED NOT NULL,
-    `id_reporte` MEDIUMINT UNSIGNED NOT NULL,
+    `id_reporte` MEDIUMINT UNSIGNED DEFAULT NULL,
     `fecha` DATE NOT NULL,
     `lote` MEDIUMINT UNSIGNED COMMENT'en caso de no especificar un numero de guia se controla por lote es un valor autoincremental para cada lote de entrada',
     `guia_remision` VARCHAR(20) NOT NULL DEFAULT 0,
