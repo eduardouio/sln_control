@@ -346,7 +346,8 @@
     `peso_descargados` VARCHAR(6) NOT NULL DEFAULT '0.0' ,    
     `horas_dia` DECIMAL(3,1) NOT NULL DEFAULT '0' ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    PRIMARY KEY (`id_acondicionador_lodo`) ,
+	UNIQUE INDEX `id_acondicionador_lodo_UNIQUE` (`id_acondicionador_lodo` ASC),
+	PRIMARY KEY (`id_reporte`,`proceso`) ,
     INDEX `fk_acondicionador_lodo_reporte_idx` (`id_reporte` ASC) ,
     CONSTRAINT `fk_acondicionador_lodo_reporte`
       FOREIGN KEY (`id_reporte` )
