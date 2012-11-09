@@ -782,9 +782,8 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
   -- Table `slnecc_control`.`inventario_salida`
   -- -----------------------------------------------------
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`inv_salida` (
-    `id_inv_salida` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `id_parametros_mp` MEDIUMINT UNSIGNED NOT NULL,
-    `id_inv_entrada` MEDIUMINT UNSIGNED NOT NULL,
+    `id_inv_salida` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,    
+    `id_materia_prima` MEDIUMINT UNSIGNED NOT NULL,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL,
     `fecha` DATE NOT NULL ,
     `lote` MEDIUMINT UNSIGNED  COMMENT'se consulta al inv_entrada y se copia en esta columna',
@@ -792,22 +791,16 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
     `cantidad` DECIMAL(5,1) NULL ,    
     `notas` MEDIUMTEXT NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    PRIMARY KEY (`id_inv_salida`) ,
-    INDEX `fk_inv_salida_parametros_mp_idx` (`id_parametros_mp` ASC) ,
+    PRIMARY KEY (`id_inv_salida`) ,    
     INDEX `fk_inv_salida_reporte_idx` (`id_reporte` ASC) ,
-    INDEX `fk_inv_salida_inv_entrada_idx` (`id_parametros_mp` ASC) ,
-    CONSTRAINT `fk_inv_salida_parametros_mp`
-      FOREIGN KEY (`id_parametros_mp` )
-      REFERENCES `slnecc_control`.`parametros_mp` (`id_parametros_mp` )
-      ON DELETE RESTRICT
-      ON UPDATE CASCADE,
-      CONSTRAINT `fk_inv_salida_inv_entrada`
-      FOREIGN KEY (`id_inv_entrada` )
-      REFERENCES `slnecc_control`.`inv_entrada` (`id_inv_entrada` )
+    INDEX `fk_materia_prima_inv_salida_idx` (`id_materia_prima` ASC) ,    
+      CONSTRAINT `fk_materia_prima_inv_salida`
+      FOREIGN KEY (`id_materia_prima` )
+      REFERENCES `slnecc_control`.`materia_prima` (`id_materia_prima` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
     CONSTRAINT `fk_inv_salida_reporte`
-      FOREIGN KEY (`id_reporte` )
+      FOREIGN KEY (`id_reporte`)
       REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE
