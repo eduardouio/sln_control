@@ -6,7 +6,7 @@
 --
 -- Este es el modelo de referencia del proyecto, ya no se va a trabajar con el modelo grafica
 -- Este script es la base para generar los modelos graficos, adjunto se encuentra un script
--- con las consultas para la insercion de datos a estas entidades datos_db.sql
+-- con las consultas para la insercion de datos a estas entidades datos_db.sql.
 -- ---------------------------------------------------
 -- ---------------------------------------------------
 
