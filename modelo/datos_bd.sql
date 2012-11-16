@@ -295,7 +295,7 @@ INSERT INTO `slnecc_control`.`personal_locacion` (`id_reporte`, `id_cargo_sln`, 
 INSERT INTO `slnecc_control`.`zaranda` (`id_reporte`, `zaranda_no`, `peso_entrada`, `peso_salida`, `peso_descargados`, `consumo_malla_dia`, `horas_dia`) VALUES ('1', '1', '0', '0', '0', '4', '0');
 INSERT INTO `slnecc_control`.`zaranda` (`id_reporte`, `zaranda_no`, `peso_entrada`, `peso_salida`, `peso_descargados`, `consumo_malla_dia`, `horas_dia`) VALUES ('1', '2', '0', '0', '0', '0', '0');
 INSERT INTO `slnecc_control`.`zaranda` (`id_reporte`, `zaranda_no`, `peso_entrada`, `peso_salida`, `peso_descargados`, `consumo_malla_dia`, `horas_dia`) VALUES ('1', '3', '0', '0', '0', '0', '0');
-INSERT INTO `slnecc_control`.`zaranda` (`id_reporte`, `zaranda_no`, `peso_entrada`, `peso_salida`, `peso_descargados`, `consumo_malla_dia`, `horas_dia`) VALUES ('2', '1', '8.9', '8.8', '14.1', '4', '16');
+INSERT INTO `slnecc_control`.`zaranda` (`id_reporte`, `zaranda_no`, `peso_entrada`, `peso_salida`, `peso_descargados`, `consumo_malla_dia`, `horas_dia`) VALUES ('2', '1', '8.9', '8.8', '14.1', '0', '16');
 INSERT INTO `slnecc_control`.`zaranda` (`id_reporte`, `zaranda_no`, `peso_entrada`, `peso_salida`, `peso_descargados`, `consumo_malla_dia`, `horas_dia`) VALUES ('2', '2', '8.9', '8.8', '14.1', '0', '16');
 INSERT INTO `slnecc_control`.`zaranda` (`id_reporte`, `zaranda_no`, `peso_entrada`, `peso_salida`, `peso_descargados`, `consumo_malla_dia`, `horas_dia`) VALUES ('2', '3', '8.9', '8.8', '14.1', '0', '16');
 INSERT INTO `slnecc_control`.`zaranda` (`id_reporte`, `zaranda_no`, `peso_entrada`, `peso_salida`, `peso_descargados`, `consumo_malla_dia`, `horas_dia`) VALUES ('3', '1', '9', '8.9', '14.3', '0', '16');
@@ -307,6 +307,24 @@ INSERT INTO `slnecc_control`.`zaranda` (`id_reporte`, `zaranda_no`, `peso_entrad
 INSERT INTO `slnecc_control`.`zaranda` (`id_reporte`, `zaranda_no`, `peso_entrada`, `peso_salida`, `peso_descargados`, `consumo_malla_dia`, `horas_dia`) VALUES ('5', '1', '10.1', '10', '14.8', '0', '19');
 INSERT INTO `slnecc_control`.`zaranda` (`id_reporte`, `zaranda_no`, `peso_entrada`, `peso_salida`, `peso_descargados`, `consumo_malla_dia`, `horas_dia`) VALUES ('5', '2', '10.1', '10', '14.8', '0', '19');
 INSERT INTO `slnecc_control`.`zaranda` (`id_reporte`, `zaranda_no`, `peso_entrada`, `peso_salida`, `peso_descargados`, `consumo_malla_dia`, `horas_dia`) VALUES ('5', '3', '10.1', '10', '14.8', '0', '19');
+INSERT INTO `slnecc_control`.`zaranda` (`id_reporte`, `zaranda_no`, `peso_entrada`, `peso_salida`, `peso_descargados`, `consumo_malla_dia`, `horas_dia`) VALUES ('6', '1', '10.4', '10.3', '14.9', '0', '19');
+INSERT INTO `slnecc_control`.`zaranda` (`id_reporte`, `zaranda_no`, `peso_entrada`, `peso_salida`, `peso_descargados`, `consumo_malla_dia`, `horas_dia`) VALUES ('6', '2', '10.4', '10.3', '14.9', '0', '19');
+INSERT INTO `slnecc_control`.`zaranda` (`id_reporte`, `zaranda_no`, `peso_entrada`, `peso_salida`, `peso_descargados`, `consumo_malla_dia`, `horas_dia`) VALUES ('6', '3', '10.4', '10.3', '14.9', '0', '19');
+INSERT INTO `slnecc_control`.`zaranda` (`id_reporte`, `zaranda_no`, `peso_entrada`, `peso_salida`, `peso_descargados`, `consumo_malla_dia`, `horas_dia`) VALUES ('7', '1', '10.5', '10.4', '15', '0', '24');
+INSERT INTO `slnecc_control`.`zaranda` (`id_reporte`, `zaranda_no`, `peso_entrada`, `peso_salida`, `peso_descargados`, `consumo_malla_dia`, `horas_dia`) VALUES ('7', '2', '10.5', '10.4', '15', '0', '24');
+INSERT INTO `slnecc_control`.`zaranda` (`id_reporte`, `zaranda_no`, `peso_entrada`, `peso_salida`, `peso_descargados`, `consumo_malla_dia`, `horas_dia`) VALUES ('7', '3', '10.5', '10.4', '15', '0', '24');
+INSERT INTO `slnecc_control`.`zaranda` (`id_reporte`, `zaranda_no`, `peso_entrada`, `peso_salida`, `peso_descargados`, `consumo_malla_dia`, `horas_dia`) VALUES ('8', '1', '10.5', '10.4', '15', '0', '18');
+INSERT INTO `slnecc_control`.`zaranda` (`id_reporte`, `zaranda_no`, `peso_entrada`, `peso_salida`, `peso_descargados`, `consumo_malla_dia`, `horas_dia`) VALUES ('8', '2', '10.5', '10.4', '15', '0', '18');
+INSERT INTO `slnecc_control`.`zaranda` (`id_reporte`, `zaranda_no`, `peso_entrada`, `peso_salida`, `peso_descargados`, `consumo_malla_dia`, `horas_dia`) VALUES ('8', '3', '10.5', '10.4', '15', '0', '18');
+INSERT INTO `slnecc_control`.`zaranda` (`id_reporte`, `zaranda_no`, `peso_entrada`, `peso_salida`, `peso_descargados`, `consumo_malla_dia`, `horas_dia`) VALUES ('9', '1', '10.5', '10.4', '15', '0', '24');
+INSERT INTO `slnecc_control`.`zaranda` (`id_reporte`, `zaranda_no`, `peso_entrada`, `peso_salida`, `peso_descargados`, `consumo_malla_dia`, `horas_dia`) VALUES ('9', '2', '10.5', '10.4', '15', '0', '24');
+INSERT INTO `slnecc_control`.`zaranda` (`id_reporte`, `zaranda_no`, `peso_entrada`, `peso_salida`, `peso_descargados`, `consumo_malla_dia`, `horas_dia`) VALUES ('9', '3', '10.5', '10.4', '15', '0', '24');
+INSERT INTO `slnecc_control`.`zaranda` (`id_reporte`, `zaranda_no`, `peso_entrada`, `peso_salida`, `peso_descargados`, `consumo_malla_dia`, `horas_dia`) VALUES ('10', '1', '10.7', '10.6', '15.1', '0', '14');
+INSERT INTO `slnecc_control`.`zaranda` (`id_reporte`, `zaranda_no`, `peso_entrada`, `peso_salida`, `peso_descargados`, `consumo_malla_dia`, `horas_dia`) VALUES ('10', '2', '10.7', '10.6', '15.1', '0', '14');
+INSERT INTO `slnecc_control`.`zaranda` (`id_reporte`, `zaranda_no`, `peso_entrada`, `peso_salida`, `peso_descargados`, `consumo_malla_dia`, `horas_dia`) VALUES ('10', '3', '10.7', '10.6', '15.1', '0', '14');
+
+
+
 -- -----------------------------------------------------
 -- Table `slnecc_control`.`zaranda_mallas`
 -- -----------------------------------------------------
@@ -371,7 +389,66 @@ INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `m
 INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('15', '2', '210', '75');
 INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('15', '3', '210', '34');
 INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('15', '4', '175', '75');
-
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('16', '1', '210', '94');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('16', '2', '210', '94');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('16', '3', '210', '94');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('16', '4', '175', '94');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('17', '1', '210', '94');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('17', '2', '210', '94');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('17', '3', '210', '94');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('17', '4', '175', '94');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('18', '1', '210', '94');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('18', '2', '210', '94');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('18', '3', '210', '53');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('18', '4', '175', '94');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('19', '1', '210', '118');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('19', '2', '210', '118');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('19', '3', '210', '118');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('19', '4', '175', '118');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('20', '1', '210', '118');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('20', '2', '210', '118');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('20', '3', '210', '118');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('20', '4', '175', '188');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('21', '1', '210', '118');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('21', '2', '210', '118');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('21', '3', '210', '77');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('21', '4', '175', '118');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('22', '1', '210', '136');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('22', '2', '210', '136');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('22', '3', '210', '136');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('22', '4', '175', '136');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('23', '1', '210', '136');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('23', '2', '210', '136');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('23', '3', '210', '136');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('23', '4', '175', '136');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('24', '1', '210', '136');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('24', '2', '210', '136');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('24', '3', '210', '77');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('24', '4', '175', '136');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('25', '1', '210', '160');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('25', '2', '210', '160');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('25', '3', '210', '160');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('25', '4', '175', '160');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('26', '1', '210', '160');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('26', '2', '210', '160');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('26', '3', '210', '160');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('26', '4', '175', '160');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('27', '1', '210', '160');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('27', '2', '210', '160');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('27', '3', '210', '101');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('27', '4', '175', '160');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('28', '1', '210', '174');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('28', '2', '210', '174');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('28', '3', '210', '174');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('28', '4', '175', '174');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('29', '1', '210', '174');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('29', '2', '210', '174');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('29', '3', '210', '174');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('29', '4', '175', '174');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('30', '1', '210', '174');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('30', '2', '210', '174');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('30', '3', '210', '115');
+INSERT INTO `slnecc_control`.`zaranda_mallas` (`id_zaranda`, `malla_deck_no`, `mesh`, `horas`) VALUES ('30', '4', '175', '174');
 -- -----------------------------------------------------
 -- Table `slnecc_control`.`acondicionador_lodo`
 -- -----------------------------------------------------
@@ -959,4 +1036,3 @@ INSERT INTO `slnecc_control`.`comentario` (`id_reporte`, `titulo`, `comentarios`
 INSERT INTO `slnecc_control`.`comentario` (`id_reporte`, `titulo`, `comentarios`, `id_usuario`) VALUES ('5', 'Manejo de Cortes','EXCAVADORA TRABAJANDO EN ZONA DE CORTES,CONONACO 20. SE TRABAJA CON UNA VOLQUETA FIJA Y UNA ADICIONAL','1');
 INSERT INTO `slnecc_control`.`comentario` (`id_reporte`, `titulo`, `comentarios`, `id_usuario`) VALUES ('5', 'Seguridad y Salud Ocupacional','MATERIALES PELIGROSOS. ALMACENAMIENTO','1');
 INSERT INTO `slnecc_control`.`comentario` (`id_reporte`, `titulo`, `comentarios`, `id_usuario`) VALUES ('5', 'Actividad del Taladro','CONTINÚA PERFORANDO ROTANDO Y DESLIZANDO DESDE 2808 FT HASTA 4027 FT. SE ENVIAN PILDORAS DE LIMPIEZA Y SE CIRCULA HASTA RETORNOS LIMPIOS CON 1000 GPM; 3300 PSI, 60 RPM- TORQUE SE REALIZA VIAJE A SUPERFICIE, SE DESARMA BHA # 2 Y SE EMPIEZA A ARMAR BHA # 3. CALIBRACION DE LA BROCA: 1-0-WT-N-X-I-NO-BHA. PUNTOS APRETADOS @ 1183 Y 810 FT. ','1');
-
