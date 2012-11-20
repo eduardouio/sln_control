@@ -307,7 +307,10 @@
   ENGINE = InnoDB 
   AUTO_INCREMENT = 1
   COMMENT = 'Entidad que registra el uso y consumo de las mallas en el pozo, entidad padre y a la vez entidad dependiente
-            del informe';
+            del informe, las horas de funcionamiento se registran de acuerdo a las horas que estan abajo en el formato cada
+            columna tiene un valor en horas y es el mismo que se registra en la parte de arriba en este caso en la tabla
+            zaranda mallas, la misma que tiene el totat de las horas, pero se deja estas columnas porque los datos se puede
+            editar o mas bien dicho vuelven a cero cuando la malla es cambiada';
 
 
   -- -----------------------------------------------------
@@ -331,7 +334,8 @@
   ENGINE = InnoDB 
   AUTO_INCREMENT = 1
   COMMENT = 'Entidad que registra el uso de las zarandas en horas y mesh valores numericos, entidad dependiente de zaranda
-            no es parte del informe directamente, sino a travez de su entidad padre (zaranda)';
+            no es parte del informe directamente, sino a travez de su entidad padre (zaranda) ademas de esta se obtiene las horas
+            de trabajo las cuales se suman en la columna horas esta columna vuelve a cero solo si se cambia la malla';
 
 
   -- -----------------------------------------------------
@@ -340,7 +344,7 @@
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`acondicionador_lodo` (
     `id_acondicionador_lodo` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
-    `proceso` VARCHAR(60) NOT NULL COMMENT 'desarenador\\ndesarcillador' ,
+    `proceso` VARCHAR(60) NOT NULL COMMENT 'desarenador\\ndesarcillador \\nZaranda acondicionador' ,
     `presion` DECIMAL(4,1) NOT NULL DEFAULT '0.0' ,
     `peso_entrada` VARCHAR(6) NOT NULL DEFAULT '0.0' COMMENT 'los valores tienen un + al final preguntar que es ejem 5.6+\\n' ,
     `peso_salida` VARCHAR(6) NOT NULL DEFAULT '0.0' COMMENT 'los valores tienen un + al final preguntar que es ejem 5.6+\\n' ,
@@ -359,7 +363,8 @@
   ENGINE = InnoDB 
   AUTO_INCREMENT = 1
   COMMENT = 'Entidad que registra los parametros de uso del acondicionador de lodo para los procesos
-              de desarenador y desarcillador, emntidad dependiente de reporte y padre de zaranda_acondicionador';
+              de desarenador y desarcillador, emntidad dependiente de reporte y padre de zaranda_acondicionador, los valores de las horas
+              para zaranda_acondicionador se almacenan para luego ser sumadas en la tabla zaranda_acondicionador';
 
 
   -- -----------------------------------------------------
@@ -383,7 +388,8 @@
   ENGINE = InnoDB 
   AUTO_INCREMENT = 1 
   COMMENT = 'Entidad que registra los datos correspondientes al uso de la zaranda acondicionador, entidad dependiente dependiente
-            de acondicionador_lodo, por ende forma parte del reporte de forma indirecta';
+            de acondicionador_lodo, por ende forma parte del reporte de forma indirecta, las horas son el resultado de la suma de acondicionador_lodo
+            en la columna horas para el procedimiento zaranda_acondicionador este vuelve a cero solo cuando se cambia la malla';
 
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`zaranda_acondicionador_mallas`
