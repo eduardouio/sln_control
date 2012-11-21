@@ -1041,43 +1041,43 @@
 
 	-- stok viejos 
 
-	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `fecha`, `lote`, `cantidad`, `costo`) VALUES ('1', '2012-01-01', '1', '1600', '5');
-	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `fecha`, `lote`, `cantidad`, `costo`) VALUES ('2', '2012-01-01', '1', '500', '10');
-	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `fecha`, `lote`, `cantidad`, `costo`) VALUES ('3', '2012-01-01', '1', '2750', '15');
-	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `fecha`, `lote`, `cantidad`, `costo`) VALUES ('4', '2012-01-01', '1', '10', '20');
-	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `fecha`, `lote`, `cantidad`, `costo`) VALUES ('5', '2012-01-01', '1', '25', '25');
-	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `fecha`, `lote`, `cantidad`, `costo`) VALUES ('6', '2012-01-01', '1', '0', '30');
-	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `fecha`, `lote`, `cantidad`, `costo`) VALUES ('7', '2012-01-01', '1', '4', '35');
-	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `fecha`, `lote`, `cantidad`, `costo`) VALUES ('8', '2012-01-01', '1', '3', '40');
-	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `fecha`, `lote`, `cantidad`, `costo`) VALUES ('9', '2012-01-01', '1', '2025', '45');
-	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `fecha`, `lote`, `cantidad`, `costo`) VALUES ('10', '2012-01-01', '1', '75', '50');
-	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `fecha`, `lote`, `guia_remision`, `cantidad`, `costo`) VALUES ('11', '2012-10-03', '1', '0', '50', '55');
-	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `fecha`, `lote`, `guia_remision`, `cantidad`, `costo`) VALUES ('11', '2012-10-03', '1', '0', '50', '55');
+	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `lote`, `cantidad`, `costo`) VALUES ('1', '1', '1600', '5');
+	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `lote`, `cantidad`, `costo`) VALUES ('2', '1', '500', '10');
+	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `lote`, `cantidad`, `costo`) VALUES ('3', '1', '2750', '15');
+	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `lote`, `cantidad`, `costo`) VALUES ('4', '1', '10', '20');
+	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `lote`, `cantidad`, `costo`) VALUES ('5', '1', '25', '25');
+	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `lote`, `cantidad`, `costo`) VALUES ('6', '1', '0', '30');
+	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `lote`, `cantidad`, `costo`) VALUES ('7', '1', '4', '35');
+	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `lote`, `cantidad`, `costo`) VALUES ('8', '1', '3', '40');
+	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `lote`, `cantidad`, `costo`) VALUES ('9', '1', '2025', '45');
+	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `lote`, `cantidad`, `costo`) VALUES ('10', '1', '75', '50');
+	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `lote`, `guia_remision`, `cantidad`, `costo`) VALUES ('11', '1', '0', '50', '55');
+	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `lote`, `guia_remision`, `cantidad`, `costo`) VALUES ('11', '1', '0', '50', '55');
 	-- entradas al inventario
 
-	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `guia_remision`, `cantidad`, `costo`) VALUES ('3', '1', '2012-08-24', '2', '0', '6000', '15');
-	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `guia_remision`, `cantidad`, `costo`) VALUES ('5', '1', '2012-08-24', '2', '0', '2000', '25');
-	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `guia_remision`, `cantidad`, `costo`) VALUES ('2', '5', '2012-10-07', '3', '0', '500', '100');
-	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `fecha`, `lote`, `guia_remision`, `cantidad`, `costo`) VALUES ('2', '8', '2012-10-10', '4', '0', '500', '99.99');
+	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `lote`, `guia_remision`, `cantidad`, `costo`) VALUES ('3', '1', '2', '0', '6000', '15');
+	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `lote`, `guia_remision`, `cantidad`, `costo`) VALUES ('5', '1', '2', '0', '2000', '25');
+	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `lote`, `guia_remision`, `cantidad`, `costo`) VALUES ('2', '5', '3', '0', '500', '100');
+	INSERT INTO `slnecc_control`.`inv_entrada` (`id_materia_prima`, `id_reporte`, `lote`, `guia_remision`, `cantidad`, `costo`) VALUES ('2', '8', '4', '0', '500', '99.99');
 
 
 -- -----------------------------------------------------
   -- Table `slnecc_control`.`inventario_salida`
   -- -----------------------------------------------------
-INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `fecha`, `cantidad`) VALUES ('4', '2', '2012-10-04', '75');
-INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `fecha`, `cantidad`) VALUES ('7', '2', '2012-10-04', '325');
-INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `fecha`, `cantidad`) VALUES ('4', '3', '2012-10-05', '75');
-INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `fecha`, `cantidad`) VALUES ('7', '3', '2012-10-05', '325');
-INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `fecha`, `cantidad`) VALUES ('4', '4', '2012-10-06', '225');
-INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `fecha`, `cantidad`) VALUES ('4', '5', '2012-10-07', '175');
-INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `fecha`, `cantidad`) VALUES ('4', '6', '2012-10-08', '200');
-INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `fecha`, `cantidad`) VALUES ('4', '7', '2012-10-09', '150');
-INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `fecha`, `cantidad`) VALUES ('4', '8', '2012-10-10', '200');
-INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `fecha`, `cantidad`) VALUES ('7', '8', '2012-10-10', '175');
-INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `fecha`, `cantidad`) VALUES ('10', '8', '2012-10-10', '50');
-INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `fecha`, `cantidad`) VALUES ('4', '9', '2012-10-10', '125');
-INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `fecha`, `cantidad`) VALUES ('4', '10', '2012-10-10', '50');
-INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `fecha`, `cantidad`) VALUES ('7', '10', '2012-10-10', '100');
+INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `cantidad`) VALUES ('4', '2', '75');
+INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `cantidad`) VALUES ('7', '2', '325');
+INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `cantidad`) VALUES ('4', '3', '75');
+INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `cantidad`) VALUES ('7', '3', '325');
+INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `cantidad`) VALUES ('4', '4', '225');
+INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `cantidad`) VALUES ('4', '5', '175');
+INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `cantidad`) VALUES ('4', '6', '200');
+INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `cantidad`) VALUES ('4', '7', '150');
+INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `cantidad`) VALUES ('4', '8', '200');
+INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `cantidad`) VALUES ('7', '8', '175');
+INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `cantidad`) VALUES ('10', '8', '50');
+INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `cantidad`) VALUES ('4', '9', '125');
+INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `cantidad`) VALUES ('4', '10', '50');
+INSERT INTO `slnecc_control`.`inv_salida` (`id_parametro_mp`, `id_reporte`, `cantidad`) VALUES ('7', '10', '100');
 
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`clasificacion_costo`

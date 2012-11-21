@@ -18,22 +18,27 @@
   CREATE SCHEMA IF NOT EXISTS `slnecc_control` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
   USE `slnecc_control` ;
 
--- -----------------------------------------------------
+  -- -----------------------------------------------------
   -- Table `slnecc_control`.`usuario`
   -- -----------------------------------------------------
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`usuario` (
     `id_usuario` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `usuario` VARCHAR(40) NOT NULL ,
     `pass` VARCHAR(200) NOT NULL ,
-    `tipo` VARCHAR(60) NOT NULL DEFAULT 'User' COMMENT  'Administrador, Medio, User' ,
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+    `tipo` VARCHAR(60) NOT NULL DEFAULT 'User' COMMENT  'Administrador, Medio, User' ,    
+    `creado_por` DATETIME ,
+    `last_failure` DATETIME ,
+    `failure_count` SMALLINT UNSIGNED ,
+    `last_login` DATETIME ,
+    `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`usuario`) ,
     UNIQUE INDEX `id_usuario_UNIQUE` (`id_usuario` ASC) 
     )
     ENGINE = InnoDB
     AUTO_INCREMENT = 1
     COMMENT = 'Entidad encargada de registrar a los usuarios del sistema, es padre de comentario, y luego de terminar con el modelo de datos
-              se usará esta entidad para el registro de actividades del sistema pudiendo identificar a los resposables de la creacion edicion 
+              se usará esta entidad para el registro de actividades del sistema pudiendo identificar a los resposables de la last_update edicion 
               de los informes, para ello se definen tres tipos de usuarios el user normal, el usuarui medio con capacidad de borrar algunas fk_costo_clasificacion
               este actuará como supervisor, y el Administrador que será quien pueda mandar todo al carajo, sin embargo se deben registrar todos 
               los cambios a la base de datos para que sea posible recuperar informacion en caso de que alguien meta mal el dedo';
@@ -48,7 +53,8 @@
     `fecha_inicio` DATE NOT NULL ,
     `fecha_fin` DATE NULL ,
     `notas` MEDIUMTEXT NULL ,
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+    `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_proyecto`, `cliente`) 
     )
   ENGINE = InnoDB 
@@ -67,7 +73,8 @@
     `inicio_actividad` DATE NOT NULL ,
     `fin_actividad` DATE NOT NULL ,
     `notas` MEDIUMTEXT NULL ,
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+   `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_pozo`) ,
     INDEX `fk_pozo_proyecto_idx` (`id_proyecto` ASC) ,
     CONSTRAINT `fk_pozo_proyecto`
@@ -90,7 +97,8 @@
     `fecha_emision` DATE NOT NULL ,
     `fecha_revision` DATE NOT NULL ,    
     `notas` MEDIUMTEXT NULL ,
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_revision`) 
     )
   ENGINE = InnoDB 
@@ -115,7 +123,8 @@
     `superintendente` VARCHAR(50) NOT NULL ,
     `rig_manager` VARCHAR(50) NOT NULL ,
     `supervisor_sln` VARCHAR(50) NOT NULL COMMENT 'El supervisor esta en la lista de personal en pozo' ,
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_pozo`, `no_reprote`) ,
     UNIQUE INDEX `id_reporte_UNIQUE` (`id_reporte` ASC) ,
     INDEX `fk_reporte_pozo_idx` (`id_pozo` ASC) ,
@@ -144,7 +153,8 @@
     `viscosidad_plastica` VARCHAR(7) NULL ,
     `yield_point` DECIMAL(4,1) NOT NULL DEFAULT '0.0' ,
     `volumen_sa` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_datos_lodos`) ,
     UNIQUE INDEX `id_reporte_UNIQUE` (`id_reporte` ASC) ,
     INDEX `fk_datos_lodo_reporte_idx` (`id_reporte` ASC) ,
@@ -170,7 +180,8 @@
     `lgs` DECIMAL(3,1) NOT NULL DEFAULT '0.0' ,
     `hgs` DECIMAL(3,1) NOT NULL DEFAULT '0.0' ,
     `mtb` SMALLINT UNSIGNED NULL DEFAULT '0',
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_contenido_solidos`) ,
     UNIQUE INDEX `id_reporte_UNIQUE` (`id_reporte` ASC) ,
     INDEX `fk_contenido_solidos_reportes_idx` (`id_reporte` ASC) ,
@@ -195,7 +206,8 @@
     `porosidad` DECIMAL(3,1) NOT NULL DEFAULT '0.0' COMMENT 'se registra en porcentaje\\n' ,
     `wash_out` DECIMAL(3,1) NOT NULL DEFAULT '0.0' COMMENT 'se registra en porcentaje\\n' ,
     `factor_expancion` DECIMAL(3,1) NOT NULL DEFAULT '0.0' ,
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id_perforacion`) ,
     UNIQUE INDEX `id_reporte_UNIQUE` (`id_reporte` ASC) ,
     INDEX `fk_perforacion_reporte_idx` (`id_reporte` ASC) ,
@@ -217,7 +229,8 @@
     `id_cargo_sln` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,    
     `cargo` VARCHAR(45) NOT NULL ,
     `descripcion` VARCHAR(45) NOT NULL ,
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id_cargo_sln`)
     )        
   ENGINE = InnoDB 
@@ -236,7 +249,8 @@
     `nombres` VARCHAR(100) NOT NULL ,
     `apellidos` VARCHAR(100) NOT NULL ,
     `profesion` VARCHAR(50) NOT NULL ,
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_personal`) ,
     UNIQUE INDEX `cedula_UNIQUE` (`cedula` ASC) 
     )
@@ -254,7 +268,8 @@
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `id_cargo_sln` MEDIUMINT UNSIGNED NOT NULL ,
     `id_personal` MEDIUMINT UNSIGNED NOT NULL ,
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,    
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,    
     PRIMARY KEY (`id_personal_locacion`) ,
     INDEX `fk_personal_locacion_reporte_idx` (`id_reporte` ASC) ,
     INDEX `fk__idx` (`id_cargo_sln` ASC) ,
@@ -295,7 +310,8 @@
     `peso_descargados` VARCHAR(6) NOT NULL DEFAULT '0.0' ,
     `consumo_malla_dia` SMALLINT UNSIGNED NOT NULL DEFAULT '0' ,
     `horas_dia` DECIMAL(3,1) NULL ,
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_zaranda`) ,
     INDEX `fk_zaranda_reporte_idx` (`id_reporte` ASC) ,
     CONSTRAINT `fk_zaranda_reporte`
@@ -322,7 +338,8 @@
     `malla_deck_no` SMALLINT NOT NULL ,
     `mesh` DECIMAL(4,1) NOT NULL DEFAULT '0.0' ,
     `horas` DECIMAL(5,1) NOT NULL DEFAULT '0.0' COMMENT 'en el informe de peuebas veo que las horas se aumentan en 36\\n' ,    
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_zaranda_mallas`) ,
     INDEX `mallas_zaranda_idx` (`id_zaranda` ASC) ,
     CONSTRAINT `fk_mallas_zaranda`
@@ -350,9 +367,10 @@
     `peso_salida` VARCHAR(6) NOT NULL DEFAULT '0.0' COMMENT 'los valores tienen un + al final preguntar que es ejem 5.6+\\n' ,
     `peso_descargados` VARCHAR(6) NOT NULL DEFAULT '0.0' ,    
     `horas_dia` DECIMAL(3,1) NOT NULL DEFAULT '0' ,
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-	UNIQUE INDEX `id_acondicionador_lodo_UNIQUE` (`id_acondicionador_lodo` ASC),
-	PRIMARY KEY (`id_reporte`,`proceso`) ,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  UNIQUE INDEX `id_acondicionador_lodo_UNIQUE` (`id_acondicionador_lodo` ASC),
+  PRIMARY KEY (`id_reporte`,`proceso`) ,
     INDEX `fk_acondicionador_lodo_reporte_idx` (`id_reporte` ASC) ,
     CONSTRAINT `fk_acondicionador_lodo_reporte`
       FOREIGN KEY (`id_reporte` )
@@ -376,7 +394,8 @@
     `malla_deck_no` SMALLINT NULL ,
     `mesh` DECIMAL(4,1) NOT NULL DEFAULT '0.0' ,
     `horas` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_zaranda_acondicionador`) ,
     INDEX `fk_zaranda_acondicionador_reporte_idx` (`id_reporte` ASC) ,
     CONSTRAINT `fk_zaranda_acondicionador_reporte`
@@ -398,9 +417,10 @@
     `id_zaranda_acondicionador_mallas` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `consumo_malla_dia` MEDIUMINT UNSIGNED NOT NULL DEFAULT '0' ,    
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_reporte`) ,
-UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionador_mallas` ASC),	
+UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionador_mallas` ASC),  
     INDEX `fk_zaranda_acondicionador_mallas_reporte_idx` (`id_reporte` ASC) ,
     CONSTRAINT `fk_zaranda_acondicionador_mallas_reporte`
       FOREIGN KEY (`id_reporte` )
@@ -411,7 +431,7 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
   AUTO_INCREMENT = 1 
   COMMENT = 'entidad que registra el uso de mallas en el proceso de zaranda_acondicionador, no se registra en la entidad anterior
             porque es una vez por reporte y no por registro (en la entidad anterior la tabla tiene varios ingresos para el mismo reporte)
-            es por eso que fue necesaria la creacion de una nueva entidad dependiente de informe, pero se entiende que lo unico que guarda es
+            es por eso que fue necesaria la last_update de una nueva entidad dependiente de informe, pero se entiende que lo unico que guarda es
             un valor de mallas usadas en este día, en caso de usar nada se deberá crear un regisrto con valor cero';
 
 
@@ -426,10 +446,11 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
     `tipo` VARCHAR(50) NOT NULL DEFAULT 'Otros',    
     `caracteristicas` MEDIUMTEXT DEFAULT NULL,
     `usos` MEDIUMTEXT DEFAULT NULL,    
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`nombre`,`modelo`) ,
     UNIQUE INDEX `id_equipo_UNIQUE` (`id_equipo` ASC),
-	UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC)
+  UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC)
     )
     ENGINE = InnoDB 
     AUTO_INCREMENT = 1
@@ -449,10 +470,11 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
     `descripcion` VARCHAR(300) NOT NULL DEFAULT 'Sin/Descripción'  ,
     `tipo` VARCHAR(50) NOT NULL ,    
     `notas` MEDIUMTEXT NULL,    
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`nombre`),
     UNIQUE INDEX `id_servicio_fluido_UNIQUE` (`id_servicio_fluido` ASC),
-	UNIQUE INDEX `codigo_UNIQUE` (`codigo`)
+  UNIQUE INDEX `codigo_UNIQUE` (`codigo`)
     )
     ENGINE = InnoDB 
     AUTO_INCREMENT = 1
@@ -475,7 +497,8 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
     `ppg_entrada` VARCHAR(6) NOT NULL DEFAULT '0.0' ,
     `ppg_salida` VARCHAR(6) NOT NULL DEFAULT '0.0' ,
     `ppg_descarga` VARCHAR(6) NOT NULL DEFAULT '0.0' ,
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_trabajo_equipo`) ,    
     INDEX `fk_trabajo_equipo_equipo_idx` (`id_equipo` ASC) ,
     CONSTRAINT `fk_trabajos_equipo_equipo`
@@ -510,7 +533,8 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
     `id_reporte` MEDIUMINT UNSIGNED NULL ,
     `id_servicio_fluido` MEDIUMINT UNSIGNED NOT NULL ,
     `diario` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_vol_recolectados_procesados`) ,
     INDEX `fk_vlo_recolectados_procesados_servicio_fluido_idx` (`id_servicio_fluido` ASC) ,
     CONSTRAINT `fk_vlo_recolectados_procesados_servicio_fluido`
@@ -538,7 +562,8 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `id_servicio_fluido` MEDIUMINT UNSIGNED NOT NULL ,    
     `diario` DECIMAL(6,1) NOT NULL DEFAULT '0.0' ,
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_vol_agua_operaciones`) ,
     INDEX `fk_vol_agua_operaciones_servicio_fluido_idx` (`id_servicio_fluido` ASC) ,
     CONSTRAINT `fk_vol_agua_operaciones_servicio_fluido`
@@ -568,7 +593,8 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
     `id_servicio_fluido` MEDIUMINT UNSIGNED DEFAULT NULL ,        
     `id_equipo` MEDIUMINT UNSIGNED NULL DEFAULT NULL ,            
     `bbls` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_vol_cortes_fluidos`) ,
     INDEX `fk_vol_cortes_fluidos_servicio_fluido_idx` (`id_servicio_fluido` ASC) ,
     CONSTRAINT `fk_vol_cortes_fluidos_servicio_fluido`
@@ -604,7 +630,8 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
     `id_servicio_fluido` MEDIUMINT UNSIGNED NOT NULL ,    
     `tanque1` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
     `tanque2` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_manejo_efluentes`) ,
     INDEX `fk_manejo_efluentes_servicio_fluido_idx` (`id_servicio_fluido` ASC) ,
     CONSTRAINT `fk_manejo_efluentes_servicio_fluido`
@@ -635,7 +662,8 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
     `bbls_dia` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
     `celda_no` SMALLINT UNSIGNED NOT NULL ,
     `cap_bls` DECIMAL(6,1) NOT NULL DEFAULT '0.0' ,    
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_manejo_cortes`) ,
     INDEX `fk_manejo_cortes_servicio_fluido_idx` (`id_servicio_fluido` ASC) ,
     CONSTRAINT `fk_manejo_cortes_servicio_fluido`
@@ -664,7 +692,8 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
     `vaccum` VARCHAR(12) NOT NULL ,
     `capacidad_bls` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
     `no_viajes_diario` SMALLINT UNSIGNED NOT NULL DEFAULT '0' ,
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_movimiento_efluentes`) ,
     INDEX `fk_movimiento_efluentes_reporte_idx` (`id_reporte` ASC) ,
     CONSTRAINT `fk_movimiento_efluentes_reporte`
@@ -687,7 +716,8 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
     `volqueta` VARCHAR(12) NOT NULL ,
     `m3` DECIMAL(4,1) NOT NULL ,
     `diario` SMALLINT UNSIGNED NOT NULL ,
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_movimiento_cortes`) ,
     INDEX `fk_movimiento_cortes_reporte_idx` (`id_reporte` ASC) ,
     CONSTRAINT `fk_movimiento_cortes_reporte`
@@ -714,7 +744,8 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
     `stock_min` SMALLINT NOT NULL DEFAULT '0' ,
     `stock_max` SMALLINT NOT NULL DEFAULT '0' ,
     `ubicacion` VARCHAR(50) NULL ,
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     UNIQUE INDEX `id_materia_prima` (`id_materia_prima` ASC) ,    
     UNIQUE INDEX `codigo` (`codigo` ASC) ,    
     PRIMARY KEY (`nombre`,`marca`,`cantidad_presentacion`) )
@@ -730,7 +761,8 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
     `id_parametro_mp` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `id_materia_prima` MEDIUMINT UNSIGNED NOT NULL ,
     `id_servicio_fluido` MEDIUMINT UNSIGNED NOT NULL ,    
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     UNIQUE INDEX `id_parametro_mp_UNIQUE` (`id_parametro_mp` ASC) ,
     PRIMARY KEY (`id_materia_prima`,`id_servicio_fluido`) ,
     INDEX `fk_parametros_materia_mp_idx` (`id_materia_prima` ASC) ,    
@@ -758,14 +790,14 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`inv_entrada` (
     `id_inv_entrada` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_materia_prima` MEDIUMINT UNSIGNED NOT NULL,
-    `id_reporte` MEDIUMINT UNSIGNED DEFAULT NULL,
-    `fecha` DATE NOT NULL,
+    `id_reporte` MEDIUMINT UNSIGNED DEFAULT NULL,    
     `lote` MEDIUMINT UNSIGNED COMMENT'en caso de no especificar un numero de guia se controla por lote es un valor autoincremental para cada lote de entrada',
     `guia_remision` VARCHAR(20) NOT NULL DEFAULT 0,
     `cantidad` DECIMAL(5,1) NOT NULL ,  
     `costo` DECIMAL(4,2) NOT NULL ,  
     `notas` MEDIUMTEXT NULL ,
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_inv_entrada`) ,
     INDEX `fk_inv_entrada_matria_mp_idx` (`id_materia_prima` ASC) ,
     INDEX `fk_inv_entrada_reporte_idx` (`id_reporte` ASC) ,
@@ -791,12 +823,12 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`inv_salida` (
     `id_inv_salida` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,        
     `id_parametro_mp` MEDIUMINT UNSIGNED NOT NULL,
-    `id_reporte` MEDIUMINT UNSIGNED NOT NULL,
-    `fecha` DATE NOT NULL ,    
+    `id_reporte` MEDIUMINT UNSIGNED NOT NULL,    
     `guia_remision` VARCHAR(20) NOT NULL DEFAULT 0 COMMENT'se usa solo si la salida se controla',
     `cantidad` DECIMAL(5,1) NULL ,    
     `notas` MEDIUMTEXT NULL ,
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_inv_salida`) ,    
     INDEX `fk_inv_salida_reporte_idx` (`id_reporte` ASC) ,    
     INDEX `fk_inv_salida_parametros_mp_idx` (`id_parametro_mp` ASC) ,      
@@ -824,7 +856,8 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
     `id_proyecto` MEDIUMINT UNSIGNED NOT NULL ,
     `nombre` VARCHAR(90) NOT NULL ,    
     `notas` MEDIUMTEXT NULL ,
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_clasificacion_costo`) ,
     UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) ,
     INDEX `fk_clasificacion_costo_proyecto_idx` (`id_proyecto` ASC) ,
@@ -850,7 +883,8 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
     `costo_diario` DECIMAL(6,2) NOT NULL DEFAULT '0.0' ,    
     `costo_total` DECIMAL(6,2) NOT NULL DEFAULT '0.0',     
     `notas` MEDIUMTEXT NULL ,
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_costo`) ,
     INDEX `fk_costo_clasificacion_idx` (`id_clasificacion_costo` ASC) ,
     CONSTRAINT `fk_costo_clasificacion`
@@ -878,7 +912,8 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
     `costo` DECIMAL(6,2) NOT NULL COMMENT'Se copia el costo de la entidad costo',            
     `cantidad` SMALLINT UNSIGNED NOT NULL DEFAULT '0.0' , 
     `notas` MEDIUMTEXT NULL ,
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  `create` DATETIME ,
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_salida_costo`) ,
     INDEX `fk_salida_costo_costo_idx` (`id_costo` ASC) ,
     INDEX `fk_salida_costo_reporte_idx` (`id_reporte` ASC) ,
@@ -909,8 +944,9 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `id_usuario` SMALLINT UNSIGNED NOT NULL ,
     `titulo` VARCHAR(150) NOT NULL ,
-    `comentarios` MEDIUMTEXT NOT NULL ,    
-    `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+    `comentarios` MEDIUMTEXT NOT NULL , 
+  `create` DATETIME , 
+    `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_comentario`) ,
     INDEX `fk_comentario_reporte_idx` (`id_reporte` ASC) ,
     INDEX `fk_comentario_id_usuario_idx` (`id_reporte` ASC) ,
