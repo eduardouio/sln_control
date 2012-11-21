@@ -321,7 +321,7 @@
     `id_zaranda` MEDIUMINT UNSIGNED NOT NULL ,
     `malla_deck_no` SMALLINT NOT NULL ,
     `mesh` DECIMAL(4,1) NOT NULL DEFAULT '0.0' ,
-    `horas` DECIMAL(3,1) NOT NULL DEFAULT '0.0' COMMENT 'en el informe de peuebas veo que las horas se aumentan en 36\\n' ,    
+    `horas` DECIMAL(5,1) NOT NULL DEFAULT '0.0' COMMENT 'en el informe de peuebas veo que las horas se aumentan en 36\\n' ,    
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_zaranda_mallas`) ,
     INDEX `mallas_zaranda_idx` (`id_zaranda` ASC) ,
