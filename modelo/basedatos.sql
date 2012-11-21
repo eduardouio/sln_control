@@ -726,12 +726,12 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`parametros_mp`
   -- -----------------------------------------------------
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`parametros_mp` (
-    `id_parametros_mp` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`parametro_mp` (
+    `id_parametro_mp` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `id_materia_prima` MEDIUMINT UNSIGNED NOT NULL ,
     `id_servicio_fluido` MEDIUMINT UNSIGNED NOT NULL ,    
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    UNIQUE INDEX `id_parametros_mp_UNIQUE` (`id_parametros_mp` ASC) ,
+    UNIQUE INDEX `id_parametro_mp_UNIQUE` (`id_parametro_mp` ASC) ,
     PRIMARY KEY (`id_materia_prima`,`id_servicio_fluido`) ,
     INDEX `fk_parametros_materia_mp_idx` (`id_materia_prima` ASC) ,    
     CONSTRAINT `fk_parametros_materia_mp`
@@ -789,26 +789,25 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
   -- Table `slnecc_control`.`inventario_salida`
   -- -----------------------------------------------------
   CREATE  TABLE IF NOT EXISTS `slnecc_control`.`inv_salida` (
-    `id_inv_salida` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,    
-    `id_materia_prima` MEDIUMINT UNSIGNED NOT NULL,
+    `id_inv_salida` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,        
+    `id_parametro_mp` MEDIUMINT UNSIGNED NOT NULL,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL,
-    `fecha` DATE NOT NULL ,
-    `lote` MEDIUMINT UNSIGNED  COMMENT'se consulta al inv_entrada y se copia en esta columna',
+    `fecha` DATE NOT NULL ,    
     `guia_remision` VARCHAR(20) NOT NULL DEFAULT 0 COMMENT'se usa solo si la salida se controla',
     `cantidad` DECIMAL(5,1) NULL ,    
     `notas` MEDIUMTEXT NULL ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_inv_salida`) ,    
-    INDEX `fk_inv_salida_reporte_idx` (`id_reporte` ASC) ,
-    INDEX `fk_materia_prima_inv_salida_idx` (`id_materia_prima` ASC) ,    
-      CONSTRAINT `fk_materia_prima_inv_salida`
-      FOREIGN KEY (`id_materia_prima` )
-      REFERENCES `slnecc_control`.`materia_prima` (`id_materia_prima` )
-      ON DELETE RESTRICT
-      ON UPDATE CASCADE,
+    INDEX `fk_inv_salida_reporte_idx` (`id_reporte` ASC) ,    
+    INDEX `fk_inv_salida_parametros_mp_idx` (`id_parametro_mp` ASC) ,      
     CONSTRAINT `fk_inv_salida_reporte`
       FOREIGN KEY (`id_reporte`)
       REFERENCES `slnecc_control`.`reporte` (`id_reporte` )
+      ON DELETE RESTRICT
+      ON UPDATE CASCADE,
+    CONSTRAINT `fk_inv_salida_parametros_mp`
+      FOREIGN KEY (`id_parametro_mp` )
+      REFERENCES `slnecc_control`.`parametro_mp` (`id_parametro_mp` )
       ON DELETE RESTRICT
       ON UPDATE CASCADE
       )
