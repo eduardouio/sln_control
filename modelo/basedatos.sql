@@ -375,7 +375,7 @@
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `malla_deck_no` SMALLINT NULL ,
     `mesh` DECIMAL(4,1) NOT NULL DEFAULT '0.0' ,
-    `horas` DECIMAL(3,1) NOT NULL DEFAULT '0.0' ,
+    `horas` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
     `creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_zaranda_acondicionador`) ,
     INDEX `fk_zaranda_acondicionador_reporte_idx` (`id_reporte` ASC) ,
