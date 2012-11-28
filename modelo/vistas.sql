@@ -153,10 +153,3 @@ ca.cargo
 FROM
 cargo as ca, personal as pe, personal_locacion as pl
 WHERE
-
-/**
-* Pedazo de codigo creada para enviar texto
-*
-*
-*/ 
-
