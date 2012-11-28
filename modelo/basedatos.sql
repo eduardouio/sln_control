@@ -144,8 +144,8 @@
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`datos_lodo`
   -- -----------------------------------------------------
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`datos_lodo` (
-    `id_datos_lodos` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`dato_lodo` (
+    `id_dato_lodo` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `compania` VARCHAR(50) NULL ,
     `sistema` VARCHAR(50) NULL ,
@@ -155,7 +155,7 @@
     `volumen_sa` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
   `create` DATETIME ,
     `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    PRIMARY KEY (`id_datos_lodos`) ,
+    PRIMARY KEY (`id_dato_lodo`) ,
     UNIQUE INDEX `id_reporte_UNIQUE` (`id_reporte` ASC) ,
     INDEX `fk_datos_lodo_reporte_idx` (`id_reporte` ASC) ,
     CONSTRAINT `fk_datos_lodo_reporte`
@@ -172,8 +172,8 @@
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`contenido_solidos`
   -- -----------------------------------------------------
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`contenido_solidos` (
-    `id_contenido_solidos` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`contenido_solido` (
+    `id_contenido_solido` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `solidos` DECIMAL(3,1) NOT NULL DEFAULT '0.0' ,
     `arena` DECIMAL(3,1) NOT NULL DEFAULT '0.0' ,
@@ -182,7 +182,7 @@
     `mtb` SMALLINT UNSIGNED NULL DEFAULT '0',
   `create` DATETIME ,
     `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    PRIMARY KEY (`id_contenido_solidos`) ,
+    PRIMARY KEY (`id_contenido_solido`) ,
     UNIQUE INDEX `id_reporte_UNIQUE` (`id_reporte` ASC) ,
     INDEX `fk_contenido_solidos_reportes_idx` (`id_reporte` ASC) ,
     CONSTRAINT `fk_contenido_solidos_reportes`
@@ -332,15 +332,15 @@
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`zaranda_mallas`
   -- -----------------------------------------------------
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`zaranda_mallas` (
-    `id_zaranda_mallas` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`zaranda_malla` (
+    `id_zaranda_malla` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_zaranda` MEDIUMINT UNSIGNED NOT NULL ,
     `malla_deck_no` SMALLINT NOT NULL ,
     `mesh` DECIMAL(4,1) NOT NULL DEFAULT '0.0' ,
     `horas` DECIMAL(5,1) NOT NULL DEFAULT '0.0' COMMENT 'en el informe de peuebas veo que las horas se aumentan en 36\\n' ,    
   `create` DATETIME ,
     `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    PRIMARY KEY (`id_zaranda_mallas`) ,
+    PRIMARY KEY (`id_zaranda_malla`) ,
     INDEX `mallas_zaranda_idx` (`id_zaranda` ASC) ,
     CONSTRAINT `fk_mallas_zaranda`
       FOREIGN KEY (`id_zaranda` )
@@ -413,14 +413,14 @@
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`zaranda_acondicionador_mallas`
   -- -----------------------------------------------------
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`zaranda_acondicionador_mallas` (
-    `id_zaranda_acondicionador_mallas` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`zaranda_acondicionador_malla` (
+    `id_zaranda_acondicionador_malla` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `consumo_malla_dia` MEDIUMINT UNSIGNED NOT NULL DEFAULT '0' ,    
   `create` DATETIME ,
     `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_reporte`) ,
-UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionador_mallas` ASC),  
+UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionador_malla` ASC),  
     INDEX `fk_zaranda_acondicionador_mallas_reporte_idx` (`id_reporte` ASC) ,
     CONSTRAINT `fk_zaranda_acondicionador_mallas_reporte`
       FOREIGN KEY (`id_reporte` )
@@ -528,14 +528,14 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`vol_recolectados_procesados`
   -- -----------------------------------------------------
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`vol_recolectados_procesados` (
-    `id_vol_recolectados_procesados` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`vol_recolectado_procesado` (
+    `id_vol_recolectado_procesado` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NULL ,
     `id_servicio_fluido` MEDIUMINT UNSIGNED NOT NULL ,
     `diario` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
   `create` DATETIME ,
     `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    PRIMARY KEY (`id_vol_recolectados_procesados`) ,
+    PRIMARY KEY (`id_vol_recolectado_procesado`) ,
     INDEX `fk_vlo_recolectados_procesados_servicio_fluido_idx` (`id_servicio_fluido` ASC) ,
     CONSTRAINT `fk_vlo_recolectados_procesados_servicio_fluido`
       FOREIGN KEY (`id_servicio_fluido` )
@@ -557,14 +557,14 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`vol_agua_operaciones`
   -- -----------------------------------------------------
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`vol_agua_operaciones` (
-    `id_vol_agua_operaciones` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`vol_agua_operacion` (
+    `id_vol_agua_operacion` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `id_servicio_fluido` MEDIUMINT UNSIGNED NOT NULL ,    
     `diario` DECIMAL(6,1) NOT NULL DEFAULT '0.0' ,
   `create` DATETIME ,
     `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    PRIMARY KEY (`id_vol_agua_operaciones`) ,
+    PRIMARY KEY (`id_vol_agua_operacion`) ,
     INDEX `fk_vol_agua_operaciones_servicio_fluido_idx` (`id_servicio_fluido` ASC) ,
     CONSTRAINT `fk_vol_agua_operaciones_servicio_fluido`
       FOREIGN KEY (`id_servicio_fluido` )
@@ -587,15 +587,15 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`vol_cortes_fluidos`
   -- -----------------------------------------------------
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`vol_cortes_fluidos` (
-    `id_vol_cortes_fluidos` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`vol_corte_fluido` (
+    `id_vol_corte_fluido` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `id_servicio_fluido` MEDIUMINT UNSIGNED DEFAULT NULL ,        
     `id_equipo` MEDIUMINT UNSIGNED NULL DEFAULT NULL ,            
     `bbls` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
   `create` DATETIME ,
     `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    PRIMARY KEY (`id_vol_cortes_fluidos`) ,
+    PRIMARY KEY (`id_vol_corte_fluido`) ,
     INDEX `fk_vol_cortes_fluidos_servicio_fluido_idx` (`id_servicio_fluido` ASC) ,
     CONSTRAINT `fk_vol_cortes_fluidos_servicio_fluido`
       FOREIGN KEY (`id_servicio_fluido` )
@@ -624,15 +624,15 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`manejo_efluentes`
   -- -----------------------------------------------------
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`manejo_efluentes` (
-    `id_manejo_efluentes` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`manejo_efluente` (
+    `id_manejo_efluente` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `id_servicio_fluido` MEDIUMINT UNSIGNED NOT NULL ,    
     `tanque1` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
     `tanque2` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
   `create` DATETIME ,
     `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    PRIMARY KEY (`id_manejo_efluentes`) ,
+    PRIMARY KEY (`id_manejo_efluente`) ,
     INDEX `fk_manejo_efluentes_servicio_fluido_idx` (`id_servicio_fluido` ASC) ,
     CONSTRAINT `fk_manejo_efluentes_servicio_fluido`
       FOREIGN KEY (`id_servicio_fluido` )
@@ -655,8 +655,8 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`manejo_cortes`
   -- -----------------------------------------------------
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`manejo_cortes` (
-    `id_manejo_cortes` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`manejo_corte` (
+    `id_manejo_corte` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `id_servicio_fluido` MEDIUMINT UNSIGNED NOT NULL ,    
     `bbls_dia` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
@@ -664,7 +664,7 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
     `cap_bls` DECIMAL(6,1) NOT NULL DEFAULT '0.0' ,    
   `create` DATETIME ,
     `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    PRIMARY KEY (`id_manejo_cortes`) ,
+    PRIMARY KEY (`id_manejo_corte`) ,
     INDEX `fk_manejo_cortes_servicio_fluido_idx` (`id_servicio_fluido` ASC) ,
     CONSTRAINT `fk_manejo_cortes_servicio_fluido`
       FOREIGN KEY (`id_servicio_fluido` )
@@ -686,15 +686,15 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`movimiento_efluentes`
   -- -----------------------------------------------------
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`movimiento_efluentes` (
-    `id_movimiento_efluentes` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`movimiento_efluente` (
+    `id_movimiento_efluente` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `vaccum` VARCHAR(12) NOT NULL ,
     `capacidad_bls` DECIMAL(5,1) NOT NULL DEFAULT '0.0' ,
     `no_viajes_diario` SMALLINT UNSIGNED NOT NULL DEFAULT '0' ,
   `create` DATETIME ,
     `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    PRIMARY KEY (`id_movimiento_efluentes`) ,
+    PRIMARY KEY (`id_movimiento_efluente`) ,
     INDEX `fk_movimiento_efluentes_reporte_idx` (`id_reporte` ASC) ,
     CONSTRAINT `fk_movimiento_efluentes_reporte`
       FOREIGN KEY (`id_reporte` )
@@ -710,15 +710,15 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
   -- -----------------------------------------------------
   -- Table `slnecc_control`.`movimiento_cortes`
   -- -----------------------------------------------------
-  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`movimiento_cortes` (
-    `id_movimiento_cortes` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  CREATE  TABLE IF NOT EXISTS `slnecc_control`.`movimiento_corte` (
+    `id_movimiento_corte` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT ,
     `id_reporte` MEDIUMINT UNSIGNED NOT NULL ,
     `volqueta` VARCHAR(12) NOT NULL ,
     `m3` DECIMAL(4,1) NOT NULL ,
     `diario` SMALLINT UNSIGNED NOT NULL ,
   `create` DATETIME ,
     `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-    PRIMARY KEY (`id_movimiento_cortes`) ,
+    PRIMARY KEY (`id_movimiento_corte`) ,
     INDEX `fk_movimiento_cortes_reporte_idx` (`id_reporte` ASC) ,
     CONSTRAINT `fk_movimiento_cortes_reporte`
       FOREIGN KEY (`id_reporte` )
