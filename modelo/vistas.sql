@@ -33,17 +33,20 @@
 *	- inv_entrada
 *	- reporte
 */
-CREATE VIEW v_inv_salida
+CREATE VIEW v_inv_entrada
 AS
 SELECT 
+ie.id_inv_entrada,
 ie.id_reporte, rp.fecha,
 mp.codigo, mp.nombre, mp.marca, mp.cantidad_presentacion, mp.unidad_medida,
-ie.cantidad, ie.costo as valor_unit, (ie.cantidad * ie.costo) as total , ie.notas
+ie.cantidad, ie.costo AS valor_unit, (ie.cantidad * ie.costo) AS total , ie.notas
 FROM
-inv_entrada as ie
-JOIN materia_prima as mp ON ie.id_materia_prima = mp.id_materia_prima
-LEFT JOIN reporte as rp ON ie.id_reporte = rp.id_reporte
-Order by rp.id_reporte;
+(
+inv_entrada AS ie
+JOIN materia_prima AS mp ON (ie.id_materia_prima = mp.id_materia_prima)
+LEFT JOIN reporte AS rp ON (ie.id_reporte = rp.id_reporte)
+)
+ORDER BY rp.id_reporte;
 
 
 /**
@@ -51,36 +54,55 @@ Order by rp.id_reporte;
 * de una forma clara eliminando los ids de las tablas secundarias
 *
 * Tablas Consultadas
-*	- materia_prima
-*	- inv_entrada
-*	- parametro_mp
+*	- inv_salida as i_s
+*	- reporte	as rp
+*	- parametro_mp	as pmp
+*	- materia_prima	as mp
+*   
 */
-CREATE VIEW v_inv_salida_mp
+CREATE VIEW v_inv_salida
 AS
-SELECT 
-is.id_reporte,
-mp.codigo, mp.nombre, mp.marca, mp.cantidad_presentacion, mp.unidad_medida,
-is.cantidad, is.costo as valor_unit, (is.cantidad * is.costo) as total, is.notas
-FROM
-materia_prima as mp, inv_salida as is ;
+SELECT
+i_s.id_inv_salida,  
+rp.id_reporte, rp.fecha,
+mp.nombre, mp.codigo,
+i_s.guia_remision, i_s.cantidad, i_s.notas,
+sf.nombre AS servicio, sf.codigo AS cod_servicio, sf.tipo as tipo_servicio
+FROM 
+(
+inv_salida AS i_s
+JOIN reporte AS rp ON (rp.id_reporte = i_s.id_reporte)
+JOIN parametro_mp as pmp ON (i_s.id_parametro_mp = pmp.id_parametro_mp)
+JOIN servicio_fluido as sf ON (pmp.id_servicio_fluido = sf.id_servicio_fluido)
+JOIN materia_prima as mp ON (pmp.id_materia_prima = mp.id_materia_prima)
+)
+ORDER BY rp.id_reporte;
+
 
 /**
 * Vista que despliega el nombre de la materia prima y sus parametros
 *
 * Tablas Consultadas
-*	- materia_prima
-*	- servicio_fluido
-*	- parametro_mp
+*	- materia_prima as mp
+*	- servicio_fluido as sf
+*	- parametro_mp as pmp
+CREATE VIEW v_parametro_mp
+AS
 */
 CREATE VIEW v_parametro_mp
 AS
 SELECT
-mp.codigo, mp.nombre, mp.marca, mp.cantidad_presentacion, mp.unidad_medida,
-sf.codigo, sf.nombre,
-pmp.create
+pmp.id_parametro_mp,
+mp.nombre AS nombre_mp, mp.codigo AS codigo_mp, mp.marca AS marca_mp, mp.cantidad_presentacion,
+sf.codigo AS cod_servicio, sf.nombre AS nom_servicio, sf.tipo AS tipo_servicio,
+pmp.create AS creado_en
 FROM
-materia_prima as mp, servicio_fluido as sf, parametro_mp as pmp
-WHERE
+(
+parametro_mp AS pmp
+JOIN servicio_fluido AS sf ON (pmp.id_servicio_fluido = sf.id_servicio_fluido)
+JOIN materia_prima AS mp ON (pmp.id_materia_prima = mp.id_materia_prima)
+)
+ORDER BY mp.nombre;
 
 
 /**
