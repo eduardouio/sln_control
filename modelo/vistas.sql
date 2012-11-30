@@ -15,12 +15,9 @@
 -- 1.- v_inv_entrada_mp
 -- 2.- v_inv_salida_mp
 -- 3.- v_parametro_mp
--- 4.- v_trabajo_equipo_equipo
--- 5.- v_salida_costo_costo
--- 6.- v_vol_corte_fluido_equipo
--- 7.- v_personal_locacion_cargo
--- 8.-
--- 9.-
+-- 4.- v_trabajo_equipo
+-- 5.- v_personal_locacion
+-- 6.- v_vol_corte_fluido
 -- ---------------------------------------------------
 -- ---------------------------------------------------
 
@@ -29,14 +26,14 @@
 * de una forma clara eliminando los ids de las tablas secundarias
 *
 * Tablas Consultadas
-*	- materia_prima
-*	- inv_entrada
-*	- reporte
+*	- materia_prima as mp
+*	- inv_entrada as ie
+*	- reporte as rp
 */
 CREATE VIEW v_inv_entrada
 AS
 SELECT 
-ie.id_inv_entrada,
+ie.id_inv_entrada AS id,
 ie.id_reporte, rp.fecha,
 mp.codigo, mp.nombre, mp.marca, mp.cantidad_presentacion, mp.unidad_medida,
 ie.cantidad, ie.costo AS valor_unit, (ie.cantidad * ie.costo) AS total , ie.notas
@@ -63,7 +60,7 @@ ORDER BY rp.id_reporte;
 CREATE VIEW v_inv_salida
 AS
 SELECT
-i_s.id_inv_salida,  
+i_s.id_inv_salida AS id,  
 rp.id_reporte, rp.fecha,
 mp.nombre, mp.codigo,
 i_s.guia_remision, i_s.cantidad, i_s.notas,
@@ -92,7 +89,7 @@ AS
 CREATE VIEW v_parametro_mp
 AS
 SELECT
-pmp.id_parametro_mp,
+pmp.id_parametro_mp AS id,
 mp.nombre AS nombre_mp, mp.codigo AS codigo_mp, mp.marca AS marca_mp, mp.cantidad_presentacion,
 sf.codigo AS cod_servicio, sf.nombre AS nom_servicio, sf.tipo AS tipo_servicio,
 pmp.create AS creado_en
@@ -106,74 +103,76 @@ ORDER BY mp.nombre;
 
 
 /**
-* Listado de trabajos realizados por los equipos, al igual que los fluidos tratados.
+* Listado de los trabajos realizados por los equipos
 *
 * Tablas Consultadas
+*	- trabajo_equipo as te
 *	- equipo
 *	- servicio_fluido
-*	- trabajo_equipo
 */
-CREATE VIEW v_trabajo_equipo_equipo
-SELECT 
+CREATE VIEW v_trabajo_equipo
+AS
+SELECT
+te.id_trabajo_equipo AS id,
 te.id_reporte,
-eq.codigo, eq.nombre, eq.tipo,
-sf.codigo, sf.nombre, sf.tipo,
-te.bbls
-FROM equipo as eq, servicio_fluido as sf, trabajo_equipo as te
-WHERE
+rp.fecha,
+eq.nombre as equipo,
+sf.nombre as servicio,
+te.horas, te.rpm, te.gpm, te.ppg_entrada, te.ppg_salida, te.ppg_descarga,
+ROUND(((te.horas*te.gpm)*(60/42)),0) as bbls_diario
+FROM
+(
+trabajo_equipo AS te
+JOIN equipo AS eq ON (te.id_equipo = eq.id_equipo)
+JOIN servicio_fluido AS sf ON (te.id_servicio_fluido = sf.id_servicio_fluido)
+JOIN reporte AS rp ON (te.id_reporte = rp.id_reporte)
+)
+ORDER BY rp.id_reporte;
 
 
 /**
-* listado de la salida de los costos incluyendo la salida de los mismos
+* Listado de las personas que trabajan en el pozo
 *
 * Tablas Consultadas
-*	- costo
-*	- clasificacion_costo
-*	- salida_costo
+*	- cargo as car
+*	- personal as per
+*	- personal_locacion as pl
 */
-CREATE VIEW v_salida_costo_costo
-SELECT 
-sc.id_reporte,
-cc.nombre,
-co.descripcion_costo,
-sc_cantidad, sc_costo
+CREATE VIEW v_personal_locacion
+AS
+SELECT
+pl.id_personal_locacion AS id,
+pl.id_reporte,
+per.apellidos, per.nombres,
+car.cargo
 FROM
-costo as co, clasificacion_costo as cc, salida_costo as sc
-WHERE
-
+(
+personal_locacion AS pl
+JOIN personal AS per ON (pl.id_personal = per.id_personal)
+JOIN cargo_sln AS car ON (pl.id_cargo_sln = car.id_cargo_sln)
+)
+ORDER BY pl.id_reporte;
 
 /**
 * Listado de fluidos contenidos en los equipos
 *
 * Tablas Consultadas
-*	- equipo
-*	- servicio_fluido
-*	- vol_corte_fluido
+*	- equipo as eq
+*	- servicio_fluido as sf
+*	- vol_corte_fluido as vcf
 */
-CREATE VIEW v_vol_corte_fluido_equipo
-SELECT 
-cvf.id_reporte, 
-eq.codigo, eq.nombre,
-sf.codigo, sf.nombre,
+CREATE VIEW v_vol_cortes_fuidos
+AS
+SELECT
+vcf.id_vol_corte_fluido AS id,
+vcf.id_reporte,
+eq.nombre AS equipo,
+sf.nombre AS servicio,
 vcf.bbls
 FROM
-equipo as eq, servicio_fluido as sf, vol_corte_fluido as vcf
-WHERE
-
-
-/**
-* Listado ed las personas trabajando en locacion
-*
-* Tablas Consultadas
-*	- cargo
-*	- personal
-*	- personal_locacion
-*/
-CREATE VIEW v_personal_locacion_cargo
-SELECT 
-pl.id_reporte,
-pe.profesion, pe.apellidos, pe.nombres,
-ca.cargo
-FROM
-cargo as ca, personal as pe, personal_locacion as pl
-WHERE
+(
+vol_corte_fluido as vcf
+JOIN equipo AS eq ON (vcf.id_equipo = eq.id_equipo)
+LEFT JOIN servicio_fluido as sf ON (vcf.id_servicio_fluido = sf.id_servicio_fluido)
+)
+ORDER BY vcf.id_reporte;
