@@ -31,16 +31,19 @@
 * Tablas Consultadas
 *	- materia_prima
 *	- inv_entrada
+*	- reporte
 */
-CREATE VIEW v_inv_entrada_mp
+CREATE VIEW v_inv_salida
 AS
 SELECT 
-ie.id_reporte,
+ie.id_reporte, rp.fecha,
 mp.codigo, mp.nombre, mp.marca, mp.cantidad_presentacion, mp.unidad_medida,
 ie.cantidad, ie.costo as valor_unit, (ie.cantidad * ie.costo) as total , ie.notas
 FROM
-materia_prima as mp, inv_entrada as ie
-WHERE
+inv_entrada as ie
+JOIN materia_prima as mp ON ie.id_materia_prima = mp.id_materia_prima
+LEFT JOIN reporte as rp ON ie.id_reporte = rp.id_reporte
+Order by rp.id_reporte;
 
 
 /**
@@ -50,6 +53,7 @@ WHERE
 * Tablas Consultadas
 *	- materia_prima
 *	- inv_entrada
+*	- parametro_mp
 */
 CREATE VIEW v_inv_salida_mp
 AS
@@ -58,9 +62,7 @@ is.id_reporte,
 mp.codigo, mp.nombre, mp.marca, mp.cantidad_presentacion, mp.unidad_medida,
 is.cantidad, is.costo as valor_unit, (is.cantidad * is.costo) as total, is.notas
 FROM
-materia_prima as mp, inv_salida as is
-WHERE
-
+materia_prima as mp, inv_salida as is ;
 
 /**
 * Vista que despliega el nombre de la materia prima y sus parametros
