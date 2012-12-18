@@ -1,6 +1,6 @@
-﻿sln_control
-===========
-<h1>SLN S.A.</h1>
+﻿<h1>Aplicación de Control de Sólidos</h1>
+<h2>Sólidos Y Lodos Nacionales S.A.</h2>
+
 Sistema de control de sólidos <a href="http://sln-ec.com">sln-ec.com</a>
 
 
