@@ -15,21 +15,25 @@ from PyQt4 import QtSql
 import conn
 
 class Modelo(object):
-''' Modelo de base de datos'''
+	''' Modelo de base de datos'''
 	def __init__(self):
 		pass
 
 	def listarTablas(self):
-		'''Lista todas las tablas de la base de datos'''
-		miDb = conn()
-		miDb.conn.conectar()
-		consulta = QtSql.QSqlQuery()	
-		consulta.exec_('SHOW TABLES FROM slnecc_control;')	
-		return consulta
+		'''Lista todas las tablas de la base de datos'''		
+		if conn.conectar() == True:
+			return True
 
-if __name__ == '__main__':
+		return False		
+
+if __name__ == '__main__':    
     app = QtGui.QApplication(sys.argv)
+
     data = Modelo()
-    res = QtSql.QSqlQuery()
-    res = data.listarTablas()
+
+    if (data.listarTablas()==True):
+    	print('conectado!..')
+    else:
+    	print('no hay Conexion')
+
     sys.exit(app.exec_())

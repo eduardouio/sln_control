@@ -14,16 +14,15 @@ from PyQt4 import QtSql
 
 def conectar():
 	'''Conecta a la base de datos reternando objeto de connection'''
-	self.Conn = QtSql.QSql.addDatabase("QMYSQL")
-	self.Conn = setHostName('localhost')
-	self.Conn = setUserName('root')
-	self.Conn = setDatabaseName('slnecc_control')
-	self.Conn = setPassword('')
-
+	Conn = QtSql.QSqlDatabase.addDatabase("QMYSQL")		    
+	Conn.setHostName('127.0.0.1')
+	Conn.setUserName('root')
+	Conn.setDatabaseName('slnecc_control')
+	Conn.setPassword('')
 	#intentamos abrir la conexion a la BD
 	# si funciona se retorna true caso contrario el error
 	try:
-		self.Conn.open()
+		Conn.open()
 	except:
-		return QtSql.QSqlDatabase.lastError()
+		return QtSql.QSqlDatabase.lastError()	
 	return True
