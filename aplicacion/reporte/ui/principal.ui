@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuArchivo">
+    <property name="title">
+     <string>&amp;Archivo</string>
+    </property>
+    <addaction name="actionNuevo_Reporte"/>
+    <addaction name="actionImprimir_Reporte"/>
+    <addaction name="actionEliminar_Reporte"/>
+    <addaction name="actionBuscar_Reporte"/>
+    <addaction name="separator"/>
+    <addaction name="action_Salir"/>
+   </widget>
+   <widget class="QMenu" name="menuReporte">
+    <property name="title">
+     <string>&amp;Reporte</string>
+    </property>
+    <addaction name="actionBuscar_En_Reporte"/>
+    <addaction name="actionEditar_Reporte"/>
+   </widget>
+   <widget class="QMenu" name="menuAyuda">
+    <property name="title">
+     <string>A&amp;yuda</string>
+    </property>
+    <addaction name="actionAcerca_de"/>
+    <addaction name="separator"/>
+    <addaction name="action_Salir_2"/>
+   </widget>
+   <addaction name="menuArchivo"/>
+   <addaction name="menuReporte"/>
+   <addaction name="menuAyuda"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionNuevo_Reporte">
+   <property name="text">
+    <string>&amp;Nuevo Reporte</string>
+   </property>
+  </action>
+  <action name="actionBuscar_Reporte">
+   <property name="text">
+    <string>&amp;Buscar Reporte</string>
+   </property>
+  </action>
+  <action name="actionEliminar_Reporte">
+   <property name="text">
+    <string>&amp;Eliminar Reporte</string>
+   </property>
+  </action>
+  <action name="actionBuscar_En_Reporte">
+   <property name="text">
+    <string>Buscar En Reporte</string>
+   </property>
+  </action>
+  <action name="actionImprimir_Reporte">
+   <property name="text">
+    <string>&amp;Imprimir Reporte</string>
+   </property>
+  </action>
+  <action name="action_Salir">
+   <property name="text">
+    <string>&amp;Salir</string>
+   </property>
+  </action>
+  <action name="actionEditar_Reporte">
+   <property name="text">
+    <string>&amp;Editar Reporte</string>
+   </property>
+  </action>
+  <action name="actionAcerca_de">
+   <property name="text">
+    <string>&amp;Acerca de...</string>
+   </property>
+  </action>
+  <action name="action_Salir_2">
+   <property name="text">
+    <string>&amp;Salir</string>
+   </property>
+  </action>
+  <action name="action_Salir_3">
+   <property name="text">
+    <string>&amp;Salir</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
