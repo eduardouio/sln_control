@@ -7,22 +7,24 @@
 # File			DB.py
 # Ubicacion		reporte/basedatos/DB.py
 # Copyright		(c) 2012 Sólidos y Lodos Nacionales S.A. <http://sln-ec.com> <info@sln-ec.com> 
-#				derehos reservados
 
-#librerias necesarias para el funcionamiento del modulo
-from PyQt4 import QtSql
+from PyQt4 import QtSql, QtGui
 
 def conectar():
-	'''Conecta a la base de datos reternando objeto de connection'''
-	Conn = QtSql.QSqlDatabase.addDatabase("QMYSQL")		    
-	Conn.setHostName('127.0.0.1')
-	Conn.setUserName('root')
-	Conn.setDatabaseName('slnecc_control')
-	Conn.setPassword('')
-	#intentamos abrir la conexion a la BD
-	# si funciona se retorna true caso contrario el error
-	try:
-		Conn.open()
-	except:
-		return QtSql.QSqlDatabase.lastError()	
+	'''Conecta a la base de datos, si la conexion falla retorna el lastError
+	de la conexion, en esta funcion tambien se establecen los parametros'''
+
+	conn = QtSql.QSqlDatabase.addDatabase("QMYSQL")		    
+	conn.setHostName('127.0.0.1')
+	conn.setUserName('root')
+	conn.setDatabaseName('mysql')
+	conn.setPassword('elia')
+	
+	if not conn.open():
+		QtGui.QMessageBox.critical(None,QtGui.qApp.tr('No se puede conectar a la Base de Datos!...'),
+			QtGui.qApp.tr('Hubo un problema al conectarse con la base de datos \n'
+				'El servidor dice... \n' + conn.lastError().databaseText()),
+				QtGui.QMessageBox.Cancel,QtGui.QMessageBox.Ok)
+		return False
+
 	return True
