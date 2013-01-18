@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 # Version		1.0
@@ -7,9 +7,7 @@
 # File			DB.py
 # Ubicacion		reporte/basedatos/DB.py
 # Copyright		(c) 2012 Sólidos y Lodos Nacionales S.A. <http://sln-ec.com> <info@sln-ec.com> 
-#				derehos reservados
 
-import sys
 from PyQt4 import QtCore, QtSql, QtGui
 import conn
 
@@ -17,42 +15,48 @@ class Modelo(object):
 	'''
 	Modelo encargado de gestionar la base de datos
 	Metodo disponibles en el modelo:
-	listarTablas
-	ip configip
+	consultar => Ejecuta una consulta en el servidor
+	listarTablas => Lista las tablas de la DB
+
 	'''
 
+	def consultar(self,query):
+		'''
+		Ejecuta una consulta en la base de datos y mustra los errores
+		que se puedan producir en las consultas
+		'''
+		conn_ = conn.conectar()		
+		sql = QtSql.QSqlQuery()		
+		sql.exec_(query)
+
+		if not sql.isActive():
+			QtGui.QMessageBox.warning(None,QtGui.qApp.tr('No se puede conectar a la Base de Datos!...'),
+			QtGui.qApp.tr('Hubo un problema al conectarse con la base de datos \n'
+				'El servidor dice... \n' + sql.lastError().databaseText()),
+				QtGui.QMessageBox.Ok)		
+			return False
+
+		return sql
+
+
 	def listarTablas(self):
-		'''Lista todas las tablas de la base de datos'''		
+		'''
+		Lista todas las tablas de la base de datos
+		'''
+		query = "show tables from slnecc_control;"				
+		valor = self.consultar(query)
+		return valor
 
-		conn_ = conn.conectar()
-		if conn_ == true:
-			query = QtSql.QSqlQuery()
-			query.exec_('show tables from slnecc_control;')
-			return query
-			
-		return False
-
-	def retornarError(miError):
-		'''Recibe un error ocurrido en el fichero y lo muestra al usuario'''
-
-
-if __name__ == '__main__':
+if __name__ == '__main__':	
+	import sys
 	app = QtGui.QApplication(sys.argv)
-	a = Modelo()
-	a.listarTablas()
-	print(dir(a))
-	print('hola mundo, se ha ejecutado las clases')
+		
+	db = Modelo()
+	tablas = db.listarTablas()
+	print(dir(tablas))
+	print(tablas.isActive())
+
+	vista = QtGui.QTableView()
+	vista.show()
+	
 	sys.exit(app.exec_())
-
-
-Control de Sólidos
-Fluidos de Perforación y Completación
-Manejo y tratamiento de cortes de perforación
-Biorremediación
-Limpieza de tanques
-Transporte y disposición de cortes
-Tratamiento de aguas residuales
-Mejoramiento químico en el tratamiento de desechos
-Análisis de aguas, suelos y gases.
-Renta de bombas centrifugas MCM
-
