@@ -17,8 +17,8 @@ def conectar():
 	conn = QtSql.QSqlDatabase.addDatabase("QMYSQL")		    
 	conn.setHostName('127.0.0.1')
 	conn.setUserName('root')
-	conn.setDatabaseName('mysql')
-	conn.setPassword('elian')
+	conn.setDatabaseName('slnecc_control')
+	conn.setPassword('')
 	
 	if not conn.open():
 		QtGui.QMessageBox.critical(None,QtGui.qApp.tr('No se puede conectar a la Base de Datos!...'),
