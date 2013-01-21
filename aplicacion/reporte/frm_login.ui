@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>frm_login</class>
+ <widget class="QDialog" name="frm_login">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>402</width>
+    <height>124</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>402</width>
+    <height>124</height>
+   </size>
+  </property>
+  <property name="mouseTracking">
+   <bool>false</bool>
+  </property>
+  <property name="focusPolicy">
+   <enum>Qt::TabFocus</enum>
+  </property>
+  <property name="windowTitle">
+   <string>Identifíquese...</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="sln.qrc">
+    <normaloff>:/Icons/icons/run.png</normaloff>:/Icons/icons/run.png</iconset>
+  </property>
+  <property name="windowOpacity">
+   <double>1.000000000000000</double>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>false</bool>
+  </property>
+  <property name="modal">
+   <bool>false</bool>
+  </property>
+  <widget class="QLabel" name="lbl_logo">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>81</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="statusTip">
+    <string>SLN S.A.</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="sln.qrc">:/Icons/icons/kgpg_identity_kgpg.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="txt_usuario">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>30</y>
+     <width>161</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::StrongFocus</enum>
+   </property>
+   <property name="toolTip">
+    <string>&lt;i&gt;Ingrese el nombre del &lt;b&gt;usuario&lt;br&gt;&lt;/b&gt; asignado&lt;/i&gt;</string>
+   </property>
+   <property name="whatsThis">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Caja de Texto para el igreso de nombre de &lt;span style=&quot; font-weight:600;&quot;&gt;usuario&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Ejemplo &lt;span style=&quot; font-style:italic;&quot;&gt;juan&lt;/span&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="maxLength">
+    <number>100</number>
+   </property>
+   <property name="echoMode">
+    <enum>QLineEdit::Normal</enum>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+   <property name="placeholderText">
+    <string comment="Usuario" extracomment="Usuario"/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_entrar">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>30</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>8</pointsize>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string>&lt;i&gt;Ingresar al Sistema&lt;/i&gt;</string>
+   </property>
+   <property name="text">
+    <string>Identificar</string>
+   </property>
+   <property name="icon">
+    <iconset resource="sln.qrc">
+     <normaloff>:/Icons/icons/apply.png</normaloff>:/Icons/icons/apply.png</iconset>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_usuario">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>10</y>
+     <width>43</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>ArrowCursor</cursorShape>
+   </property>
+   <property name="toolTip">
+    <string/>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Plain</enum>
+   </property>
+   <property name="text">
+    <string>Usuario</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_pass">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>60</y>
+     <width>71</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>ArrowCursor</cursorShape>
+   </property>
+   <property name="toolTip">
+    <string/>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Plain</enum>
+   </property>
+   <property name="text">
+    <string>Contraseña</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="txt_pass">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>80</y>
+     <width>161</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::StrongFocus</enum>
+   </property>
+   <property name="toolTip">
+    <string>&lt;i&gt;Ingrese el nombre del &lt;b&gt;usuario&lt;br&gt;&lt;/b&gt; asignado&lt;/i&gt;</string>
+   </property>
+   <property name="maxLength">
+    <number>100</number>
+   </property>
+   <property name="echoMode">
+    <enum>QLineEdit::Password</enum>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+   <property name="placeholderText">
+    <string comment="Usuario" extracomment="Usuario"/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_salir">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>70</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>8</pointsize>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string>&lt;i&gt;Ingresar al Sistema&lt;/i&gt;</string>
+   </property>
+   <property name="text">
+    <string>Salir</string>
+   </property>
+   <property name="icon">
+    <iconset resource="sln.qrc">
+     <normaloff>:/Icons/icons/remove.png</normaloff>:/Icons/icons/remove.png</iconset>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="sln.qrc"/>
+ </resources>
+ <connections/>
+</ui>

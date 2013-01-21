@@ -29,7 +29,7 @@ class Model(object):
 		self.Conn = conn.conectar()		
 		
 
-	def consultDb(self,sql):
+	def __consultDb(self,sql):
 		'''
 		Ejecuta una consulta en la base de datos, las consultas son preparadas por el metodo
 		que invoca a este metodo, este metodo solo se encarga de ejecutar una consulta y
@@ -78,38 +78,82 @@ class Model(object):
 			return resultado
 
 		return False
+
+	def selectAll(self, table, condition):
+		'''
+		Ejecuta una consulta todos los registros de una tabla o vista
+
+		(str)	table 		=>	nombre de la tabla a consultar
+		(bool)	condition 	=> 	Indica si la sentencia tiene alguna condicion
+		'''
+		sql = QtSql.QSqlQuery()
+
+		if (condition == False)
+			sql.prepare("SELECT * FROM " + table + ";")
+		else:
+			sql.prepare("SELECT * FROM " + table +  condition + ";")	
+			
+		resultado = self.consultDb(sql)
+
+		if not resultado:
+			return resultado
+
+		return False
+
+
 	
-	def selectTable(self, table, columns, limit, condicion, like):
-		'''
-		Ejecuta una consulta tipo SELECT en la DB
-
-		(str)	table 		=>	nombre de la tabla a consultar
-		(tulp)	columns 	=>	Columnas a consultar
-		(int)	limit		=>	Limite de resultados (si vale 0 todos)
-		(str|bool)condicion	=>	Condicon de la consulta cadena (False si no hay)
-		(str|bool)like		=> 	Like en la consulta (si no hay es false)
-		'''
-		consult = "SELECT * FROM tabla ;"
-		pass
-
-
-	def selectAll(self, table):
-		'''
-		Ejecuta una consulta todos los registros de una tabla
-
-		(str)	table 		=>	nombre de la tabla a consultar
-		'''
-		consult = "SELECT * FROM "
-
-
-	def insertTable(self,table,columns):
+	def insertTable(self,table,row):
 		'''
 		Inserta un registro en la DB
 
 		table 		=>	nombre de la tabla
-		columns 	=>	diccionario de calve valor
+		row 	=>	diccionario de calve valor (columna/valor)
+
 		'''
-		pass
+		#separo en una lista cada valor
+		columnas = []
+		valores = []
+		for item in diccionario:
+			columnas.append(item)
+			valores.append(diccionario[item])
+
+		#Preparo la primera parte de la sentencia
+		misql = "INSERT INTO " + table + "("
+		i = 1
+		x = len(columnas)
+		for columna in columnas:
+			if (i<x):
+				
+
+
+
+
+
+		sql = QtSql.QSqlQuery()
+		sql.prepare("INSERT INTO `slnecc_control`.`cargo_sln`"
+					"(`id_cargo_sln`,"
+					"`cargo`,"
+					"`descripcion`,"
+					"`create`,"
+					"`last_update`)"
+					"VALUES"
+					"("
+					"<{id_cargo_sln: }>,"
+					"<{cargo: }>,"
+					"<{descripcion: }>,"
+					"<{create: }>,"
+					"<{last_update: CURRENT_TIMESTAMP}>"
+					");"
+					)
+
+		columnas = []
+		valores = []
+
+
+		for item in diccionario:
+			columnas.append(item)
+			valores.append(diccionario[item])
+
 
 	def updateTable(self,table,columns):
 		'''
@@ -128,6 +172,14 @@ class Model(object):
 		table 		=>	nombre de la tabla
 		conditions 	=>	condiciones (clave valor)		
 		'''
+		pass
+
+	def lastQuery(self):
+		'''	retorna el Sql de la última consulta'''
+		pass
+
+	def lastInsertId(self):
+		'''Ultimo Id ingresado en la BD'''
 		pass
 
 
