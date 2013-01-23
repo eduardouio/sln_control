@@ -124,11 +124,6 @@ class Model(object):
 		for columna in columnas:
 			if (i<x):
 				
-
-
-
-
-
 		sql = QtSql.QSqlQuery()
 		sql.prepare("INSERT INTO `slnecc_control`.`cargo_sln`"
 					"(`id_cargo_sln`,"
