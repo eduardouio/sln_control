@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>402</width>
+    <width>371</width>
     <height>124</height>
    </rect>
   </property>
@@ -47,10 +47,10 @@
   <widget class="QLabel" name="lbl_logo">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>20</y>
-     <width>81</width>
-     <height>81</height>
+     <x>10</x>
+     <y>10</y>
+     <width>71</width>
+     <height>71</height>
     </rect>
    </property>
    <property name="statusTip">
@@ -63,13 +63,13 @@
     <pixmap resource="sln.qrc">:/Icons/icons/kgpg_identity_kgpg.png</pixmap>
    </property>
    <property name="scaledContents">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QLineEdit" name="txt_usuario">
    <property name="geometry">
     <rect>
-     <x>110</x>
+     <x>90</x>
      <y>30</y>
      <width>161</width>
      <height>22</height>
@@ -105,7 +105,7 @@
   <widget class="QPushButton" name="btn_entrar">
    <property name="geometry">
     <rect>
-     <x>300</x>
+     <x>270</x>
      <y>30</y>
      <width>91</width>
      <height>31</height>
@@ -130,9 +130,9 @@
   <widget class="QLabel" name="lbl_usuario">
    <property name="geometry">
     <rect>
-     <x>110</x>
+     <x>90</x>
      <y>10</y>
-     <width>43</width>
+     <width>51</width>
      <height>16</height>
     </rect>
    </property>
@@ -151,13 +151,13 @@
     <enum>QFrame::Plain</enum>
    </property>
    <property name="text">
-    <string>Usuario</string>
+    <string>Usuario:</string>
    </property>
   </widget>
   <widget class="QLabel" name="lbl_pass">
    <property name="geometry">
     <rect>
-     <x>110</x>
+     <x>90</x>
      <y>60</y>
      <width>71</width>
      <height>16</height>
@@ -178,13 +178,13 @@
     <enum>QFrame::Plain</enum>
    </property>
    <property name="text">
-    <string>Contraseña</string>
+    <string>Contraseña:</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="txt_pass">
    <property name="geometry">
     <rect>
-     <x>110</x>
+     <x>90</x>
      <y>80</y>
      <width>161</width>
      <height>22</height>
@@ -217,7 +217,7 @@
   <widget class="QPushButton" name="btn_salir">
    <property name="geometry">
     <rect>
-     <x>300</x>
+     <x>270</x>
      <y>70</y>
      <width>91</width>
      <height>31</height>
