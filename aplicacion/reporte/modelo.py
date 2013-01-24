@@ -12,29 +12,20 @@ from PyQt4 import QtCore, QtSql, QtGui
 import conn
 
 class Model(object):
-	''' 	
-	Model encargado de gestionar la base de datos, los errores que puedan ocurrir son mostrados
-	directamente por la capa y el metodo en el que ocurra un error retorna falso caso contrario
-	retorna en resultado de la ejecucion del metodo.
+	''' Modelo de datos, lo errores ocurridos en la capa son mostrados por lastError()
+	si un metodo no puede efectuar una accion retorna falso.
+	Los tipos de error a soportar son errores de conexión y errores en consultas sql'''
 
-	Metodos disponibles en Model:
 
-	consultDb => 		Ejecuta una consulta en el servidor
-	listTables => 	Lista las tablas de la DB
-	listColumns => 	Lista las columnas de una tabla
-	selectTable => 		Ejecuta una Sentencia SELECT en la DB 
-	'''
 	def __init__(self):
 		'''Inicia la conexión al servidor'''
+
 		self.Conn = conn.conectar()		
 		
 
 	def __consultDb(self,sql):
-		'''
-		Ejecuta una consulta en la base de datos, las consultas son preparadas por el metodo
-		que invoca a este metodo, este metodo solo se encarga de ejecutar una consulta y
-		controlar los errores.		
-		'''				
+		'''Ejecuta una consulta en la base de datos, las consultas son preparadas por el metodo
+		que invoca a este metodo'''				
 
 		if (self.Conn):			
 			sql.exec_()
@@ -49,11 +40,8 @@ class Model(object):
 
 			return sql
 
-
 	def listTables(self):
-		'''
-		Lista todas las tablas de la base de datos
-		'''		
+		'''	Lista todas las tablas de la base de datos '''		
 		sql = QtSql.QSqlQuery()				
 
 		sql.prepare('SHOW TABLES FROM slnecc_control;')
@@ -66,9 +54,7 @@ class Model(object):
 
 
 	def listColumns(self,tabla):
-		'''
-		Lista las columnas de una tabla
-		'''
+		''' Lista las columnas de una tabla	'''
 		sql = QtSql.QSqlQuery()					
 		
 		sql.prepare("SHOW COLUMNS FROM " + tabla + " ;")
@@ -78,6 +64,46 @@ class Model(object):
 			return resultado
 
 		return False
+
+	def getQueryModel(self,columns,table):
+		'''Retorna un modelo de solo lectura de una tabla
+		se especifica las columnas con un diccionario, para 
+		no escribir las cabeceras del model si la consulta tiene un error consultar 
+		QSqlQueryModel.lastError()'''
+
+		sql = 'SELECT '
+		#desde
+		i = 1
+		#hasta
+		x = len(columns)
+
+		#armamos la consulta
+		for item in columns:
+			if ( i < x ):
+				sql = sql + item + ' AS ' + columns[item] + ','
+
+			if ( i == x ):
+				sql = sql + item + ' AS ' + columns[item] + ' FROM ' + table
+
+			i += 1
+
+		modelo = QtSql.QSqlQueryModel()
+		modelo.setQuery(sql)
+
+	def getTableModel(self, table, condition):
+		'''Retorna un modelo editable de una tabla, la condicion string sql
+		lo errores estan en lastError() '''
+		
+		modelo = QtSql.QSqlTableModel()		
+		modelo.setTable(table)
+		#los cambios al modelo se almacenan en cache y se reguistran 
+		#cuando llamemos al metodo modelo.submitAll(), se tiene la posibilada de revertir
+		modelo.setEditStrategy(QtSql.QSqlTableModel.OnManualSubmit)
+		modelo.setFilter(condition)
+		modelo.select()
+
+		return modelo
+
 
 	def selectAll(self, table, condition):
 		'''
@@ -190,3 +216,4 @@ if __name__ == '__main__':
 	vista.show()
 	
 	sys.exit(app.exec_())
+
