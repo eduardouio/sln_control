@@ -105,13 +105,23 @@ class Model(object):
 		return modelo
 
 
-	def selectAll(self, table, condition):
+	def selectQuery(self, table, columns ,condition, like, limit):
 		'''
-		Ejecuta una consulta todos los registros de una tabla o vista
+		Ejecuta una consulta tipo SELECT en la BD
 
 		(str)	table 		=>	nombre de la tabla a consultar
-		(bool)	condition 	=> 	Indica si la sentencia tiene alguna condicion
+		(list)	columns 	=>	Columnas a mostrar
+		(str)	condition 	=> 	condicion si no existe "1=1"
+		(str)	like		=>	para filtras busquedas de no existir es False
+		(int)	limit		=>	limite de registros si se desa la tabla completa vale 0
+
+		SELECT columns FROM table
+		WHERE conditions | like
+		LIMIT limit 
 		'''
+
+		
+
 		sql = QtSql.QSqlQuery()
 
 		if (condition == False)
