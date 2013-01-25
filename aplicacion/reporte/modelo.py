@@ -145,7 +145,7 @@ class Model(object):
 		if limit == 0:
 			query = query + ';'
 		else:
-			query = query + ' LIMIT ' limit + ';'
+			query = query + ' LIMIT ' + limit + ';'
 
 		sql = QtSql.QSqlQuery()
 		sql.prepare(query)
@@ -166,7 +166,7 @@ class Model(object):
 		VALUES( values[value]);
 		'''
 		
-		query = 'INSERT INTO ' table +'('
+		query = 'INSERT INTO ' + table +'('
 
 		i = 1
 		x = len(values)
@@ -234,7 +234,7 @@ class Model(object):
 		result = self.__consultDb(sql)
 
 		if not result:
-			result False
+			return False
 
 		return result
 
@@ -267,6 +267,19 @@ class Model(object):
 		'''	retorna el Sql de la última consulta'''
 		sql = QtSql.QSqlQuery()
 		return sql.lastQuery()
+
+	def beginTransaction(self):
+		'''Inicia una transaccion'''
+		pass
+
+	def commitTransaction(self):
+		'''Confirma una transaccion'''
+		pass
+
+	def rollBack(self):
+		'''Cancela y revierte los cambios de una transaccion'''
+		pass
+
 
 
 if __name__ == '__main__':	
