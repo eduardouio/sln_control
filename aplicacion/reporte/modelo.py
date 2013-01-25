@@ -270,26 +270,16 @@ class Model(object):
 
 	def beginTransaction(self):
 		'''Inicia una transaccion'''
-		pass
+		conn = QtSql.QSqlDatabase.database()
+		conn.transaction()
+
 
 	def commitTransaction(self):
 		'''Confirma una transaccion'''
-		pass
+		conn = QtSql.QSqlDatabase.database()
+		conn.commit()
 
 	def rollBack(self):
 		'''Cancela y revierte los cambios de una transaccion'''
-		pass
-
-
-
-if __name__ == '__main__':	
-	import sys
-	app = QtGui.QApplication(sys.argv)
-		
-	db = Model()	
-	
-	vista = QtGui.QTableView()
-	vista.show()
-	
-	sys.exit(app.exec_())
-
+		conn = QtSql.QSqlDatabase.database()
+		conn.rollback()

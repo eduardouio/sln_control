@@ -255,7 +255,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">424,100;424,8;164,8;164,92</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">424,100;424,44;164,44;164,92</XPD:ATTR>
 <XPD:REF name="Model">eTwNfrDa+U6RPsXcW8tzIAAA</XPD:REF>
 <XPD:REF name="Head">m+qjZ1gC7k6mOi1rMoPMlgAA</XPD:REF>
 <XPD:REF name="Tail">3vtfpwI4c0yw9l6z9xd23wAA</XPD:REF>
@@ -382,7 +382,7 @@
 <XPD:REF name="Views[1]">uea3RvUliUibm+4eQdggAAAA</XPD:REF>
 <XPD:REF name="Views[2]">NQGKyiXovEi8K6MYp4jFaQAA</XPD:REF>
 <XPD:REF name="Views[3]">0tMMYV/jKEm9kyCpc4H07wAA</XPD:REF>
-<XPD:ATTR name="#Operations" type="integer">14</XPD:ATTR>
+<XPD:ATTR name="#Operations" type="integer">13</XPD:ATTR>
 <XPD:OBJ name="Operations[0]" type="UMLOperation" guid="AQdschZGAEWT06WG9dbqpQAA">
 <XPD:ATTR name="Name" type="string">__init__</XPD:ATTR>
 <XPD:REF name="Owner">QDfnk9YI+UW5BgghO2w4CwAA</XPD:REF>
@@ -484,29 +484,7 @@
 <XPD:REF name="BehavioralFeature">2Go9jYySgk6TCI/lfFlcewAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:OBJ name="Operations[6]" type="UMLOperation" guid="UkC0GmQ6uUCGgMjRvEppMwAA">
-<XPD:ATTR name="Name" type="string">selectAll</XPD:ATTR>
-<XPD:REF name="Owner">QDfnk9YI+UW5BgghO2w4CwAA</XPD:REF>
-<XPD:ATTR name="#Parameters" type="integer">4</XPD:ATTR>
-<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="oKihOCiBDku16gXGAYY7YwAA">
-<XPD:ATTR name="DirectionKind" type="UMLParameterDirectionKind">pdkReturn</XPD:ATTR>
-<XPD:ATTR name="TypeExpression" type="string">return QtSqlQuery | false</XPD:ATTR>
-<XPD:REF name="BehavioralFeature">UkC0GmQ6uUCGgMjRvEppMwAA</XPD:REF>
-</XPD:OBJ>
-<XPD:OBJ name="Parameters[1]" type="UMLParameter" guid="wqhqSjjgw0GSxU0/cJysQAAA">
-<XPD:ATTR name="Name" type="string">self</XPD:ATTR>
-<XPD:REF name="BehavioralFeature">UkC0GmQ6uUCGgMjRvEppMwAA</XPD:REF>
-</XPD:OBJ>
-<XPD:OBJ name="Parameters[2]" type="UMLParameter" guid="jRQeZeN7G0a+CXfIItX7qwAA">
-<XPD:ATTR name="Name" type="string">table</XPD:ATTR>
-<XPD:REF name="BehavioralFeature">UkC0GmQ6uUCGgMjRvEppMwAA</XPD:REF>
-</XPD:OBJ>
-<XPD:OBJ name="Parameters[3]" type="UMLParameter" guid="nACLlJqAIE6O9QxSljar3QAA">
-<XPD:ATTR name="Name" type="string">codicion</XPD:ATTR>
-<XPD:REF name="BehavioralFeature">UkC0GmQ6uUCGgMjRvEppMwAA</XPD:REF>
-</XPD:OBJ>
-</XPD:OBJ>
-<XPD:OBJ name="Operations[7]" type="UMLOperation" guid="ZLOdi872AkOl8Ox63KgEHwAA">
+<XPD:OBJ name="Operations[6]" type="UMLOperation" guid="ZLOdi872AkOl8Ox63KgEHwAA">
 <XPD:ATTR name="Name" type="string">selectQuery</XPD:ATTR>
 <XPD:REF name="Owner">QDfnk9YI+UW5BgghO2w4CwAA</XPD:REF>
 <XPD:ATTR name="#Parameters" type="integer">7</XPD:ATTR>
@@ -540,7 +518,7 @@
 <XPD:REF name="BehavioralFeature">ZLOdi872AkOl8Ox63KgEHwAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:OBJ name="Operations[8]" type="UMLOperation" guid="ELX1Okh+EkWlW+TIwrSYWwAA">
+<XPD:OBJ name="Operations[7]" type="UMLOperation" guid="ELX1Okh+EkWlW+TIwrSYWwAA">
 <XPD:ATTR name="Name" type="string">insertQuery</XPD:ATTR>
 <XPD:REF name="Owner">QDfnk9YI+UW5BgghO2w4CwAA</XPD:REF>
 <XPD:ATTR name="#Parameters" type="integer">4</XPD:ATTR>
@@ -562,7 +540,7 @@
 <XPD:REF name="BehavioralFeature">ELX1Okh+EkWlW+TIwrSYWwAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:OBJ name="Operations[9]" type="UMLOperation" guid="st76A6azOEioIEBcvh4eQgAA">
+<XPD:OBJ name="Operations[8]" type="UMLOperation" guid="st76A6azOEioIEBcvh4eQgAA">
 <XPD:ATTR name="Name" type="string">updateQuery</XPD:ATTR>
 <XPD:REF name="Owner">QDfnk9YI+UW5BgghO2w4CwAA</XPD:REF>
 <XPD:ATTR name="#Parameters" type="integer">4</XPD:ATTR>
@@ -584,7 +562,7 @@
 <XPD:REF name="BehavioralFeature">st76A6azOEioIEBcvh4eQgAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:OBJ name="Operations[10]" type="UMLOperation" guid="ykxAke3vuECybdbs+pWiEwAA">
+<XPD:OBJ name="Operations[9]" type="UMLOperation" guid="ykxAke3vuECybdbs+pWiEwAA">
 <XPD:ATTR name="Name" type="string">deleteQuery</XPD:ATTR>
 <XPD:REF name="Owner">QDfnk9YI+UW5BgghO2w4CwAA</XPD:REF>
 <XPD:ATTR name="#Parameters" type="integer">4</XPD:ATTR>
@@ -606,7 +584,7 @@
 <XPD:REF name="BehavioralFeature">ykxAke3vuECybdbs+pWiEwAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:OBJ name="Operations[11]" type="UMLOperation" guid="CTl5SoWrg06dJTAk+FqJKwAA">
+<XPD:OBJ name="Operations[10]" type="UMLOperation" guid="CTl5SoWrg06dJTAk+FqJKwAA">
 <XPD:ATTR name="Name" type="string">lastInsertId</XPD:ATTR>
 <XPD:REF name="Owner">QDfnk9YI+UW5BgghO2w4CwAA</XPD:REF>
 <XPD:ATTR name="#Parameters" type="integer">2</XPD:ATTR>
@@ -620,7 +598,7 @@
 <XPD:REF name="BehavioralFeature">CTl5SoWrg06dJTAk+FqJKwAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:OBJ name="Operations[12]" type="UMLOperation" guid="gtoLGcXif0ymQVyZFF8/MQAA">
+<XPD:OBJ name="Operations[11]" type="UMLOperation" guid="gtoLGcXif0ymQVyZFF8/MQAA">
 <XPD:ATTR name="Name" type="string">lastQuery</XPD:ATTR>
 <XPD:REF name="Owner">QDfnk9YI+UW5BgghO2w4CwAA</XPD:REF>
 <XPD:ATTR name="#Parameters" type="integer">2</XPD:ATTR>
@@ -634,7 +612,7 @@
 <XPD:REF name="BehavioralFeature">gtoLGcXif0ymQVyZFF8/MQAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:OBJ name="Operations[13]" type="UMLOperation" guid="34fFfFN+BEK3n53wwZCqfgAA">
+<XPD:OBJ name="Operations[12]" type="UMLOperation" guid="34fFfFN+BEK3n53wwZCqfgAA">
 <XPD:ATTR name="Name" type="string">lastError</XPD:ATTR>
 <XPD:REF name="Owner">QDfnk9YI+UW5BgghO2w4CwAA</XPD:REF>
 <XPD:ATTR name="#Parameters" type="integer">2</XPD:ATTR>
