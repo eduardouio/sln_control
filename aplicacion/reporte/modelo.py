@@ -3,7 +3,7 @@
 
 # Version		1.0
 # Autor			Eduardo Villota <eduardouio@hotmail.com> <@eduardouio>
-# Package		Conexion a la base de datos
+# Package		Modelo de Interaccion con la base de datos
 # File			DB.py
 # Ubicacion		reporte/basedatos/DB.py
 # Copyright		(c) 2012 Sólidos y Lodos Nacionales S.A. <http://sln-ec.com> <info@sln-ec.com> 
