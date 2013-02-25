@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Version		1.0
-# Autor			Eduardo Villota <eduardouio@hotmail.com> <@eduardouio>
+# Autor			Eduardo Villota <eduardouio@hotmail.com> <@eduardouio> <@jairo>
 # Package		Conexion a la base de datos
 # File			DB.py
 # Ubicacion		reporte/basedatos/DB.py
