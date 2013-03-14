@@ -3,19 +3,18 @@
 
 # Version		1.0
 # Autor			Eduardo Villota <eduardouio@hotmail.com> <@eduardouio>
-# Package		Modelo de Interaccion con la base de datos
+# Package		Conexion a la base de datos
 # File			DB.py
 # Ubicacion		reporte/basedatos/DB.py
 # Copyright		(c) 2012 Sólidos y Lodos Nacionales S.A. <http://sln-ec.com> <info@sln-ec.com> 
 
-from PyQt4 import QtCore, QtSql, QtGui
+from PyQt4 import QtCore, QtSql
 import conn
 
 class Model(object):
 	''' Modelo de datos, lo errores ocurridos en la capa son mostrados por lastError()
 	si un metodo no puede efectuar una accion retorna falso.
 	Los tipos de error a soportar son errores de conexión y errores en consultas sql'''
-
 
 	def __init__(self):
 		'''Inicia la conexión al servidor'''
@@ -42,8 +41,8 @@ class Model(object):
 
 	def listTables(self):
 		'''	Lista todas las tablas de la base de datos '''		
-		sql = QtSql.QSqlQuery()				
-
+		sql = QtSql.QSqlQuery()	
+		
 		sql.prepare('SHOW TABLES FROM slnecc_control;')
 		result = self.__consultDb(sql)
 
@@ -71,7 +70,7 @@ class Model(object):
 		no escribir las cabeceras del model si la consulta tiene un error consultar 
 		QSqlQueryModel.lastError()'''
 
-		sql = 'SELECT '
+		query = 'SELECT '
 		#desde
 		i = 1
 		#hasta
@@ -80,15 +79,17 @@ class Model(object):
 		#armamos la consulta
 		for item in columns:
 			if ( i < x ):
-				sql = sql + item + ' AS ' + columns[item] + ','
+				query = query + item + ' AS ' + columns[item] + ','
 
 			if ( i == x ):
-				sql = sql + item + ' AS ' + columns[item] + ' FROM ' + table
+				query = query + item + ' AS ' + columns[item] + ' FROM ' + table
 
 			i += 1
 
 		modelo = QtSql.QSqlQueryModel()
-		modelo.setQuery(sql)
+		modelo.setQuery(query)
+
+		return modelo
 
 	def getTableModel(self, table, condition):
 		'''Retorna un modelo editable de una tabla, la condicion string sql
@@ -104,7 +105,6 @@ class Model(object):
 
 		return modelo
 
-
 	def selectQuery(self, table, columns ,condition, like, limit):
 		'''Ejecuta una consulta tipo SELECT en la BD
 
@@ -115,7 +115,7 @@ class Model(object):
 		(int)	limit		=>	limite de registros si se desa la tabla completa vale 0
 
 		SELECT columns FROM table
-		WHERE conditions | like
+		WHERE conditions | like | 1=1
 		LIMIT limit | nothing
 		'''		
 		query = 'SELECT '
@@ -282,4 +282,4 @@ class Model(object):
 	def rollBack(self):
 		'''Cancela y revierte los cambios de una transaccion'''
 		conn = QtSql.QSqlDatabase.database()
-		conn.rollback()
+|		conn.rollback()
