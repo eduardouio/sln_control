@@ -24,8 +24,15 @@ class usuario(object):
 		self.db = db()
 
 	def listUsers(self,user,pssw):
-		''' Se listan todos los usuarios del sistema'''
-		
+		''' Se listan todos los usuarios del sistema
+			selectQuery(self, table, columns ,condition, like, limit):
+		'''
+		result = db.selectQuery(self.table,'*',false,false,0)
+
+		if not result:
+			return false
+
+		return result		
 
 
 	def loginUser(self,user,pssw):
@@ -42,5 +49,9 @@ class usuario(object):
 
 	def deleteUser(self,user,pssw):
 		''' Se elimina un usuario existente'''
+
+	def lastError(self):
+		return db.
+
 
 		

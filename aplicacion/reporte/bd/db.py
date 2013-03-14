@@ -150,7 +150,7 @@ class Model(object):
 		sql = QtSql.QSqlQuery()
 		sql.prepare(query)
 		#ejecutamos la consulta, si hay un error acudir a last error
-		result = self.__consultDb(sql)
+		result = self.__consultD	b(sql)
 
 		if not result:			
 			return False
@@ -282,4 +282,9 @@ class Model(object):
 	def rollBack(self):
 		'''Cancela y revierte los cambios de una transaccion'''
 		conn = QtSql.QSqlDatabase.database()
-|		conn.rollback()
+		conn.rollback()
+
+	def lastError(self):
+		'''Retorna en ultimo error producido en la base de datos
+		ojo *** '''
+		return conn.lastError()

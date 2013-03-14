@@ -1,0 +1,2 @@
+-- Revisar que el metodo lastError del objeto conn devuelva los errores en las consultas sql, caso
+de que no sea asi, verifiar 
