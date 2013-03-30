@@ -11,6 +11,11 @@ creados hastas ahora para genrar perfiles predeterminados a la hora de crear usu
 Revisar que el metodo lastError del objeto conn devuelva los errores en las consultas sql, caso
 de que no sea asi, verifiar 
 
+--Control---
+numero de veces que se visualizó un reporte 
+numero de veces que se editó un reporte
+
+
 ====================================xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=================================================
 Observaciones:
 ====================================xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=================================================
@@ -19,9 +24,8 @@ Observaciones:
 ====================================xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=================================================
 Pendientes:
 ====================================xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=================================================
-
 --Usuarios--
-Los usuarios estan gestionados en niveles, se crear tres niveles diferentes de usuarios:
+Los usuarios estan gestionados en niveles, se crean cuatro niveles diferentes de usuarios, para mejorar el control de la aplicacion en el sistema:
 	-Normal
 	-Supervisor
 	-Gerencial
@@ -43,10 +47,12 @@ llamaré user son:
 Supervisor.-
 Perfil de usuario creado para crear o trabajar con informacion más sensible en el sistema, este usuario tiene acceso a reportes más detallados que el usuario normal, en los roles asignados al supervisor se incluyen los mismos roles asignados al usuario normal más los detallados a continuacion:
 
-
 -Establecer parámetros de matería prima
 -Ingreso de existencias de materia prima
 -Ingreso de existencias de Equipos
+-Ingreso de personal
+-Salida de personal
+
 
 
 Gerente.-
@@ -54,22 +60,21 @@ Este perfil de usuario debe ser único en el sistema y tiene la capacidad de hac
 cambios de mayor importancia en el sistema, los roles espécificos del usuario son:
 
 -Crear Proyectos
+-Crear nuevos Pozos
+-Crear Taladro
 -Editar reportes aprobados y firmados
+-Eliminar reportes firmados
 -Editar reportes con fecha pasada
 -Ingreso de nuevos costos al Sistema
+-Ingresar nuevos Servicios
 
 Administrador.-
-Este es el super usuario del sistema tiene la capacidad de cambiar todos los datos del sistema, trabaja con un table model para hacer el cambio directamente en las tablas, es el único que puede crear usuarios en el sistema.
+Este es el super usuario del sistema tiene la capacidad de cambiar todos los datos del sistema, trabaja con un table model para hacer el cambio directamente en las tablas, es el único que puede crear usuarios en el sistema, tiene un control total sobre la base de datos, por ende el usuario administrador es el encargado del proyecto.
 
 -Eliminar reportes
 -Gestion de usuarios
+-Cambios sensibles en la DB
 
-
-
-
-
-
-
-
-
+--Roles de Usuario--
+Listado de roles dentro del sistema, se estudian estos roles contra el modelo de la base de datos para ser más especificos:
 

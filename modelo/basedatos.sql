@@ -945,7 +945,7 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
     `id_usuario` SMALLINT UNSIGNED NOT NULL ,
     `titulo` VARCHAR(150) NOT NULL ,
     `comentarios` MEDIUMTEXT NOT NULL , 
-  `create` DATETIME , 
+    `create` DATETIME , 
     `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id_comentario`) ,
     INDEX `fk_comentario_reporte_idx` (`id_reporte` ASC) ,
@@ -966,6 +966,28 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
   COMMENT = 'En esta entidad se registran los comentarios que el reporte posee estos comentarios estan estructurados como los muestra el informe
             ademas como todos los usuarios que usan el sistema deben ser autoridades de la empresa los commentarios guardados responden a un id
             de usuario, para definir responsables entidad hija de reporte y de usuario' ;
+
+
+#
+# Tablas de control interno de la app
+#
+
+  -- -----------------------------------------------------
+  -- Table `slnecc_control`.`c_reporte`
+  -- -----------------------------------------------------
+CREATE TABLE c_reporte(
+`id_c_reporte` MEDIUMINT UNSIGNED NOT NULL,
+`id_reporte` MEDIUMINT UNSIGNED NOT NULL,
+`cambios` SMALLINT(1) NOT NULL,
+`id_usuario` SMALLINT NOT NULL,
+`computador` varchar(100),
+`create` DATETIME , 
+`last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+)
+ENGINE=InnoDB
+COMMENT'Tabla encargada de manejar el numero de vecer que un usuario accede al reporte, se registran los datos de usuario
+la fecha, y se registra 1 si hace cambios en el reporrte o 0 si solo lo revisa';
+
 
   SET SQL_MODE=@OLD_SQL_MODE;
   SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
