@@ -1,4 +1,75 @@
--- establecer una arquitectura para el diseño de los componentes de la app
+====================================xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=================================================
+Notas:
+====================================xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=================================================
 
--- Revisar que el metodo lastError del objeto conn devuelva los errores en las consultas sql, caso
+--Usuarios--
+Crear un nivel de roles basados en el listado de tareas que se pueden llevar a cabo con el reporte de trabajo, traba
+jar en una forma de asignar roles a los usuarios que se crean en el sistema, se puede usar los perfiles de usuarios
+creados hastas ahora para genrar perfiles predeterminados a la hora de crear usuarios en el sistema.
+
+--Errores Programacion--
+Revisar que el metodo lastError del objeto conn devuelva los errores en las consultas sql, caso
 de que no sea asi, verifiar 
+
+====================================xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=================================================
+Observaciones:
+====================================xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=================================================
+
+
+====================================xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=================================================
+Pendientes:
+====================================xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=================================================
+
+--Usuarios--
+Los usuarios estan gestionados en niveles, se crear tres niveles diferentes de usuarios:
+	-Normal
+	-Supervisor
+	-Gerencial
+	-Administrador
+
+Normal.-
+Este usuario tiene la capacidad de realizar un manejo basico del sistema, los permisos de este nivel de usuario al que
+llamaré user son:
+
+-Crear reportes
+-Editar reportes de la misma fecha
+-Imprimir reporte
+-Consultar stocks materia prima
+-Cosultar costos
+-Informes basicos de la obras (Materia prima, uso de equipo, etc.)
+-Ingreso de la información al reporte diario
+-Ingreso de materia prima
+
+Supervisor.-
+Perfil de usuario creado para crear o trabajar con informacion más sensible en el sistema, este usuario tiene acceso a reportes más detallados que el usuario normal, en los roles asignados al supervisor se incluyen los mismos roles asignados al usuario normal más los detallados a continuacion:
+
+
+-Establecer parámetros de matería prima
+-Ingreso de existencias de materia prima
+-Ingreso de existencias de Equipos
+
+
+Gerente.-
+Este perfil de usuario debe ser único en el sistema y tiene la capacidad de hacer un magnament del proyecto, puede crear
+cambios de mayor importancia en el sistema, los roles espécificos del usuario son:
+
+-Crear Proyectos
+-Editar reportes aprobados y firmados
+-Editar reportes con fecha pasada
+-Ingreso de nuevos costos al Sistema
+
+Administrador.-
+Este es el super usuario del sistema tiene la capacidad de cambiar todos los datos del sistema, trabaja con un table model para hacer el cambio directamente en las tablas, es el único que puede crear usuarios en el sistema.
+
+-Eliminar reportes
+-Gestion de usuarios
+
+
+
+
+
+
+
+
+
+
