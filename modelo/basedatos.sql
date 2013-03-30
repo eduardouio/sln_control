@@ -976,7 +976,7 @@ UNIQUE INDEX `id_zaranda_acondicionador_mallas_UNIQUE` (`id_zaranda_acondicionad
   -- Table `slnecc_control`.`c_reporte`
   -- -----------------------------------------------------
 CREATE TABLE c_reporte(
-`id_c_reporte` MEDIUMINT UNSIGNED NOT NULL,
+`id_c_reporte` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
 `id_reporte` MEDIUMINT UNSIGNED NOT NULL,
 `cambios` SMALLINT(1) NOT NULL,
 `id_usuario` SMALLINT NOT NULL,
@@ -985,6 +985,7 @@ CREATE TABLE c_reporte(
 `last_update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 )
 ENGINE=InnoDB
+AUTO_INCREMENT = 1
 COMMENT'Tabla encargada de manejar el numero de vecer que un usuario accede al reporte, se registran los datos de usuario
 la fecha, y se registra 1 si hace cambios en el reporrte o 0 si solo lo revisa';
 
