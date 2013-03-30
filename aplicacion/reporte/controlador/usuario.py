@@ -12,8 +12,7 @@ from PyQt4 import PyqtDq
 import db.db
 
 class usuario(object):
-	'''	Intentando implementar una clase para que trabaje con los 
-	usuarios, existen dos tipos de usuario un administrador y un digitador,
+	'''	clase encargada de trabajar con los usuarios, existen dos tipos de usuario un administrador y un digitador,
 	la administracion de usuarios es manejada unicamente por el administrador'''
 
 	def __init__(self):

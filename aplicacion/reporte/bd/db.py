@@ -150,7 +150,7 @@ class Model(object):
 		sql = QtSql.QSqlQuery()
 		sql.prepare(query)
 		#ejecutamos la consulta, si hay un error acudir a last error
-		result = self.__consultD	b(sql)
+		result = self.__consultDb(sql)
 
 		if not result:			
 			return False
